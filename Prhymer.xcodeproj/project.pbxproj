@@ -1,0 +1,507 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E964C2121C32451500A1AFCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E964C2111C32451500A1AFCD /* AppDelegate.swift */; };
+		E964C2141C32451500A1AFCD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E964C2131C32451500A1AFCD /* ViewController.swift */; };
+		E964C2171C32451500A1AFCD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E964C2151C32451500A1AFCD /* Main.storyboard */; };
+		E964C2191C32451500A1AFCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E964C2181C32451500A1AFCD /* Assets.xcassets */; };
+		E964C21C1C32451500A1AFCD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E964C21A1C32451500A1AFCD /* LaunchScreen.storyboard */; };
+		E964C2271C32451500A1AFCD /* PrhymerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E964C2261C32451500A1AFCD /* PrhymerTests.swift */; };
+		E964C2321C32451500A1AFCD /* PrhymerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E964C2311C32451500A1AFCD /* PrhymerUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E964C2231C32451500A1AFCD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E964C2061C32451500A1AFCD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E964C20D1C32451500A1AFCD;
+			remoteInfo = Prhymer;
+		};
+		E964C22E1C32451500A1AFCD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E964C2061C32451500A1AFCD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E964C20D1C32451500A1AFCD;
+			remoteInfo = Prhymer;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		E964C20E1C32451500A1AFCD /* Prhymer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Prhymer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E964C2111C32451500A1AFCD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E964C2131C32451500A1AFCD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E964C2161C32451500A1AFCD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E964C2181C32451500A1AFCD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E964C21B1C32451500A1AFCD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E964C21D1C32451500A1AFCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E964C2221C32451500A1AFCD /* PrhymerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrhymerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E964C2261C32451500A1AFCD /* PrhymerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrhymerTests.swift; sourceTree = "<group>"; };
+		E964C2281C32451500A1AFCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E964C22D1C32451500A1AFCD /* PrhymerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrhymerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E964C2311C32451500A1AFCD /* PrhymerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrhymerUITests.swift; sourceTree = "<group>"; };
+		E964C2331C32451500A1AFCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E964C20B1C32451500A1AFCD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E964C21F1C32451500A1AFCD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E964C22A1C32451500A1AFCD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E964C2051C32451500A1AFCD = {
+			isa = PBXGroup;
+			children = (
+				E964C2101C32451500A1AFCD /* Prhymer */,
+				E964C2251C32451500A1AFCD /* PrhymerTests */,
+				E964C2301C32451500A1AFCD /* PrhymerUITests */,
+				E964C20F1C32451500A1AFCD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E964C20F1C32451500A1AFCD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E964C20E1C32451500A1AFCD /* Prhymer.app */,
+				E964C2221C32451500A1AFCD /* PrhymerTests.xctest */,
+				E964C22D1C32451500A1AFCD /* PrhymerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E964C2101C32451500A1AFCD /* Prhymer */ = {
+			isa = PBXGroup;
+			children = (
+				E964C2111C32451500A1AFCD /* AppDelegate.swift */,
+				E964C2131C32451500A1AFCD /* ViewController.swift */,
+				E964C2151C32451500A1AFCD /* Main.storyboard */,
+				E964C2181C32451500A1AFCD /* Assets.xcassets */,
+				E964C21A1C32451500A1AFCD /* LaunchScreen.storyboard */,
+				E964C21D1C32451500A1AFCD /* Info.plist */,
+			);
+			path = Prhymer;
+			sourceTree = "<group>";
+		};
+		E964C2251C32451500A1AFCD /* PrhymerTests */ = {
+			isa = PBXGroup;
+			children = (
+				E964C2261C32451500A1AFCD /* PrhymerTests.swift */,
+				E964C2281C32451500A1AFCD /* Info.plist */,
+			);
+			path = PrhymerTests;
+			sourceTree = "<group>";
+		};
+		E964C2301C32451500A1AFCD /* PrhymerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				E964C2311C32451500A1AFCD /* PrhymerUITests.swift */,
+				E964C2331C32451500A1AFCD /* Info.plist */,
+			);
+			path = PrhymerUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E964C20D1C32451500A1AFCD /* Prhymer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E964C2361C32451500A1AFCD /* Build configuration list for PBXNativeTarget "Prhymer" */;
+			buildPhases = (
+				E964C20A1C32451500A1AFCD /* Sources */,
+				E964C20B1C32451500A1AFCD /* Frameworks */,
+				E964C20C1C32451500A1AFCD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Prhymer;
+			productName = Prhymer;
+			productReference = E964C20E1C32451500A1AFCD /* Prhymer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E964C2211C32451500A1AFCD /* PrhymerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E964C2391C32451500A1AFCD /* Build configuration list for PBXNativeTarget "PrhymerTests" */;
+			buildPhases = (
+				E964C21E1C32451500A1AFCD /* Sources */,
+				E964C21F1C32451500A1AFCD /* Frameworks */,
+				E964C2201C32451500A1AFCD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E964C2241C32451500A1AFCD /* PBXTargetDependency */,
+			);
+			name = PrhymerTests;
+			productName = PrhymerTests;
+			productReference = E964C2221C32451500A1AFCD /* PrhymerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		E964C22C1C32451500A1AFCD /* PrhymerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E964C23C1C32451500A1AFCD /* Build configuration list for PBXNativeTarget "PrhymerUITests" */;
+			buildPhases = (
+				E964C2291C32451500A1AFCD /* Sources */,
+				E964C22A1C32451500A1AFCD /* Frameworks */,
+				E964C22B1C32451500A1AFCD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E964C22F1C32451500A1AFCD /* PBXTargetDependency */,
+			);
+			name = PrhymerUITests;
+			productName = PrhymerUITests;
+			productReference = E964C22D1C32451500A1AFCD /* PrhymerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E964C2061C32451500A1AFCD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Shaken Earth";
+				TargetAttributes = {
+					E964C20D1C32451500A1AFCD = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					E964C2211C32451500A1AFCD = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = E964C20D1C32451500A1AFCD;
+					};
+					E964C22C1C32451500A1AFCD = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = E964C20D1C32451500A1AFCD;
+					};
+				};
+			};
+			buildConfigurationList = E964C2091C32451500A1AFCD /* Build configuration list for PBXProject "Prhymer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E964C2051C32451500A1AFCD;
+			productRefGroup = E964C20F1C32451500A1AFCD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E964C20D1C32451500A1AFCD /* Prhymer */,
+				E964C2211C32451500A1AFCD /* PrhymerTests */,
+				E964C22C1C32451500A1AFCD /* PrhymerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E964C20C1C32451500A1AFCD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E964C21C1C32451500A1AFCD /* LaunchScreen.storyboard in Resources */,
+				E964C2191C32451500A1AFCD /* Assets.xcassets in Resources */,
+				E964C2171C32451500A1AFCD /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E964C2201C32451500A1AFCD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E964C22B1C32451500A1AFCD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E964C20A1C32451500A1AFCD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E964C2141C32451500A1AFCD /* ViewController.swift in Sources */,
+				E964C2121C32451500A1AFCD /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E964C21E1C32451500A1AFCD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E964C2271C32451500A1AFCD /* PrhymerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E964C2291C32451500A1AFCD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E964C2321C32451500A1AFCD /* PrhymerUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E964C2241C32451500A1AFCD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E964C20D1C32451500A1AFCD /* Prhymer */;
+			targetProxy = E964C2231C32451500A1AFCD /* PBXContainerItemProxy */;
+		};
+		E964C22F1C32451500A1AFCD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E964C20D1C32451500A1AFCD /* Prhymer */;
+			targetProxy = E964C22E1C32451500A1AFCD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E964C2151C32451500A1AFCD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E964C2161C32451500A1AFCD /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E964C21A1C32451500A1AFCD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E964C21B1C32451500A1AFCD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E964C2341C32451500A1AFCD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E964C2351C32451500A1AFCD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E964C2371C32451500A1AFCD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Prhymer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shakenearth.Prhymer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E964C2381C32451500A1AFCD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Prhymer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shakenearth.Prhymer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		E964C23A1C32451500A1AFCD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = PrhymerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shakenearth.PrhymerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Prhymer.app/Prhymer";
+			};
+			name = Debug;
+		};
+		E964C23B1C32451500A1AFCD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = PrhymerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shakenearth.PrhymerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Prhymer.app/Prhymer";
+			};
+			name = Release;
+		};
+		E964C23D1C32451500A1AFCD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = PrhymerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shakenearth.PrhymerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Prhymer;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		E964C23E1C32451500A1AFCD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = PrhymerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shakenearth.PrhymerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Prhymer;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E964C2091C32451500A1AFCD /* Build configuration list for PBXProject "Prhymer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E964C2341C32451500A1AFCD /* Debug */,
+				E964C2351C32451500A1AFCD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E964C2361C32451500A1AFCD /* Build configuration list for PBXNativeTarget "Prhymer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E964C2371C32451500A1AFCD /* Debug */,
+				E964C2381C32451500A1AFCD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		E964C2391C32451500A1AFCD /* Build configuration list for PBXNativeTarget "PrhymerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E964C23A1C32451500A1AFCD /* Debug */,
+				E964C23B1C32451500A1AFCD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		E964C23C1C32451500A1AFCD /* Build configuration list for PBXNativeTarget "PrhymerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E964C23D1C32451500A1AFCD /* Debug */,
+				E964C23E1C32451500A1AFCD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E964C2061C32451500A1AFCD /* Project object */;
+}
