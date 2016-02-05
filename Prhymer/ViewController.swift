@@ -80,6 +80,7 @@ class ViewController: UIViewController {
             
                 indexOfCharBeingExamined = j;
                 
+                
                 charBeingExamined = lineBeingExamined[charString/*lineBeingExamined.startIndex.advancedBy(indexOfCharBeingExamined)*/];
                 
                 if(charBeingExamined != " " && charBeingExamined != "("){
