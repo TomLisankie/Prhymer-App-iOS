@@ -76,12 +76,11 @@ class ViewController: UIViewController {
             
             var charBeingExamined: Character;
             
-            for charString in lineBeingExamined.characters{//goes through each character in whichever line is being examined
+            for (var j = 0; j < lineBeingExamined.characters.count; j++){//goes through each character in whichever line is being examined
             
                 indexOfCharBeingExamined = j;
                 
-                
-                charBeingExamined = lineBeingExamined[charString/*lineBeingExamined.startIndex.advancedBy(indexOfCharBeingExamined)*/];
+                charBeingExamined = lineBeingExamined[lineBeingExamined.startIndex.advancedBy(indexOfCharBeingExamined)];
                 
                 if(charBeingExamined != " " && charBeingExamined != "("){
                 
