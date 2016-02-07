@@ -18,6 +18,7 @@
 		E964C2321C32451500A1AFCD /* PrhymerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E964C2311C32451500A1AFCD /* PrhymerUITests.swift */; };
 		E964C2401C3245AB00A1AFCD /* Phoneme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E964C23F1C3245AB00A1AFCD /* Phoneme.swift */; };
 		E964C2421C324DDF00A1AFCD /* cmudict-0.7b_modified.txt in Resources */ = {isa = PBXBuildFile; fileRef = E964C2411C324DDF00A1AFCD /* cmudict-0.7b_modified.txt */; };
+		E99E78611C665ABE004B9795 /* RandoThing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99E78601C665ABE004B9795 /* RandoThing.swift */; };
 		E9EA05071C33392300610E52 /* StreamReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EA05061C33392300610E52 /* StreamReader.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,7 @@
 		E964C2331C32451500A1AFCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E964C23F1C3245AB00A1AFCD /* Phoneme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Phoneme.swift; sourceTree = "<group>"; };
 		E964C2411C324DDF00A1AFCD /* cmudict-0.7b_modified.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "cmudict-0.7b_modified.txt"; sourceTree = "<group>"; };
+		E99E78601C665ABE004B9795 /* RandoThing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandoThing.swift; sourceTree = "<group>"; };
 		E9EA05061C33392300610E52 /* StreamReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StreamReader.swift; path = ../StreamReader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,6 +113,7 @@
 				E964C2411C324DDF00A1AFCD /* cmudict-0.7b_modified.txt */,
 				E964C2111C32451500A1AFCD /* AppDelegate.swift */,
 				E964C2131C32451500A1AFCD /* ViewController.swift */,
+				E99E78601C665ABE004B9795 /* RandoThing.swift */,
 				E9507F2C1C45D58C00DD6F2B /* Word.swift */,
 				E964C23F1C3245AB00A1AFCD /* Phoneme.swift */,
 				E9507F2E1C45FE7D00DD6F2B /* WordIndexRhymePercentilePair.swift */,
@@ -274,6 +277,7 @@
 			files = (
 				E9EA05071C33392300610E52 /* StreamReader.swift in Sources */,
 				E964C2401C3245AB00A1AFCD /* Phoneme.swift in Sources */,
+				E99E78611C665ABE004B9795 /* RandoThing.swift in Sources */,
 				E9507F2F1C45FE7D00DD6F2B /* WordIndexRhymePercentilePair.swift in Sources */,
 				E9507F2D1C45D58C00DD6F2B /* Word.swift in Sources */,
 				E964C2141C32451500A1AFCD /* ViewController.swift in Sources */,

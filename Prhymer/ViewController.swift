@@ -26,7 +26,7 @@ class ViewController: UIViewController {
     func buildWords(){
     
         var phonemes = [Phoneme]();
-        var linesOfDictionary  = [String?]();
+        var linesOfDictionary  = [String]();
         
         let path = NSBundle.mainBundle().pathForResource("cmudict-0.7b_modified", ofType: "txt");
         
@@ -45,7 +45,7 @@ class ViewController: UIViewController {
                 
                 linesOfDictionary.append(line);
                 
-                debugPrint(linesOfDictionary[i]!);
+                debugPrint(linesOfDictionary[i]);
                 
                 i = i + 1;
                 
@@ -55,7 +55,8 @@ class ViewController: UIViewController {
         
         //takes the read in original text file and breaks each line into word names and lists of phonemes; sets up resources for the dictionary.
         var wordNames = [String]();
-        var listsOfPhonemesForWords = [[Phoneme]]();
+        var listsOfPhonemesForWords = [[Phoneme]](); /*for something each element in this list contains far more stuff than it ever should.
+        It all seems to be duplications of previous elements too. This is likely where the absurd memory problem is coming from*/
         
         var word = "";
         debugPrint(linesOfDictionary.count);
@@ -69,8 +70,7 @@ class ViewController: UIViewController {
         
             spacesToSkip = 2;
             
-            lineBeingExamined = linesOfDictionary[i]!;
-            linesOfDictionary[i] = nil;
+            lineBeingExamined = linesOfDictionary[i];
             
             indexOfCharBeingExamined = 0;
             
@@ -101,51 +101,53 @@ class ViewController: UIViewController {
                 
                 }
                 
-                print(i);
-                indexOfCharBeingExamined = indexOfCharBeingExamined + spacesToSkip;
-                var phoneme = Phoneme();
-                var phonemeName = "";
+            }
                 
-                //creates a list of phonemes
+            print(i);
+            indexOfCharBeingExamined = indexOfCharBeingExamined + spacesToSkip;
+            phonemes = [Phoneme]();
+            var phoneme = Phoneme();
+            var phonemeName = "";
+            
+            //creates a list of phonemes
+            
+            let lineBeingExaminedChars = lineBeingExamined.utf16;
+            
+            for(var k = indexOfCharBeingExamined; k < lineBeingExaminedChars.count; k++){
+            
+                let charBeingExamined = lineBeingExaminedChars[lineBeingExaminedChars.startIndex.advancedBy(k)]; //this is returning an Int16 not a character for some reason
                 
-                let lineBeingExaminedChars = lineBeingExamined.utf16;
-                
-                for(var k = indexOfCharBeingExamined; k < lineBeingExaminedChars.count; k++){
-                
-                    let charBeingExamined = lineBeingExaminedChars[lineBeingExaminedChars.startIndex.advancedBy(k)];
+                if(NSCharacterSet.letterCharacterSet().characterIsMember(charBeingExamined)) {
                     
-                    if(NSCharacterSet.letterCharacterSet().characterIsMember(charBeingExamined)) {
-                        
-                        phonemeName = phonemeName + String(lineBeingExamined[lineBeingExamined.startIndex.advancedBy(k)]);
-                        
-                    }else if NSCharacterSet.decimalDigitCharacterSet().characterIsMember(charBeingExamined) {
-                        
-                        let stress16 = charBeingExamined;
-                        let stress = Int(stress16);
-                        
-                        phoneme.stress = stress;
-                        
-                    }else if(String(charBeingExamined) == " "){
+                    phonemeName = phonemeName + String(lineBeingExamined[lineBeingExamined.startIndex.advancedBy(k)]);
                     
-                        phoneme.phoneme = phonemeName;
-                        phonemes.append(phoneme);
-                        phoneme = Phoneme();
-                        phonemeName = "";
+                }else if NSCharacterSet.decimalDigitCharacterSet().characterIsMember(charBeingExamined) {
                     
-                    }else{}
+                    let stress16 = charBeingExamined;
+                    let stress = Int(stress16);
+                    
+                    phoneme.stress = stress;
+                    
+                }else if(String(charBeingExamined) == " "){ //this is never being ran
                 
-                }
+                    phoneme.phoneme = phonemeName;
+                    phonemes.append(phoneme);
+                    phoneme = Phoneme();
+                    phonemeName = "";
+                    print("space encountered, should move on to next phoneme");
                 
-                //for the last phoneme
-                phoneme.phoneme = phonemeName;
-                phonemes.append(phoneme);
-                phoneme = Phoneme();
-                phonemeName = "";
-                
-                listsOfPhonemesForWords.append(phonemes);
+                }else{}
             
             }
             
+            //for the last phoneme
+            phoneme.phoneme = phonemeName;
+            phonemes.append(phoneme);
+            phoneme = Phoneme();
+            phonemeName = "";
+            
+            listsOfPhonemesForWords.append(phonemes);
+        
         }
         
         //builds dictionary
