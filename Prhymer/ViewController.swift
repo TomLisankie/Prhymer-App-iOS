@@ -10,7 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    let DEBUGGING = true;
+    let DEBUGGING = false;
+    var anchors = [Word]();
     
     @IBAction func buttonTapped(){
     
@@ -115,18 +116,22 @@ class ViewController: UIViewController {
             
             for(var k = indexOfCharBeingExamined; k < lineBeingExaminedChars.count; k++){
             
-                let charBeingExamined = lineBeingExaminedChars[lineBeingExaminedChars.startIndex.advancedBy(k)]; //this is returning an Int16 not a character for some reason
+                let charBeingExamined = lineBeingExamined[lineBeingExamined.startIndex.advancedBy(k)]; //this is returning an Int16 not a character for some reason
+                let charBeingExaminedUnichar = lineBeingExaminedChars[lineBeingExaminedChars.startIndex.advancedBy(k)];
                 
-                if(NSCharacterSet.letterCharacterSet().characterIsMember(charBeingExamined)) {
+                if(NSCharacterSet.letterCharacterSet().characterIsMember(charBeingExaminedUnichar)) {
                     
                     phonemeName = phonemeName + String(lineBeingExamined[lineBeingExamined.startIndex.advancedBy(k)]);
+                    debugPrint("added character to phonemeName");
                     
-                }else if NSCharacterSet.decimalDigitCharacterSet().characterIsMember(charBeingExamined) {
+                }else if NSCharacterSet.decimalDigitCharacterSet().characterIsMember(charBeingExaminedUnichar) {
                     
-                    let stress16 = charBeingExamined;
+                    let stress16 = charBeingExaminedUnichar;
                     let stress = Int(stress16);
                     
                     phoneme.stress = stress;
+                    
+                    debugPrint("added stress to phoneme");
                     
                 }else if(String(charBeingExamined) == " "){ //this is never being ran
                 
@@ -134,7 +139,7 @@ class ViewController: UIViewController {
                     phonemes.append(phoneme);
                     phoneme = Phoneme();
                     phonemeName = "";
-                    print("space encountered, should move on to next phoneme");
+                    debugPrint("space encountered, should move on to next phoneme");
                 
                 }else{}
             
@@ -162,6 +167,8 @@ class ViewController: UIViewController {
             }
                 
         }
+        
+        anchors = anchorWords;
         
         print("hello");
         print(anchorWords[145].wordName);
