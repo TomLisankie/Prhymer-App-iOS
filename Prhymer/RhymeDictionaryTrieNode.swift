@@ -14,12 +14,15 @@ class RhymeDictionaryTrieNode {
     var isFinalChar: Bool;
     var charValue: Character;
     var depth: Int;
-    var childrenMap: NSMapTable;
+    var childrenArray: [RhymeDictionaryTrieNode];
     
     init(){
     
         word = nil;
         isFinalChar = true;
+        charValue = ".";
+        depth = 0;
+        childrenArray = [RhymeDictionaryTrieNode]();
     
     }
     
@@ -32,6 +35,12 @@ class RhymeDictionaryTrieNode {
     func getChild(charValue: Character) -> RhymeDictionaryTrieNode{
     
         return RhymeDictionaryTrieNode();
+    
+    }
+    
+    func getChildrenNodes() -> [RhymeDictionaryTrieNode]{
+    
+        return childrenArray;
     
     }
     

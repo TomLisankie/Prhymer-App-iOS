@@ -51,12 +51,37 @@ class RhymeDictionaryTrie {
         for(var i = 0; i < wordName.characters.count; i++){
         
             let current = wordName[wordName.startIndex.advancedBy(i)];
-            let children = currentNode.childrenNodes;
+            let children = currentNode.getChildrenNodes();
+            var foundChar = false;
+            
+            for(var j = 0; j < children.count; j++){
+            
+                foundChar = false;
+                let child = children[j];
+                let childChar = child.charValue;
+                
+                if(String(childChar) == String(current)){
+                
+                    currentNode = child;
+                    foundChar = true;
+                    break;
+                
+                }
+            
+            }
+            
+            if(foundChar == false){
+            
+                break;
+            
+            }
         
         }
         
+        word = currentNode.word!;
+        
         return word;
     
-    }
+    } //okay finished this class, need to fill out RhymeDictionaryTrieNode now.
     
 }
