@@ -28,14 +28,64 @@ class RhymeDictionaryTrieNode {
     
     func addChild(charValue: Character) -> Bool{
     
-        return false;
+        isFinalChar = false;
+        
+        for(var i = 0; i < childrenArray.count; i++){
+        
+            if(childrenArray[i].charValue == charValue){
+            
+                return false;
+            
+            }
+        
+        }
+        
+        let newNode = RhymeDictionaryTrieNode();
+        newNode.charValue = charValue;
+        newNode.depth = self.depth + 1;
+        
+        childrenArray.append(newNode);
+        
+        //TODO Need to fix this so words aren't added to every child
+        
+        return true;
+    
+    }
+    
+    func removeChild(){
+    
+        
     
     }
     
     func getChild(charValue: Character) -> RhymeDictionaryTrieNode{
     
+        for(var i = 0; i < childrenArray.count; i++){
+            
+            if(childrenArray[i].charValue == charValue){
+            
+                return childrenArray[i];
+            
+            }
+            
+        }
+        
         return RhymeDictionaryTrieNode();
     
+    }
+    
+    func getChildrenValues() -> [Character]{
+        
+        var childrenValues = [Character]();
+        
+        for(var i = 0; i < childrenArray.count; i++){
+        
+            childrenValues.append(childrenArray[i].charValue);
+        
+        }
+        
+        return childrenValues;
+        
     }
     
     func getChildrenNodes() -> [RhymeDictionaryTrieNode]{

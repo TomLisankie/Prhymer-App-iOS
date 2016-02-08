@@ -12,6 +12,7 @@ class ViewController: UIViewController {
 
     let DEBUGGING = false;
     var anchors = [Word]();
+    var trie = RhymeDictionaryTrie();
     
     @IBAction func buttonTapped(){
     
@@ -169,6 +170,15 @@ class ViewController: UIViewController {
         }
         
         anchors = anchorWords;
+        
+        for(var i = 0; i < anchors.count; i++){
+        
+            trie.addWord(anchors[i]);
+        
+        }
+        
+        anchorWords = [Word]();
+        anchors = [Word]();
         
         print("hello");
         print(anchorWords[145].wordName);
