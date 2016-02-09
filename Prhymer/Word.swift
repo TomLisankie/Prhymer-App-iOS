@@ -15,6 +15,8 @@ class Word {
     var wordsThisRhymesWith = [WordIndexRhymePercentilePair]();
     var numOfSyllables = 0;
     
+    init(){}
+    
     init (wordName: String, phonemes: [Phoneme]) {
         
         self.wordName = wordName;

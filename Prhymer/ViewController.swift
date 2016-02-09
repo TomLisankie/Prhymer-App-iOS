@@ -187,6 +187,122 @@ class ViewController: UIViewController {
         
     }
     
+    func findRhymeValueAndPercentileForWords(anchor: Word, satellite: Word) -> Double{
+    
+        var rhymePercentile = 0.0;
+        
+        if(anchor.listOfPhonemes.count == satellite.listOfPhonemes.count){
+        
+            rhymePercentile = regularRhymeValue(anchor, satellite: satellite);
+        
+        }else{
+        
+            rhymePercentile = idealRhymeValue(anchor, satellite: satellite);
+        
+        }
+        
+        return rhymePercentile;
+    
+    }
+    
+    func regularRhymeValue(anchor: Word, satellite: Word) -> Double{
+    
+        var foundConsonantCluster = false;
+        var anchorOrSatellite = false;
+        
+        var rhymeValue = 0.0;
+        
+        var newWord = Word();
+        
+        let weightTowardsWordEnd = 0.1;
+        
+        if(anchor.listOfPhonemes[0].isAVowelPhoneme == false && anchor.listOfPhonemes[1].isAVowelPhoneme == false && anchor.listOfPhonemes[0].isEqualTo(satellite.listOfPhonemes[0]) == false && anchor.listOfPhonemes[1].isEqualTo(satellite.listOfPhonemes[1]) == false){
+        
+            foundConsonantCluster = true;
+            
+            let shortenedListOfPhonemes = Array(anchor.listOfPhonemes[1...anchor.listOfPhonemes.count]);
+            
+            newWord = Word(wordName: anchor.wordName, phonemes: shortenedListOfPhonemes);
+            
+            anchorOrSatellite = true;
+        
+        }else if(satellite.listOfPhonemes[0].isAVowelPhoneme == false && satellite.listOfPhonemes[1].isAVowelPhoneme == false && anchor.listOfPhonemes[0].isEqualTo(satellite.listOfPhonemes[0]) == false && anchor.listOfPhonemes[1].isEqualTo(satellite.listOfPhonemes[1]) == false){
+        
+            foundConsonantCluster = true;
+            
+            let shortenedListOfPhonemes = Array(satellite.listOfPhonemes[1...anchor.listOfPhonemes.count]);
+            
+            newWord = Word(wordName: anchor.wordName, phonemes: shortenedListOfPhonemes); //may want to switch this to satellite rather than anchor
+            
+            anchorOrSatellite = false;
+        
+        }
+        
+        if(foundConsonantCluster == false){
+        
+            for(var s = 0; s < anchor.listOfPhonemes.count; s++){
+                
+                rhymeValue = rhymeValue + findRVBetweenPhonemes(anchor.listOfPhonemes[s],
+                    p2: satellite.listOfPhonemes[s], addWeight: true, weight: Double(s)*weightTowardsWordEnd);
+            
+            }
+        
+        }else{
+        
+            //nothing, it'll be taken care of in the next if-else statement.
+        
+        }
+        
+        if(foundConsonantCluster == false){
+            
+            return findRhymePercentile(rhymeValue, longerWord: anchor);
+            
+        }else{
+        
+            var longerWord = Word();
+            
+            if(anchor.listOfPhonemes.count < satellite.listOfPhonemes.count){
+            
+                longerWord = satellite;
+            
+            }else{
+            
+                longerWord = anchor;
+            
+            }
+            
+            if(anchorOrSatellite == true){
+                
+                return idealRhymeValue(newWord, satellite: satellite);
+                
+            }else{
+                
+                return idealRhymeValue(anchor, satellite: newWord);
+                
+            }
+        
+        }
+    
+    }
+    
+    func idealRhymeValue(anchor: Word, satellite: Word) -> Double{
+        
+        
+        
+    }
+    
+    func findRVBetweenPhonemes(p1: Phoneme, p2: Phoneme, addWeight: Bool, weight: Double) -> Double{
+    
+        
+    
+    }
+    
+    func findRhymePercentile(rhymeValue: Double, longerWord: Word) -> Double{
+    
+        
+    
+    }
+    
     func debugPrint(obj: AnyObject){
     
         if(DEBUGGING){
