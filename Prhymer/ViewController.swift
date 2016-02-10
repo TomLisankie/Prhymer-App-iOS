@@ -287,7 +287,146 @@ class ViewController: UIViewController {
     
     func idealRhymeValue(anchor: Word, satellite: Word) -> Double{
         
+        var shorterWord = Word();
+        var longerWord = Word();
         
+        if(anchor.listOfPhonemes.count < satellite.listOfPhonemes.count){
+        
+            shorterWord = anchor;
+            longerWord = satellite;
+        
+        }else{
+        
+            shorterWord = satellite;
+            longerWord = anchor;
+        
+        }
+        
+        var idealRhymeValue = 0.0;
+        
+        var firstSearch = true;
+        var foundStartingIndex = false;
+        var layers = [Layer]();
+        var nodesForThisLayer = [Node]();
+        
+        var pastLayerNumber = 0;
+        
+        for(var s = 0; s < shorterWord.listOfPhonemes.count; s++){
+        
+            let weightTowardsWordEnd = 0.1;
+            
+            if(firstSearch == true){
+            
+                let startNode = Node();
+                for(var l = 0; l < longerWord.listOfPhonemes.count; l++){
+                
+                    let RVBetweenPhonemes = findRVBetweenPhonemes(shorterWord.listOfPhonemes[s], p2: longerWord.listOfPhonemes[l], addWeight: true, weight: Double(l)*weightTowardsWordEnd);
+                    
+                    if(RVBetweenPhonemes > 0){
+                    
+                        foundStartingIndex = true;
+                        
+                        let indexSet = IndexSet(index: l, RVBetweenPhonemes: RVBetweenPhonemes);
+                        
+                        startNode.addIndexSet(indexSet);
+                    
+                    }
+                
+                }
+                
+                if(foundStartingIndex == true){
+                
+                    nodesForThisLayer.append(startNode);
+                    layers.append(Layer(nodes: nodesForThisLayer));
+                    firstSearch = false;
+                
+                }
+                
+                nodesForThisLayer = [Node]();
+            
+            }else{
+            
+                for(var n = 0; n < layers[pastLayerNumber].nodes.count; n++){
+                
+                    let nodeBeingExamined = layers[pastLayerNumber].nodes[n];
+                    
+                    for(var i = 0; i < nodeBeingExamined.indexSets.count; i++){
+                    
+                        let setBeingExamined = nodeBeingExamined.indexSets[i];
+                        let childNode = Node();
+                        let indexToStartAt = setBeingExamined.indexes[0];
+                        
+                        if(indexToStartAt + 1 == longerWord.listOfPhonemes.count){
+                        
+                            //do nothing
+                        
+                        }else{
+                        
+                            for(var l = indexToStartAt + 1; l < longerWord.listOfPhonemes.count; l++){
+                            
+                                let RVBetweenPhonemes = findRVBetweenPhonemes(shorterWord.listOfPhonemes[s], p2: longerWord.listOfPhonemes[l], addWeight: true, weight: Double(l)*weightTowardsWordEnd);
+                                
+                                if(RVBetweenPhonemes > 0){
+                                
+                                    let indexSet = IndexSet(index: l, RVBetweenPhonemes: RVBetweenPhonemes);
+                                    childNode.addIndexSet(indexSet);
+                                
+                                }
+                            
+                            }
+                            
+                            setBeingExamined.attachChildNode(childNode);
+                            nodesForThisLayer.append(childNode);
+                        
+                        }
+                    
+                    }
+                
+                }
+                
+                layers.append(Layer(nodes: nodesForThisLayer));
+                nodesForThisLayer = [Node]();
+                
+                pastLayerNumber = pastLayerNumber + 1;
+            
+            }
+        
+        }
+        
+        //find best path
+        
+        var bestSet = IndexSet(index: 0, RVBetweenPhonemes: 0.0);
+        var nodeBeingExamined = Node();
+        
+        for(var l = layers.count - 1; l >= 0; l--){
+        
+            for(var n = 0; n < layers[l].nodes.count; n++){
+            
+                nodeBeingExamined = layers[l].nodes[n];
+                
+                if(nodeBeingExamined.indexSets.count > 0){
+                
+                    nodeBeingExamined.findBestIndexSetAndSendItUp();
+                
+                }
+            
+            }
+            
+            if(l == 0 && layers[l].nodes.count == 1){
+            
+                bestSet = nodeBeingExamined.bestSet;
+            
+            }
+        
+        }
+        
+        idealRhymeValue = bestSet.rhymeValueForSet;
+        
+        var rhymeValue = idealRhymeValue;
+        
+        rhymeValue = rhymeValue - findDeductionForIndexSet(bestSet, longerWord: longerWord);
+        
+        return findRhymePercentile(rhymeValue, longerWord: longerWord);
         
     }
     
@@ -301,6 +440,12 @@ class ViewController: UIViewController {
     
         
     
+    }
+    
+    func findDeductionForIndexSet(bestSet: IndexSet, longerWord: Word) -> Double{
+        
+        
+        
     }
     
     func debugPrint(obj: AnyObject){
