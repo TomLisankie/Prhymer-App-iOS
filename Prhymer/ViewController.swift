@@ -13,6 +13,9 @@ class ViewController: UIViewController {
     let DEBUGGING = false;
     var anchors = [Word]();
     var trie = RhymeDictionaryTrie();
+    @IBOutlet weak var firstTextField: UITextField?;
+    @IBOutlet weak var secondTextField: UITextField?;
+    @IBOutlet weak var rhymePercentileLabel: UILabel?;
     
     @IBAction func buttonTapped(){
     
@@ -22,6 +25,21 @@ class ViewController: UIViewController {
         print(sampleNeme.phoneme);
         
         buildWords();
+        
+        let string1 = firstTextField?.text;
+        
+        let firstStrings = [String]();
+        for(var i = 0; i < string1?.characters.count; i++){
+        
+            if(String(string1![string1!.startIndex.advancedBy(i)]) != " "){
+            
+                
+            
+            }
+        
+        }
+        
+        let string2 = secondTextField?.text;
     
     }
     
@@ -105,7 +123,7 @@ class ViewController: UIViewController {
                 
             }
                 
-            print(i);
+            //print(i);
             indexOfCharBeingExamined = indexOfCharBeingExamined + spacesToSkip;
             phonemes = [Phoneme]();
             var phoneme = Phoneme();
@@ -171,6 +189,7 @@ class ViewController: UIViewController {
         
         anchors = anchorWords;
         
+        //now put this list of Words into a trie
         for(var i = 0; i < anchors.count; i++){
         
             trie.addWord(anchors[i]);
@@ -179,11 +198,6 @@ class ViewController: UIViewController {
         
         anchorWords = [Word]();
         anchors = [Word]();
-        
-        print("hello");
-        print(anchorWords[145].wordName);
-        
-        //now put this list of Words into a trie
         
     }
     
@@ -432,19 +446,91 @@ class ViewController: UIViewController {
     
     func findRVBetweenPhonemes(p1: Phoneme, p2: Phoneme, addWeight: Bool, weight: Double) -> Double{
     
+        if(p1.isAVowelPhoneme == true && p2.isAVowelPhoneme == true){
         
+            if(p1.isEqualTo(p2)){
+            
+                return 2.0 + weight;
+            
+            }else{
+            
+                return 1.0 + weight;
+            
+            }
+        
+        }else if(p1.isAVowelPhoneme == false && p2.isAVowelPhoneme == false){
+        
+            if(p1.isEqualTo(p2)){
+                
+                return 1.0 + weight;
+                
+            }else{
+                
+                return 0.5 + weight;
+                
+            }
+        
+        }else{
+        
+            return 0.0;
+        
+        }
     
     }
     
     func findRhymePercentile(rhymeValue: Double, longerWord: Word) -> Double{
     
+        var homophonicRhymeValue = 0.0;
+        var rhymePercentile = 0.0;
         
+        let weightTowardsWordEnd = 0.1;
+        
+        for(var i = 0; i < longerWord.listOfPhonemes.count; i++){
+        
+            homophonicRhymeValue = homophonicRhymeValue + findRVBetweenPhonemes(longerWord.listOfPhonemes[i], p2: longerWord.listOfPhonemes[i], addWeight: true, weight: Double(i)*weightTowardsWordEnd);
+        
+        }
+        
+        rhymePercentile = rhymeValue / homophonicRhymeValue;
+        
+        return rhymePercentile;
     
     }
     
     func findDeductionForIndexSet(bestSet: IndexSet, longerWord: Word) -> Double{
         
+        var deduction = 0.0;
         
+        if(bestSet.indexes[0] > 0){
+        
+            if(bestSet.indexes[0] > 1){
+            
+                deduction = deduction + log10(Double(bestSet.indexes[0]));
+            
+            }else{
+            
+                deduction = deduction + 0.25;
+            
+            }
+        
+        }
+        
+        if((longerWord.listOfPhonemes.count - 1) - bestSet.indexes[bestSet.indexes.count-1] > 0){
+        
+            deduction = deduction + log10(Double((longerWord.listOfPhonemes.count - 1) - bestSet.indexes[bestSet.indexes.count-1]));
+        
+        }
+        
+        for(var i = 0; i < bestSet.indexes.count - 1; i++){
+        
+            let index1 = bestSet.indexes[i];
+            let index2 = bestSet.indexes[i+1];
+            
+            deduction = deduction + (0.25 * Double(index2 - index1-1));
+        
+        }
+        
+        return deduction;
         
     }
     

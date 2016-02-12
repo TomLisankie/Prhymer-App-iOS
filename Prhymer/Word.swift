@@ -36,7 +36,7 @@ class Word {
     
     deinit{
         
-        print("Word deinitializing");
+        //print("Word deinitializing");
         
     }
     

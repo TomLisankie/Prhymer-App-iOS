@@ -30,7 +30,7 @@ class Phoneme {
     
     deinit{
     
-        print("Phoneme deinitializing");
+        //print("Phoneme deinitializing");
     
     }
     
