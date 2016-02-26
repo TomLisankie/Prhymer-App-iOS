@@ -54,10 +54,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         
+        print("read in text file");
+        
         //takes the read in original text file and breaks each line into word names and lists of phonemes; sets up resources for the dictionary.
         var wordNames = [String]();
-        var listsOfPhonemesForWords = [[Phoneme]](); /*for something each element in this list contains far more stuff than it ever should.
-        It all seems to be duplications of previous elements too. This is likely where the absurd memory problem is coming from*/
+        var listsOfPhonemesForWords = [[Phoneme]]();
         
         var word = "";
         debugPrint(linesOfDictionary.count);
@@ -67,21 +68,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         var indexOfCharBeingExamined = 0;
         
-        for(var i = 0; i < linesOfDictionary.count; i++){//goes through every line of the dictionary
+        for line in linesOfDictionary{//goes through every line of the dictionary
             
             spacesToSkip = 2;
             
-            lineBeingExamined = linesOfDictionary[i];
+            lineBeingExamined = line;
             
             indexOfCharBeingExamined = 0;
             
             var charBeingExamined: Character;
             
-            for (var j = 0; j < lineBeingExamined.characters.count; j++){//goes through each character in whichever line is being examined
+            for character in lineBeingExamined.characters{//goes through each character in whichever line is being examined
+                //need to fix this to use a for-in loop
                 
-                indexOfCharBeingExamined = j;
+                indexOfCharBeingExamined = indexOfCharBeingExamined + 1;
                 
-                charBeingExamined = lineBeingExamined[lineBeingExamined.startIndex.advancedBy(indexOfCharBeingExamined)];
+                charBeingExamined = character;
                 
                 if(charBeingExamined != " " && charBeingExamined != "("){
                     
@@ -112,7 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             //creates a list of phonemes
             
-            let lineBeingExaminedChars = lineBeingExamined.utf16;
+            let lineBeingExaminedChars = Array(lineBeingExamined.utf16[indexOfCharBeingExamined...lineBeingExamined.utf16.count]); //do a subarray of this from indexOfCharBeingExamined to the end so that a for-in loop can be used after. Some conversion may be necessary
             
             for(var k = indexOfCharBeingExamined; k < lineBeingExaminedChars.count; k++){
                 

@@ -26,22 +26,87 @@ class ViewController: UIViewController {
         
         let string1 = firstTextField?.text;
         
-        let firstStrings = [String]();
+        var firstStrings = [String]();
+        var wordToAdd1 = "";
         for(var i = 0; i < string1?.characters.count; i++){
         
             if(String(string1![string1!.startIndex.advancedBy(i)]) != " "){
             
-                
+                wordToAdd1 = wordToAdd1 + String(string1![string1!.startIndex.advancedBy(i)]);
+            
+            }else{
+            
+                firstStrings.append(wordToAdd1);
+                wordToAdd1 = "";
             
             }
         
         }
+        firstStrings.append(wordToAdd1);
         
         let string2 = secondTextField?.text;
+        
+        var secondStrings = [String]();
+        var wordToAdd2 = "";
+        for(var i = 0; i < string2?.characters.count; i++){
+            
+            if(String(string2![string2!.startIndex.advancedBy(i)]) != " "){
+                
+                wordToAdd2 = wordToAdd2 + String(string2![string2!.startIndex.advancedBy(i)]);
+                
+            }else{
+                
+                secondStrings.append(wordToAdd2);
+                wordToAdd2 = "";
+                
+            }
+            
+        }
+        secondStrings.append(wordToAdd2);
+        
+        var firstWords = [Word](), secondWords = [Word]();
+        
+        for(var w = 0; w < firstStrings.count; w++){
+            
+            firstWords.append(appDelegate.trie.getWord(firstStrings[w]));
+            
+        }
+        
+        for(var w = 0; w < secondStrings.count; w++){
+            
+            secondWords.append(appDelegate.trie.getWord(secondStrings[w]));
+            
+        }
+        
+        var firstListOfPhonemes = [Phoneme](), secondListOfPhonemes = [Phoneme]();
+        
+        for(var w = 0; w < firstWords.count; w++){
+            
+            for(var p = 0; p < firstWords[w].listOfPhonemes.count; p++){
+                
+                firstListOfPhonemes.append(firstWords[w].listOfPhonemes[p]);
+                
+            }
+            
+        }
+        let word1 = Word(wordName: string1!, phonemes: firstListOfPhonemes);
+        
+        for(var w = 0; w < secondWords.count; w++){
+            
+            for(var p = 0; p < secondWords[w].listOfPhonemes.count; p++){
+                
+                secondListOfPhonemes.append(secondWords[w].listOfPhonemes[p]);
+                
+            }
+            
+        }
+        let word2 = Word(wordName: string2!, phonemes: secondListOfPhonemes);
+        
+        let rhymePercentile = appDelegate.findRhymeValueAndPercentileForWords(word1, satellite: word2);
+        
+        rhymePercentileLabel?.text = String(rhymePercentile);
     
     }
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
