@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -106,7 +107,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
             }
             
-            //print(i);
             indexOfCharBeingExamined = indexOfCharBeingExamined + spacesToSkip;
             phonemes = [Phoneme]();
             var phoneme = Phoneme();
@@ -114,28 +114,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             //creates a list of phonemes
             
-            let lineBeingExaminedChars = Array(lineBeingExamined.utf16[indexOfCharBeingExamined...lineBeingExamined.utf16.count]); //do a subarray of this from indexOfCharBeingExamined to the end so that a for-in loop can be used after. Some conversion may be necessary
+            let phonemesInLine = lineBeingExamined.substringFromIndex(lineBeingExamined.startIndex.advancedBy(indexOfCharBeingExamined));
             
-            for(var k = indexOfCharBeingExamined; k < lineBeingExaminedChars.count; k++){
+            for characterBeingExamined in phonemesInLine.characters{
                 
-                let charBeingExamined = lineBeingExamined[lineBeingExamined.startIndex.advancedBy(k)]; //this is returning an Int16 not a character for some reason
-                let charBeingExaminedUnichar = lineBeingExaminedChars[lineBeingExaminedChars.startIndex.advancedBy(k)];
-                
-                if(NSCharacterSet.letterCharacterSet().characterIsMember(charBeingExaminedUnichar)) {
+                if(charIsMember(characterBeingExamined, inSet: NSCharacterSet.letterCharacterSet())) {
                     
-                    phonemeName = phonemeName + String(lineBeingExamined[lineBeingExamined.startIndex.advancedBy(k)]);
+                    phonemeName.append(characterBeingExamined);
                     debugPrint("added character to phonemeName");
                     
-                }else if NSCharacterSet.decimalDigitCharacterSet().characterIsMember(charBeingExaminedUnichar) {
+                }else if(charIsMember(characterBeingExamined, inSet: NSCharacterSet.decimalDigitCharacterSet())) {
                     
-                    let stress16 = charBeingExaminedUnichar;
+                    let chars16 = String(characterBeingExamined).utf16;
+                    let stress16 = chars16[chars16.startIndex];
                     let stress = Int(stress16);
                     
                     phoneme.stress = stress;
                     
                     debugPrint("added stress to phoneme");
                     
-                }else if(String(charBeingExamined) == " "){ //this is never being ran
+                }else if(String(characterBeingExamined) == " "){ //this is never being ran
                     
                     phoneme.phoneme = phonemeName;
                     phonemes.append(phoneme);
@@ -515,6 +513,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return deduction;
         
+    }
+    
+    func charIsMember(char: Character, inSet set: NSCharacterSet) -> Bool {
+        var found = true
+        for ch in String(char).utf16 {
+            if !set.characterIsMember(ch) { found = false }
+        }
+        return found
     }
     
     func debugPrint(obj: AnyObject){
