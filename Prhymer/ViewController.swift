@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     
     @IBAction func buttonTapped(){
     
-        print("hello")
+        print("hello");
         let sampleNeme = Phoneme();
         sampleNeme.phoneme = "AH";
         print(sampleNeme.phoneme);
@@ -104,7 +104,9 @@ class ViewController: UIViewController {
         
         let rhymePercentile = appDelegate.findRhymeValueAndPercentileForWords(word1, satellite: word2);
         
-        rhymePercentileLabel?.text = String(rhymePercentile);
+        print("Rhyme Percentile: ", rhymePercentile);
+        
+        rhymePercentileLabel?.text = String(rhymePercentile * 100) + String("%");
     
     }
     

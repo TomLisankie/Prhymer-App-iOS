@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    let DEBUGGING = false;
+    let DEBUGGING = true;
     var anchors = [Word]();
     var trie = RhymeDictionaryTrie();
 
@@ -27,33 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func buildWords(){ //builds the list of Word objects that can be compared to one another
         
+        let start = NSDate();
+        
         var phonemes = [Phoneme]();
-        var linesOfDictionary  = [String]();
-        
-        let path = NSBundle.mainBundle().pathForResource("cmudict-0.7b_modified", ofType: "txt");
-        
-        var i = 0;
-        
-        //reads in the dictionary's original text file
-        if let aStreamReader = StreamReader(path: path!) {
-            
-            defer {
-                
-                aStreamReader.close();
-                
-            }
-            
-            while let line = aStreamReader.nextLine() {
-                
-                linesOfDictionary.append(line);
-                
-                debugPrint(linesOfDictionary[i]);
-                
-                i = i + 1;
-                
-            }
-            
-        }
+        let linesOfDictionary  = readInLines();
         
         print("read in text file");
         
@@ -62,7 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var listsOfPhonemesForWords = [[Phoneme]]();
         
         var word = "";
-        debugPrint(linesOfDictionary.count);
         var spacesToSkip = 2;
         
         var lineBeingExamined = "";
@@ -114,14 +90,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             //creates a list of phonemes
             
-            let phonemesInLine = lineBeingExamined.substringFromIndex(lineBeingExamined.startIndex.advancedBy(indexOfCharBeingExamined));
+            let phonemesInLine = lineBeingExamined.substringFromIndex(lineBeingExamined.startIndex.advancedBy(indexOfCharBeingExamined-1));
             
             for characterBeingExamined in phonemesInLine.characters{
                 
                 if(charIsMember(characterBeingExamined, inSet: NSCharacterSet.letterCharacterSet())) {
                     
                     phonemeName.append(characterBeingExamined);
-                    debugPrint("added character to phonemeName");
                     
                 }else if(charIsMember(characterBeingExamined, inSet: NSCharacterSet.decimalDigitCharacterSet())) {
                     
@@ -131,22 +106,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                     phoneme.stress = stress;
                     
-                    debugPrint("added stress to phoneme");
+                }else if(String(characterBeingExamined) == " "){
                     
-                }else if(String(characterBeingExamined) == " "){ //this is never being ran
-                    
-                    phoneme.phoneme = phonemeName;
+                    phoneme.setPhonemeName(phonemeName);
                     phonemes.append(phoneme);
                     phoneme = Phoneme();
                     phonemeName = "";
-                    debugPrint("space encountered, should move on to next phoneme");
                     
                 }else{}
                 
             }
             
             //for the last phoneme
-            phoneme.phoneme = phonemeName;
+            phoneme.setPhonemeName(phonemeName);
             phonemes.append(phoneme);
             phoneme = Phoneme();
             phonemeName = "";
@@ -154,6 +126,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             listsOfPhonemesForWords.append(phonemes);
             
         }
+        
+        print("resources for dictionary organized");
         
         //builds dictionary
         var anchorWords = [Word]();
@@ -168,6 +142,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         
+        print("dictionary created");
+        
         anchors = anchorWords;
         
         //now put this list of Words into a trie
@@ -177,10 +153,56 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         
+        print("trie created");
+        
         anchorWords = [Word]();
-        anchors = [Word]();
+        anchors = anchorWords;
+        
+        print("done");
+        
+        print("Dictionary created in \(NSDate().timeIntervalSince1970 - start.timeIntervalSince1970) seconds.")
         
     }
+    
+    //ASSISTANT FUNCTIONS FOR buildWords()
+    
+    func readInLines() -> [String]{
+    
+        let path = NSBundle.mainBundle().pathForResource("cmudict-0.7b_modified", ofType: "txt");
+        
+        var linesOfDictionary = [String]();
+        
+        var i = 0;
+        
+        //reads in the dictionary's original text file
+        if let aStreamReader = StreamReader(path: path!) {
+            
+            defer {
+                
+                aStreamReader.close();
+                
+            }
+            
+            while let line = aStreamReader.nextLine() {
+                
+                linesOfDictionary.append(line);
+                
+                i = i + 1;
+                
+            }
+            
+        }
+        
+        let p1 = Phoneme(), p2 = Phoneme();
+        p1.phoneme = "D";
+        p2.phoneme = "P";
+        print(p1.isEqualTo(p2));
+        
+        return linesOfDictionary;
+    
+    }
+    
+    //END ASSISTANT FUNCTIONS FOR buildWords()
     
     func findRhymeValueAndPercentileForWords(anchor: Word, satellite: Word) -> Double{
         
@@ -188,10 +210,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if(anchor.listOfPhonemes.count == satellite.listOfPhonemes.count){
             
+            debugPrint("Regular Rhyme Value");
             rhymePercentile = regularRhymeValue(anchor, satellite: satellite);
             
         }else{
             
+            debugPrint("Ideal Rhyme Value");
             rhymePercentile = idealRhymeValue(anchor, satellite: satellite);
             
         }
@@ -214,8 +238,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if(anchor.listOfPhonemes[0].isAVowelPhoneme == false && anchor.listOfPhonemes[1].isAVowelPhoneme == false && anchor.listOfPhonemes[0].isEqualTo(satellite.listOfPhonemes[0]) == false && anchor.listOfPhonemes[1].isEqualTo(satellite.listOfPhonemes[1]) == false){
             
             foundConsonantCluster = true;
-            
-            let shortenedListOfPhonemes = Array(anchor.listOfPhonemes[1...anchor.listOfPhonemes.count]);
+            print(anchor.listOfPhonemes[0].phoneme);
+            let shortenedListOfPhonemes = Array(anchor.listOfPhonemes[1...anchor.listOfPhonemes.count-1]);
             
             newWord = Word(wordName: anchor.wordName, phonemes: shortenedListOfPhonemes);
             
@@ -225,7 +249,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             foundConsonantCluster = true;
             
-            let shortenedListOfPhonemes = Array(satellite.listOfPhonemes[1...anchor.listOfPhonemes.count]);
+            let shortenedListOfPhonemes = Array(satellite.listOfPhonemes[1...anchor.listOfPhonemes.count-1]);
             
             newWord = Word(wordName: anchor.wordName, phonemes: shortenedListOfPhonemes); //may want to switch this to satellite rather than anchor
             
@@ -311,10 +335,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let weightTowardsWordEnd = 0.1;
             
             if(firstSearch == true){
-                
-                let startNode = Node();
+                debugPrint("firstSearch = true");
+                let startNode = Node(); //problem is occuring here
+                debugPrint("startNode created");
                 for(var l = 0; l < longerWord.listOfPhonemes.count; l++){
-                    
+                    print("l: ", l);
                     let RVBetweenPhonemes = findRVBetweenPhonemes(shorterWord.listOfPhonemes[s], p2: longerWord.listOfPhonemes[l], addWeight: true, weight: Double(l)*weightTowardsWordEnd);
                     
                     if(RVBetweenPhonemes > 0){
@@ -520,7 +545,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         for ch in String(char).utf16 {
             if !set.characterIsMember(ch) { found = false }
         }
-        return found
+        return found;
     }
     
     func debugPrint(obj: AnyObject){

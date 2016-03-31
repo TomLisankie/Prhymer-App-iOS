@@ -15,9 +15,11 @@ class IndexSet {
     var childNode = Node();
     
     init(index: Int, RVBetweenPhonemes: Double){
-    
+        
+        print("IndexSet beginning to be initialized");
         indexes.append(index);
         rhymeValueForSet = rhymeValueForSet + RVBetweenPhonemes;
+        print("IndexSet successfully initialized");
     
     }
     

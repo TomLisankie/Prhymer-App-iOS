@@ -14,8 +14,6 @@ class Node {
     var parentIndexSet: IndexSet?;
     var bestSet = IndexSet(index: 0, RVBetweenPhonemes: 0);
     
-    init(){}
-    
     func addIndexSet(set: IndexSet){
     
         indexSets.append(set);
