@@ -8,35 +8,29 @@
 
 import Foundation
 
-class Word {
+struct Word {
+    let name: String;
+    let listOfPhonemes: [Phoneme];
+    var numOfSyllables: Int;
     
-    var wordName = "";
-    var listOfPhonemes = [Phoneme]();
-    var wordsThisRhymesWith = [WordIndexRhymePercentilePair]();
-    var numOfSyllables = 0;
-    
-    init(){}
-    
-    init (wordName: String, phonemes: [Phoneme]) {
+    init?(line: String) {
         
-        self.wordName = wordName;
-        self.listOfPhonemes = phonemes;
+        let components = line.componentsSeparatedByString("  ")
+        guard components.count == 2 else { return nil }
         
-    }
-    
-    func addWordThisRhymesWith(wordIndex: Int, rhymePercentile: Double){
-    
-        let wordToBeInserted = WordIndexRhymePercentilePair(wordIndex: wordIndex, rhymePercentile: rhymePercentile);
+        name = components[0].lowercaseString;
+        listOfPhonemes = components[1].componentsSeparatedByString(" ").map { Phoneme(phonemeName: $0)! }
         
-        wordsThisRhymesWith.append(wordToBeInserted);
+        numOfSyllables = 0;
+        for phoneme in listOfPhonemes{
         
-        //TODO add way of sorting these
-    
-    }
-    
-    deinit{
+            if(phoneme.isAVowelPhoneme == true){
+            
+                numOfSyllables = numOfSyllables + 1;
+            
+            }
         
-        //print("Word deinitializing");
+        }
         
     }
     
