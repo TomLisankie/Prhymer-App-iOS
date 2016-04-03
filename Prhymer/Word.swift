@@ -9,16 +9,24 @@
 import Foundation
 
 struct Word {
-    let name: String;
+    let wordName: String;
     let listOfPhonemes: [Phoneme];
     var numOfSyllables: Int;
+    
+    init(){
+    
+        wordName = "";
+        listOfPhonemes = [Phoneme]();
+        numOfSyllables = 0;
+    
+    }
     
     init?(line: String) {
         
         let components = line.componentsSeparatedByString("  ")
         guard components.count == 2 else { return nil }
         
-        name = components[0].lowercaseString;
+        wordName = components[0].lowercaseString;
         listOfPhonemes = components[1].componentsSeparatedByString(" ").map { Phoneme(phonemeName: $0)! }
         
         numOfSyllables = 0;
@@ -30,6 +38,24 @@ struct Word {
             
             }
         
+        }
+        
+    }
+    
+    init?(wordName: String, phonemes: [Phoneme]) {
+        
+        self.wordName = wordName;
+        self.listOfPhonemes = phonemes;
+        
+        numOfSyllables = 0;
+        for phoneme in listOfPhonemes{
+            
+            if(phoneme.isAVowelPhoneme == true){
+                
+                numOfSyllables = numOfSyllables + 1;
+                
+            }
+            
         }
         
     }

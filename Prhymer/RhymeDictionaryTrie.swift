@@ -80,7 +80,7 @@ class RhymeDictionaryTrie {
         
         word = currentNode.word!;
         
-        return word;
+        return word!;
     
     } //okay finished this class, need to fill out RhymeDictionaryTrieNode now.
     

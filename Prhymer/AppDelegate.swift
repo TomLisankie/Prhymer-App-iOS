@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let start = NSDate();
         
-        let stringData = try! String(contentsOfFile: /*path to the dictionary file*/, encoding: NSASCIIStringEncoding)
+        let stringData = try! String(contentsOfFile: "cmudict-0.7b_modified.txt", encoding: NSASCIIStringEncoding)
         let lines = stringData.componentsSeparatedByString("\n").filter { !$0.hasPrefix(";;;") && !$0.isEmpty }
         let anchorWords = lines.flatMap { Word(line: $0) };
         
@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print("trie created");
         
-        anchorWords = [Word]();
+        //anchorWords = [Word]();
         anchors = anchorWords;
         
         print("done");
@@ -82,10 +82,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         
-        let p1 = Phoneme(), p2 = Phoneme();
-        p1.phoneme = "D";
-        p2.phoneme = "P";
-        print(p1.isEqualTo(p2));
+        let p1 = Phoneme(phonemeName: "D"), p2 = Phoneme(phonemeName: "P");
+        print(p1!.isEqualTo(p2!));
         
         return linesOfDictionary;
     
@@ -130,7 +128,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print(anchor.listOfPhonemes[0].phoneme);
             let shortenedListOfPhonemes = Array(anchor.listOfPhonemes[1...anchor.listOfPhonemes.count-1]);
             
-            newWord = Word(wordName: anchor.wordName, phonemes: shortenedListOfPhonemes);
+            newWord = Word(wordName: anchor.wordName, phonemes: shortenedListOfPhonemes)!;
             
             anchorOrSatellite = true;
             
@@ -140,7 +138,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             let shortenedListOfPhonemes = Array(satellite.listOfPhonemes[1...anchor.listOfPhonemes.count-1]);
             
-            newWord = Word(wordName: anchor.wordName, phonemes: shortenedListOfPhonemes); //may want to switch this to satellite rather than anchor
+            newWord = Word(wordName: anchor.wordName, phonemes: shortenedListOfPhonemes)!; //may want to switch this to satellite rather than anchor
             
             anchorOrSatellite = false;
             

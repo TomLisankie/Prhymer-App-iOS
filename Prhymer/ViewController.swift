@@ -18,9 +18,8 @@ class ViewController: UIViewController {
     @IBAction func buttonTapped(){
     
         print("hello");
-        let sampleNeme = Phoneme();
-        sampleNeme.phoneme = "AH";
-        print(sampleNeme.phoneme);
+        let sampleNeme = Phoneme(phonemeName: "AH");
+        print(sampleNeme!.phoneme);
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate;
         
@@ -102,7 +101,7 @@ class ViewController: UIViewController {
         }
         let word2 = Word(wordName: string2!, phonemes: secondListOfPhonemes);
         
-        let rhymePercentile = appDelegate.findRhymeValueAndPercentileForWords(word1, satellite: word2);
+        let rhymePercentile = appDelegate.findRhymeValueAndPercentileForWords(word1!, satellite: word2!);
         
         print("Rhyme Percentile: ", rhymePercentile);
         

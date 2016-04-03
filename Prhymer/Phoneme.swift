@@ -19,10 +19,10 @@ struct Phoneme {
         
         if(phoneme.hasSuffix("1") || phoneme.hasSuffix("2") || phoneme.hasSuffix("3") || phoneme.hasSuffix("4") || phoneme.hasSuffix("5")) {
             
-            let stressText = self.phoneme.substringFromIndex(self.phoneme.characters.count - 1);
-            let thePhoneme = self.phoneme.substringToIndex(self.phoneme.characters.count - 1);
+            let stressText = self.phoneme.substringFromIndex(self.phoneme.endIndex);
+            let thePhoneme = self.phoneme.substringToIndex(self.phoneme.endIndex);
             self.phoneme = thePhoneme;
-            stress = Int(stressText);
+            stress = Int(stressText)!;
             
         }
         
