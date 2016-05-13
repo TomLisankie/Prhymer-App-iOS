@@ -82,6 +82,6 @@ class RhymeDictionaryTrie {
         
         return word!;
     
-    } //okay finished this class, need to fill out RhymeDictionaryTrieNode now.
+    }
     
 }
