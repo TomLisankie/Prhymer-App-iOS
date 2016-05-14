@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    let finder = RhymeFinder(pathToDict: "cmudict-0.7b_modified.txt");
+    let finder = RhymeFinder(pathToDict: "/Users/thomas/Desktop/Dev/Prhymer/Prhymer/cmudict-0.7b_modified.txt");
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         

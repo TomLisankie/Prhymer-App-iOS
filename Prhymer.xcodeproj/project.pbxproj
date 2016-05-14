@@ -119,8 +119,8 @@
 		E964C2101C32451500A1AFCD /* Prhymer */ = {
 			isa = PBXGroup;
 			children = (
-				E9EA05061C33392300610E52 /* StreamReader.swift */,
 				E964C2411C324DDF00A1AFCD /* cmudict-0.7b_modified.txt */,
+				E9EA05061C33392300610E52 /* StreamReader.swift */,
 				E964C2111C32451500A1AFCD /* AppDelegate.swift */,
 				E9FB1C221CE58BD600BFC47E /* Rhyme Essentials */,
 				E964C2131C32451500A1AFCD /* ViewController.swift */,

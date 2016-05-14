@@ -21,7 +21,7 @@ class RhymeFinder{
     }
     
     func buildWords(pathToDict: String){ //builds the list of Word objects that can be compared to one another
-        
+        debugPrint("starting");
         let start = NSDate();
         
         let stringData = try! String(contentsOfFile: pathToDict, encoding: NSASCIIStringEncoding)
@@ -31,9 +31,9 @@ class RhymeFinder{
         anchors = anchorWords;
         
         //now put this list of Words into a trie
-        for(var i = 0; i < anchors.count; i++){
+        for anchor in anchors{
             
-            trie.addWord(anchors[i]);
+            trie.addWord(anchor);
             
         }
         
@@ -103,10 +103,11 @@ class RhymeFinder{
         
         if(foundConsonantCluster == false){
             
-            for(var s = 0; s < anchor.listOfPhonemes.count; s++){
-                
-                rhymeValue = rhymeValue + findRVBetweenPhonemes(anchor.listOfPhonemes[s],
-                                                                p2: satellite.listOfPhonemes[s], addWeight: true, weight: Double(s)*weightTowardsWordEnd);
+            var counter = 0;
+            for anchorPhoneme in anchor.listOfPhonemes{
+                counter = counter + 1;
+                rhymeValue = rhymeValue + findRVBetweenPhonemes(anchorPhoneme,
+                                                                p2: satellite.listOfPhonemes[counter], addWeight: true, weight: Double(counter)*weightTowardsWordEnd);
                 
             }
             
@@ -174,17 +175,21 @@ class RhymeFinder{
         
         var pastLayerNumber = 0;
         
-        for(var s = 0; s < shorterWord.listOfPhonemes.count; s++){
-            
+        var s = 0;
+        for shorterWordPhoneme in shorterWord.listOfPhonemes{
+            s = s + 1;
             let weightTowardsWordEnd = 0.1;
             
             if(firstSearch == true){
                 debugPrint("firstSearch = true");
                 let startNode = Node(); //problem is occuring here
                 debugPrint("startNode created");
-                for(var l = 0; l < longerWord.listOfPhonemes.count; l++){
-                    print("l: ", l);
-                    let RVBetweenPhonemes = findRVBetweenPhonemes(shorterWord.listOfPhonemes[s], p2: longerWord.listOfPhonemes[l], addWeight: true, weight: Double(l)*weightTowardsWordEnd);
+                var l = 0;
+                for longerWordPhoneme in longerWord.listOfPhonemes{
+                    
+                    l = l + 1;
+                    
+                    let RVBetweenPhonemes = findRVBetweenPhonemes(shorterWordPhoneme, p2: longerWordPhoneme, addWeight: true, weight: Double(l)*weightTowardsWordEnd);
                     
                     if(RVBetweenPhonemes > 0){
                         
@@ -210,13 +215,10 @@ class RhymeFinder{
                 
             }else{
                 
-                for(var n = 0; n < layers[pastLayerNumber].nodes.count; n++){
+                for nodeBeingExamined in layers[pastLayerNumber].nodes{
                     
-                    let nodeBeingExamined = layers[pastLayerNumber].nodes[n];
-                    
-                    for(var i = 0; i < nodeBeingExamined.indexSets.count; i++){
+                    for setBeingExamined in nodeBeingExamined.indexSets{
                         
-                        let setBeingExamined = nodeBeingExamined.indexSets[i];
                         let childNode = Node();
                         let indexToStartAt = setBeingExamined.indexes[0];
                         
@@ -226,9 +228,11 @@ class RhymeFinder{
                             
                         }else{
                             
-                            for(var l = indexToStartAt + 1; l < longerWord.listOfPhonemes.count; l++){
+                            var l = 0;
+                            for longerWordPhoneme in longerWord.listOfPhonemes{
                                 
-                                let RVBetweenPhonemes = findRVBetweenPhonemes(shorterWord.listOfPhonemes[s], p2: longerWord.listOfPhonemes[l], addWeight: true, weight: Double(l)*weightTowardsWordEnd);
+                                l = l + 1;
+                                let RVBetweenPhonemes = findRVBetweenPhonemes(shorterWordPhoneme, p2: longerWordPhoneme, addWeight: true, weight: Double(l)*weightTowardsWordEnd);
                                 
                                 if(RVBetweenPhonemes > 0){
                                     
@@ -260,14 +264,13 @@ class RhymeFinder{
         //find best path
         
         var bestSet = IndexSet(index: 0, RVBetweenPhonemes: 0.0);
-        var nodeBeingExamined = Node();
+        var theNode = Node();
         
-        for(var l = layers.count - 1; l >= 0; l--){
-            
-            for(var n = 0; n < layers[l].nodes.count; n++){
-                
-                nodeBeingExamined = layers[l].nodes[n];
-                
+        var l = 0;
+        for layer in layers.reverse(){
+            l = l + 1;
+            for nodeBeingExamined in layer.nodes{
+                theNode = nodeBeingExamined;
                 if(nodeBeingExamined.indexSets.count > 0){
                     
                     nodeBeingExamined.findBestIndexSetAndSendItUp();
@@ -276,9 +279,9 @@ class RhymeFinder{
                 
             }
             
-            if(l == 0 && layers[l].nodes.count == 1){
+            if(l == 0 && layer.nodes.count == 1){
                 
-                bestSet = nodeBeingExamined.bestSet;
+                bestSet = theNode.bestSet;
                 
             }
             
@@ -335,9 +338,10 @@ class RhymeFinder{
         
         let weightTowardsWordEnd = 0.1;
         
-        for(var i = 0; i < longerWord.listOfPhonemes.count; i++){
-            
-            homophonicRhymeValue = homophonicRhymeValue + findRVBetweenPhonemes(longerWord.listOfPhonemes[i], p2: longerWord.listOfPhonemes[i], addWeight: true, weight: Double(i)*weightTowardsWordEnd);
+        var i = 0;
+        for longerWordPhoneme in longerWord.listOfPhonemes{
+            i = i + 1;
+            homophonicRhymeValue = homophonicRhymeValue + findRVBetweenPhonemes(longerWordPhoneme, p2: longerWordPhoneme, addWeight: true, weight: Double(i)*weightTowardsWordEnd);
             
         }
         
@@ -371,9 +375,17 @@ class RhymeFinder{
             
         }
         
-        for(var i = 0; i < bestSet.indexes.count - 1; i++){
+        var i = 0;
+        for set in bestSet.indexes{
+            i = i + 1;
+            if(i == bestSet.indexes.count - 1){
             
-            let index1 = bestSet.indexes[i];
+                break;
+            
+            }
+            
+            i = i + 1;
+            let index1 = set;
             let index2 = bestSet.indexes[i+1];
             
             deduction = deduction + (0.25 * Double(index2 - index1-1));
