@@ -22,7 +22,11 @@ struct Phoneme {
             let stressText = self.phoneme.substringFromIndex(self.phoneme.endIndex);
             let thePhoneme = self.phoneme.substringToIndex(self.phoneme.endIndex);
             self.phoneme = thePhoneme;
-            stress = Int(stressText)!;
+            if(stressText != ""){
+                
+                stress = Int(stressText)!;
+                
+            }
             
         }
         

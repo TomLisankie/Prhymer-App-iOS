@@ -12,22 +12,20 @@ class IndexSet {
     
     var indexes = [Int]();
     var rhymeValueForSet = 0.0;
-    var childNode = Node();
+    var childNode: Node?;
     
     init(index: Int, RVBetweenPhonemes: Double){
         
-        print("IndexSet beginning to be initialized");
         indexes.append(index);
         rhymeValueForSet = rhymeValueForSet + RVBetweenPhonemes;
-        print("IndexSet successfully initialized");
     
     }
     
     func addIndexes(indexesToAdd: [Int], RVBetweenPhonemes: Double){
     
-        for(var i = 0; i < indexesToAdd.count; i++){
+        for index in indexesToAdd{
         
-            indexes.append(indexesToAdd[i]);
+            indexes.append(index);
         
         }
         
@@ -38,7 +36,7 @@ class IndexSet {
     func attachChildNode(childNode: Node){
     
         self.childNode = childNode;
-        self.childNode.parentIndexSet = self;
+        self.childNode!.parentIndexSet = self;
     
     }
     

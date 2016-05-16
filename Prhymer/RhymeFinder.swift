@@ -105,9 +105,11 @@ class RhymeFinder{
             
             var counter = 0;
             for anchorPhoneme in anchor.listOfPhonemes{
-                counter = counter + 1;
+                
                 rhymeValue = rhymeValue + findRVBetweenPhonemes(anchorPhoneme,
                                                                 p2: satellite.listOfPhonemes[counter], addWeight: true, weight: Double(counter)*weightTowardsWordEnd);
+                
+                counter = counter + 1;
                 
             }
             
@@ -177,7 +179,7 @@ class RhymeFinder{
         
         var s = 0;
         for shorterWordPhoneme in shorterWord.listOfPhonemes{
-            s = s + 1;
+            
             let weightTowardsWordEnd = 0.1;
             
             if(firstSearch == true){
@@ -231,7 +233,6 @@ class RhymeFinder{
                             var l = 0;
                             for longerWordPhoneme in longerWord.listOfPhonemes{
                                 
-                                l = l + 1;
                                 let RVBetweenPhonemes = findRVBetweenPhonemes(shorterWordPhoneme, p2: longerWordPhoneme, addWeight: true, weight: Double(l)*weightTowardsWordEnd);
                                 
                                 if(RVBetweenPhonemes > 0){
@@ -240,6 +241,8 @@ class RhymeFinder{
                                     childNode.addIndexSet(indexSet);
                                     
                                 }
+                                
+                                l = l + 1;
                                 
                             }
                             
@@ -259,6 +262,8 @@ class RhymeFinder{
                 
             }
             
+            s = s + 1;
+            
         }
         
         //find best path
@@ -266,9 +271,9 @@ class RhymeFinder{
         var bestSet = IndexSet(index: 0, RVBetweenPhonemes: 0.0);
         var theNode = Node();
         
-        var l = 0;
+        var l = layers.count - 1;
         for layer in layers.reverse(){
-            l = l + 1;
+            
             for nodeBeingExamined in layer.nodes{
                 theNode = nodeBeingExamined;
                 if(nodeBeingExamined.indexSets.count > 0){
@@ -280,18 +285,23 @@ class RhymeFinder{
             }
             
             if(l == 0 && layer.nodes.count == 1){
-                
-                bestSet = theNode.bestSet;
+                print("LAYER IS 0");
+                bestSet = theNode.bestSet!;
                 
             }
+            
+            l = l - 1;
             
         }
         
         idealRhymeValue = bestSet.rhymeValueForSet;
+        print("Ideal Rhyme Value: ", idealRhymeValue);
         
         var rhymeValue = idealRhymeValue;
+        print("Deduction: ", findDeductionForIndexSet(bestSet, longerWord: longerWord));
         
         rhymeValue = rhymeValue - findDeductionForIndexSet(bestSet, longerWord: longerWord);
+        print("Rhyme Value: ", rhymeValue);
         
         return findRhymePercentile(rhymeValue, longerWord: longerWord);
         
@@ -340,8 +350,10 @@ class RhymeFinder{
         
         var i = 0;
         for longerWordPhoneme in longerWord.listOfPhonemes{
-            i = i + 1;
+            
             homophonicRhymeValue = homophonicRhymeValue + findRVBetweenPhonemes(longerWordPhoneme, p2: longerWordPhoneme, addWeight: true, weight: Double(i)*weightTowardsWordEnd);
+            
+            i = i + 1;
             
         }
         
@@ -377,18 +389,19 @@ class RhymeFinder{
         
         var i = 0;
         for set in bestSet.indexes{
-            i = i + 1;
+            
             if(i == bestSet.indexes.count - 1){
             
                 break;
             
             }
             
-            i = i + 1;
             let index1 = set;
             let index2 = bestSet.indexes[i+1];
             
             deduction = deduction + (0.25 * Double(index2 - index1-1));
+            
+            i = i + 1;
             
         }
         

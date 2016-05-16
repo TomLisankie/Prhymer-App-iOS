@@ -12,7 +12,7 @@ class Node {
     
     var indexSets = [IndexSet]();
     var parentIndexSet: IndexSet?;
-    var bestSet = IndexSet(index: 0, RVBetweenPhonemes: 0);
+    var bestSet : IndexSet?;
     
     func addIndexSet(set: IndexSet){
     
@@ -20,21 +20,29 @@ class Node {
     
     }
     
+    init(){
+    
+        indexSets = [IndexSet]();
+    
+    }
+    
     func findBestIndexSetAndSendItUp(){
     
         var bestSet = IndexSet(index: 0, RVBetweenPhonemes: 0);
         
-        for(var i = 0; i < indexSets.count; i++){
+        var first = true;
+        for indexSet in indexSets{
         
-            if(i == 0){
+            if(first){
                 
-                bestSet = indexSets[i];
+                bestSet = indexSet;
+                first = false;
                 
             }else{
                 
-                if(indexSets[i].rhymeValueForSet > bestSet.rhymeValueForSet){
-                    
-                    bestSet = indexSets[i];
+                if(indexSet.rhymeValueForSet > bestSet.rhymeValueForSet){
+                    print("BIGGER");
+                    bestSet = indexSet;
                     
                 }
                 
@@ -46,7 +54,7 @@ class Node {
         
         if(parentIndexSet != nil){
         
-            parentIndexSet?.addIndexes(bestSet.indexes, RVBetweenPhonemes: self.bestSet.rhymeValueForSet);
+            parentIndexSet?.addIndexes(bestSet.indexes, RVBetweenPhonemes: self.bestSet!.rhymeValueForSet);
         
         }
     
