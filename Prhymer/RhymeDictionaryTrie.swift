@@ -45,12 +45,13 @@ class RhymeDictionaryTrie {
     
     func getWord(wordName: String) -> Word{
     
+        let wordNameLC = wordName.lowercaseString;
         var word = Word(wordName: "", phonemes: [Phoneme]());
         var currentNode = trieRoot;
         
-        for(var i = 0; i < wordName.characters.count; i++){
+        for(var i = 0; i < wordNameLC.characters.count; i++){
         
-            let current = wordName[wordName.startIndex.advancedBy(i)];
+            let current = wordNameLC[wordNameLC.startIndex.advancedBy(i)];
             let children = currentNode.getChildrenNodes();
             var foundChar = false;
             

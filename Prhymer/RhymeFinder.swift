@@ -30,6 +30,7 @@ class RhymeFinder{
         
         anchors = anchorWords;
         
+        let trieCreationStart = NSDate();
         //now put this list of Words into a trie
         for anchor in anchors{
             
@@ -37,14 +38,14 @@ class RhymeFinder{
             
         }
         
-        print("trie created");
+        print("Trie created in \(NSDate().timeIntervalSince1970 - trieCreationStart.timeIntervalSince1970) seconds.");
         
         //anchorWords = [Word]();
         anchors = anchorWords;
         
         print("done");
         
-        print("Dictionary created in \(NSDate().timeIntervalSince1970 - start.timeIntervalSince1970) seconds.")
+        print("Dictionary created in \(NSDate().timeIntervalSince1970 - start.timeIntervalSince1970) seconds.");
         
     }
     

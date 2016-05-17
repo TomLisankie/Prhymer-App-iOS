@@ -14,10 +14,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    let finder = RhymeFinder(pathToDict: "/Users/thomas/Desktop/Dev/Prhymer/Prhymer/cmudict-0.7b_modified.txt");
+    let fileInBundle = NSBundle.mainBundle().pathForResource("cmudict-0.7b_modified", ofType: "txt");
+    var finder: RhymeFinder?;
+    
+    
+    // "/Users/thomas/Desktop/Dev/Prhymer/Prhymer/cmudict-0.7b_modified.txt"
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        finder = RhymeFinder(pathToDict: fileInBundle!);
         return true
     }
 

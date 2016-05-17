@@ -67,13 +67,13 @@ class ViewController: UIViewController {
         
         for(var w = 0; w < firstStrings.count; w++){
             
-            firstWords.append(appDelegate.finder.trie.getWord(firstStrings[w]));
+            firstWords.append(appDelegate.finder!.trie.getWord(firstStrings[w]));
             
         }
         
         for(var w = 0; w < secondStrings.count; w++){
             
-            secondWords.append(appDelegate.finder.trie.getWord(secondStrings[w]));
+            secondWords.append(appDelegate.finder!.trie.getWord(secondStrings[w]));
             
         }
         
@@ -101,7 +101,7 @@ class ViewController: UIViewController {
         }
         let word2 = Word(wordName: string2!, phonemes: secondListOfPhonemes);
         
-        let rhymePercentile = appDelegate.finder.findRhymeValueAndPercentileForWords(word1!, satellite: word2!);
+        let rhymePercentile = appDelegate.finder!.findRhymeValueAndPercentileForWords(word1!, satellite: word2!);
         
         print("Rhyme Percentile: ", rhymePercentile);
         

@@ -96,6 +96,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E9480C931CEAECE5001981A0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E964C2411C324DDF00A1AFCD /* cmudict-0.7b_modified.txt */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		E964C2051C32451500A1AFCD = {
 			isa = PBXGroup;
 			children = (
@@ -119,7 +127,7 @@
 		E964C2101C32451500A1AFCD /* Prhymer */ = {
 			isa = PBXGroup;
 			children = (
-				E964C2411C324DDF00A1AFCD /* cmudict-0.7b_modified.txt */,
+				E9480C931CEAECE5001981A0 /* Resources */,
 				E9EA05061C33392300610E52 /* StreamReader.swift */,
 				E964C2111C32451500A1AFCD /* AppDelegate.swift */,
 				E9FB1C221CE58BD600BFC47E /* Rhyme Essentials */,
@@ -234,6 +242,7 @@
 				TargetAttributes = {
 					E964C20D1C32451500A1AFCD = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = TA4U4W7988;
 					};
 					E964C2211C32451500A1AFCD = {
 						CreatedOnToolsVersion = 7.2;
@@ -451,10 +460,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Prhymer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.shakenearth.Prhymer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -462,10 +474,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Prhymer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.shakenearth.Prhymer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
