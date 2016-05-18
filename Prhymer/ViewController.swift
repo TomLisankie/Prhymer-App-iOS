@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate;
         
-        let string1 = firstTextField?.text;
+        let string1 = firstTextField?.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet());
         
         var firstStrings = [String]();
         var wordToAdd1 = "";
@@ -43,7 +43,7 @@ class ViewController: UIViewController {
         }
         firstStrings.append(wordToAdd1);
         
-        let string2 = secondTextField?.text;
+        let string2 = secondTextField?.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet());
         
         var secondStrings = [String]();
         var wordToAdd2 = "";
@@ -64,16 +64,16 @@ class ViewController: UIViewController {
         secondStrings.append(wordToAdd2);
         
         var firstWords = [Word](), secondWords = [Word]();
-        
+        print(appDelegate.finder!.dictionary);
         for(var w = 0; w < firstStrings.count; w++){
             
-            firstWords.append(appDelegate.finder!.trie.getWord(firstStrings[w]));
+            firstWords.append(appDelegate.finder!.dictionary[firstStrings[w].lowercaseString]!);
             
         }
         
         for(var w = 0; w < secondStrings.count; w++){
             
-            secondWords.append(appDelegate.finder!.trie.getWord(secondStrings[w]));
+            secondWords.append(appDelegate.finder!.dictionary[secondStrings[w].lowercaseString]!);
             
         }
         

@@ -12,11 +12,17 @@ class RhymeFinder{
 
     let DEBUGGING = true;
     var anchors = [Word]();
-    var trie = RhymeDictionaryTrie();
+    var dictionary = [String : Word]();
     
     init(pathToDict: String) {
         
         buildWords(pathToDict);
+        
+    }
+    
+    init(dict: [String : Word]) {
+        
+        
         
     }
     
@@ -30,22 +36,19 @@ class RhymeFinder{
         
         anchors = anchorWords;
         
-        let trieCreationStart = NSDate();
-        //now put this list of Words into a trie
+        let dictionaryCreationStart = NSDate();
+
         for anchor in anchors{
-            
-            trie.addWord(anchor);
-            
+        
+            dictionary[anchor.wordName] = anchor;
+        
         }
         
-        print("Trie created in \(NSDate().timeIntervalSince1970 - trieCreationStart.timeIntervalSince1970) seconds.");
+        print("Dictionary created in \(NSDate().timeIntervalSince1970 - dictionaryCreationStart.timeIntervalSince1970) seconds.");
         
-        //anchorWords = [Word]();
         anchors = anchorWords;
         
-        print("done");
-        
-        print("Dictionary created in \(NSDate().timeIntervalSince1970 - start.timeIntervalSince1970) seconds.");
+        print("buildWords done in \(NSDate().timeIntervalSince1970 - start.timeIntervalSince1970) seconds.");
         
     }
     

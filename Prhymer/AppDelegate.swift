@@ -16,14 +16,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let fileInBundle = NSBundle.mainBundle().pathForResource("cmudict-0.7b_modified", ofType: "txt");
     var finder: RhymeFinder?;
-    
-    
-    // "/Users/thomas/Desktop/Dev/Prhymer/Prhymer/cmudict-0.7b_modified.txt"
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        finder = RhymeFinder(pathToDict: fileInBundle!);
+        let launchedBefore = NSUserDefaults.standardUserDefaults().boolForKey("launchedBefore");
+        if launchedBefore  {
+            //not first launch
+            print("Has been used before");
+            
+            let filePath = getFileURL("data.dat").path!;
+            
+            // read from file
+            let dictionary = NSKeyedUnarchiver.unarchiveObjectWithFile(filePath) as! [String : Word];
+            
+            finder = RhymeFinder(dict: dictionary);
+            
+        }
+        else {
+            //first launch
+            print("Has NOT been used before");
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "launchedBefore");
+            finder = RhymeFinder(pathToDict: fileInBundle!);
+        }
+        
         return true
+    }
+    
+    func getFileURL(fileName: String) -> NSURL {
+        let manager = NSFileManager.defaultManager()
+        let dirURL = try! manager.URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false);
+        return dirURL.URLByAppendingPathComponent(fileName)
     }
 
     func applicationWillResignActive(application: UIApplication) {

@@ -8,18 +8,10 @@
 
 import Foundation
 
-struct Word {
+class Word : NSObject, NSCoding {
     let wordName: String;
     let listOfPhonemes: [Phoneme];
     var numOfSyllables: Int;
-    
-    init(){
-    
-        wordName = "";
-        listOfPhonemes = [Phoneme]();
-        numOfSyllables = 0;
-    
-    }
     
     init?(line: String) {
         
@@ -42,6 +34,12 @@ struct Word {
         
     }
     
+    override init() {
+        wordName = "";
+        listOfPhonemes = [Phoneme]();
+        numOfSyllables = 0;
+    }
+    
     init?(wordName: String, phonemes: [Phoneme]) {
         
         self.wordName = wordName;
@@ -59,5 +57,22 @@ struct Word {
         }
         
     }
+    
+    func encodeWithCoder(aCoder: NSCoder){
+    
+        aCoder.encodeObject(wordName, forKey: "wordName");
+        aCoder.encodeObject(listOfPhonemes, forKey: "listOfPhonemes");
+        aCoder.encodeObject(numOfSyllables, forKey: "numOfSyllables");
+    
+    }
+    
+    required init(coder: NSCoder){
+        
+        wordName = coder.decodeObjectForKey("wordName") as? String ?? "";
+        listOfPhonemes = (coder.decodeObjectForKey("listOfPhonemes") as? [Phoneme])!;
+        numOfSyllables = (coder.decodeObjectForKey("numOfSyllables") as? Int)!;
+        
+    }
+
     
 }

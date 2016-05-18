@@ -8,19 +8,17 @@
 
 import Foundation
 
-struct Phoneme {
+class Phoneme: NSObject, NSCoding {
     var phoneme = "";
     var isAVowelPhoneme = false;
     var stress = -1;
     
     init?(phonemeName: String){
         
-        phoneme = phonemeName;
-        
-        if(phoneme.hasSuffix("1") || phoneme.hasSuffix("2") || phoneme.hasSuffix("3") || phoneme.hasSuffix("4") || phoneme.hasSuffix("5")) {
+        if(phonemeName.hasSuffix("1") || phonemeName.hasSuffix("2") || phonemeName.hasSuffix("3") || phonemeName.hasSuffix("4") || phonemeName.hasSuffix("5")) {
             
-            let stressText = self.phoneme.substringFromIndex(self.phoneme.endIndex);
-            let thePhoneme = self.phoneme.substringToIndex(self.phoneme.endIndex);
+            let stressText = phonemeName.substringFromIndex(phonemeName.endIndex);
+            let thePhoneme = phonemeName.substringToIndex(phonemeName.endIndex);
             self.phoneme = thePhoneme;
             if(stressText != ""){
                 
@@ -30,7 +28,7 @@ struct Phoneme {
             
         }
         
-        if(phoneme == "AA" || phoneme == "AE" || phoneme == "AH" || phoneme == "AO" || phoneme == "AW" || phoneme == "AY" || phoneme == "EH" || phoneme == "ER" || phoneme == "EY" || phoneme == "IH" || phoneme == "IY" || phoneme == "NG" || phoneme == "OW" || phoneme == "OY" || phoneme == "UH" || phoneme == "UW"){
+        if(phonemeName == "AA" || phonemeName == "AE" || phonemeName == "AH" || phonemeName == "AO" || phonemeName == "AW" || phonemeName == "AY" || phonemeName == "EH" || phonemeName == "ER" || phonemeName == "EY" || phonemeName == "IH" || phonemeName == "IY" || phonemeName == "NG" || phonemeName == "OW" || phonemeName == "OY" || phonemeName == "UH" || phonemeName == "UW"){
             
             isAVowelPhoneme = true;
             
@@ -49,6 +47,22 @@ struct Phoneme {
             return false;
             
         }
+        
+    }
+    
+    func encodeWithCoder(aCoder: NSCoder){
+        
+        aCoder.encodeObject(phoneme, forKey: "phoneme");
+        aCoder.encodeObject(isAVowelPhoneme, forKey: "isAVowelPhoneme");
+        aCoder.encodeObject(stress, forKey: "stress");
+        
+    }
+    
+    required init?(coder: NSCoder){
+        
+        phoneme = coder.decodeObjectForKey("phoneme") as? String ?? "";
+        isAVowelPhoneme = (coder.decodeObjectForKey("isAVowelPhoneme") as? Bool)!;
+        stress = (coder.decodeObjectForKey("stress") as? Int)!;
         
     }
     
