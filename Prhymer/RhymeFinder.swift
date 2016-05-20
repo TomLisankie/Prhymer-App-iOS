@@ -12,17 +12,11 @@ class RhymeFinder{
 
     let DEBUGGING = true;
     var anchors = [Word]();
-    var dictionary = [String : Word]();
+    var dictionary = [String : String]();
     
     init(pathToDict: String) {
         
         buildWords(pathToDict);
-        
-    }
-    
-    init(dict: [String : Word]) {
-        
-        
         
     }
     
@@ -32,21 +26,22 @@ class RhymeFinder{
         
         let stringData = try! String(contentsOfFile: pathToDict, encoding: NSASCIIStringEncoding)
         let lines = stringData.componentsSeparatedByString("\n").filter { !$0.hasPrefix(";;;") && !$0.isEmpty }
-        let anchorWords = lines.flatMap { Word(line: $0) };
         
-        anchors = anchorWords;
+        for line in lines{
         
-        let dictionaryCreationStart = NSDate();
-
-        for anchor in anchors{
-        
-            dictionary[anchor.wordName] = anchor;
+            let components = line.componentsSeparatedByString("  ")
+            guard components.count == 2 else {
+                print("The lines aren't separated by two spaces.");
+                break;
+            }
+            
+            dictionary[components[0].lowercaseString] = components[1];
         
         }
         
-        print("Dictionary created in \(NSDate().timeIntervalSince1970 - dictionaryCreationStart.timeIntervalSince1970) seconds.");
+        let dictionaryCreationStart = NSDate();
         
-        anchors = anchorWords;
+        print("Dictionary created in \(NSDate().timeIntervalSince1970 - dictionaryCreationStart.timeIntervalSince1970) seconds.");
         
         print("buildWords done in \(NSDate().timeIntervalSince1970 - start.timeIntervalSince1970) seconds.");
         

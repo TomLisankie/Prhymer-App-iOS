@@ -19,25 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        let launchedBefore = NSUserDefaults.standardUserDefaults().boolForKey("launchedBefore");
-        if launchedBefore  {
-            //not first launch
-            print("Has been used before");
-            
-            let filePath = getFileURL("data.dat").path!;
-            
-            // read from file
-            let dictionary = NSKeyedUnarchiver.unarchiveObjectWithFile(filePath) as! [String : Word];
-            
-            finder = RhymeFinder(dict: dictionary);
-            
-        }
-        else {
-            //first launch
-            print("Has NOT been used before");
-            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "launchedBefore");
-            finder = RhymeFinder(pathToDict: fileInBundle!);
-        }
+        finder = RhymeFinder(pathToDict: fileInBundle!);
         
         return true
     }
