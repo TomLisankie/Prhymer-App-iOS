@@ -29,11 +29,11 @@ class ViewController: UIViewController {
         
         var firstStrings = [String]();
         var wordToAdd1 = "";
-        for(var i = 0; i < string1?.characters.count; i++){
+        for char in (string1?.characters)!{
         
-            if(String(string1![string1!.startIndex.advancedBy(i)]) != " "){
+            if(String(char) != " "){
                 
-                wordToAdd1 = wordToAdd1 + String(string1![string1!.startIndex.advancedBy(i)]);
+                wordToAdd1 = wordToAdd1 + String(char);
             
             }else{
             
@@ -49,11 +49,11 @@ class ViewController: UIViewController {
         
         var secondStrings = [String]();
         var wordToAdd2 = "";
-        for(var i = 0; i < string2?.characters.count; i++){
+        for char in (string2?.characters)!{
             
-            if(String(string2![string2!.startIndex.advancedBy(i)]) != " "){
+            if(String(char) != " "){
                 
-                wordToAdd2 = wordToAdd2 + String(string2![string2!.startIndex.advancedBy(i)]);
+                wordToAdd2 = wordToAdd2 + String(char);
                 
             }else{
                 
@@ -89,9 +89,9 @@ class ViewController: UIViewController {
     
             var firstWords = [Word](), secondWords = [Word]();
             
-            for(var w = 0; w < firstStrings.count; w++){
+            for entry in firstStrings{
                 
-                if(appDelegate.finder!.dictionary[firstStrings[w].lowercaseString] == nil){
+                if(appDelegate.finder!.dictionary[entry.lowercaseString] == nil){
                 
                     firstTextField?.backgroundColor = UIColor.redColor();
                     firstTextField?.textColor = UIColor.whiteColor();
@@ -101,16 +101,16 @@ class ViewController: UIViewController {
                 
                 }else{
                 
-                    let word = Word(wordName: firstStrings[w].lowercaseString, phonemeString: appDelegate.finder!.dictionary[firstStrings[w].lowercaseString]!);
+                    let word = Word(wordName: entry.lowercaseString, phonemeString: appDelegate.finder!.dictionary[entry.lowercaseString]!);
                     firstWords.append(word!);
                     
                 }
                 
             }
             
-            for(var w = 0; w < secondStrings.count; w++){
+            for entry in secondStrings{
                 
-                if(appDelegate.finder!.dictionary[secondStrings[w].lowercaseString] == nil){
+                if(appDelegate.finder!.dictionary[entry.lowercaseString] == nil){
                     
                     secondTextField?.backgroundColor = UIColor.redColor();
                     secondTextField?.textColor = UIColor.whiteColor();
@@ -120,7 +120,7 @@ class ViewController: UIViewController {
                     
                 }else{
                 
-                    let word = Word(wordName: secondStrings[w].lowercaseString, phonemeString: appDelegate.finder!.dictionary[secondStrings[w].lowercaseString]!);
+                    let word = Word(wordName: entry.lowercaseString, phonemeString: appDelegate.finder!.dictionary[entry.lowercaseString]!);
                     secondWords.append(word!);
                     
                 }
@@ -131,22 +131,22 @@ class ViewController: UIViewController {
             
                 var firstListOfPhonemes = [Phoneme](), secondListOfPhonemes = [Phoneme]();
                 
-                for(var w = 0; w < firstWords.count; w++){
+                for word in firstWords{
                     
-                    for(var p = 0; p < firstWords[w].listOfPhonemes.count; p++){
+                    for phoneme in word.listOfPhonemes{
                         
-                        firstListOfPhonemes.append(firstWords[w].listOfPhonemes[p]);
+                        firstListOfPhonemes.append(phoneme);
                         
                     }
                     
                 }
                 let word1 = Word(wordName: string1!, phonemes: firstListOfPhonemes);
                 
-                for(var w = 0; w < secondWords.count; w++){
+                for word in secondWords{
                     
-                    for(var p = 0; p < secondWords[w].listOfPhonemes.count; p++){
+                    for phoneme in word.listOfPhonemes{
                         
-                        secondListOfPhonemes.append(secondWords[w].listOfPhonemes[p]);
+                        secondListOfPhonemes.append(phoneme);
                         
                     }
                     

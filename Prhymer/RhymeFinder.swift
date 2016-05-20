@@ -124,18 +124,6 @@ class RhymeFinder{
             
         }else{
             
-            var longerWord = Word();
-            
-            if(anchor.listOfPhonemes.count < satellite.listOfPhonemes.count){
-                
-                longerWord = satellite;
-                
-            }else{
-                
-                longerWord = anchor;
-                
-            }
-            
             if(anchorOrSatellite == true){
                 
                 return idealRhymeValue(newWord, satellite: satellite);
