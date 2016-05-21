@@ -171,12 +171,11 @@ class RhymeFinder{
             
             if(firstSearch == true){
                 debugPrint("firstSearch = true");
-                let startNode = Node(); //problem is occuring here
+                let startNode = Node();
                 debugPrint("startNode created");
                 var l = 0;
+                print("Number of phonemes: ", longerWord.listOfPhonemes.count);
                 for longerWordPhoneme in longerWord.listOfPhonemes{
-                    
-                    l = l + 1;
                     
                     let RVBetweenPhonemes = findRVBetweenPhonemes(shorterWordPhoneme, p2: longerWordPhoneme, addWeight: true, weight: Double(l)*weightTowardsWordEnd);
                     
@@ -189,6 +188,9 @@ class RhymeFinder{
                         startNode.addIndexSet(indexSet);
                         
                     }
+                    
+                    print("l: ", l);
+                    l = l + 1;
                     
                 }
                 
@@ -203,7 +205,7 @@ class RhymeFinder{
                 nodesForThisLayer = [Node]();
                 
             }else{
-                
+                print("ELSE");
                 for nodeBeingExamined in layers[pastLayerNumber].nodes{
                     
                     for setBeingExamined in nodeBeingExamined.indexSets{
@@ -217,9 +219,10 @@ class RhymeFinder{
                             
                         }else{
                             
-                            var l = 0;
-                            for longerWordPhoneme in longerWord.listOfPhonemes{
+                            
+                            for(var l = indexToStartAt+1; l < longerWord.listOfPhonemes.count; l = l + 1){
                                 
+                                let longerWordPhoneme = longerWord.listOfPhonemes[l];
                                 let RVBetweenPhonemes = findRVBetweenPhonemes(shorterWordPhoneme, p2: longerWordPhoneme, addWeight: true, weight: Double(l)*weightTowardsWordEnd);
                                 
                                 if(RVBetweenPhonemes > 0){
@@ -229,7 +232,8 @@ class RhymeFinder{
                                     
                                 }
                                 
-                                l = l + 1;
+                                print("l: ", l);
+                                
                                 
                             }
                             
@@ -243,16 +247,18 @@ class RhymeFinder{
                 }
                 
                 layers.append(Layer(nodes: nodesForThisLayer));
+                print("appended layer");
                 nodesForThisLayer = [Node]();
                 
                 pastLayerNumber = pastLayerNumber + 1;
                 
             }
-            
+            print("s: ", s);
             s = s + 1;
             
         }
         
+        print("index set creation completed");
         //find best path
         
         var bestSet = IndexSet(index: 0, RVBetweenPhonemes: 0.0);
@@ -262,6 +268,7 @@ class RhymeFinder{
         for layer in layers.reverse(){
             
             for nodeBeingExamined in layer.nodes{
+                print("bestSet LOOP");
                 theNode = nodeBeingExamined;
                 if(nodeBeingExamined.indexSets.count > 0){
                     
@@ -358,6 +365,7 @@ class RhymeFinder{
             
             if(bestSet.indexes[0] > 1){
                 
+                print("log10 being applied on: ", Double(bestSet.indexes[0]));
                 deduction = deduction + log10(Double(bestSet.indexes[0]));
                 
             }else{
@@ -370,6 +378,7 @@ class RhymeFinder{
         
         if((longerWord.listOfPhonemes.count - 1) - bestSet.indexes[bestSet.indexes.count-1] > 0){
             
+            print("Another log10 being applied on: ", Double((longerWord.listOfPhonemes.count - 1) - bestSet.indexes[bestSet.indexes.count-1]));
             deduction = deduction + log10(Double((longerWord.listOfPhonemes.count - 1) - bestSet.indexes[bestSet.indexes.count-1]));
             
         }
