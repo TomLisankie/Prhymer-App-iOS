@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CompareWordsViewController.swift
 //  Prhymer
 //
 //  Created by Thomas Lisankie on 12/28/15.

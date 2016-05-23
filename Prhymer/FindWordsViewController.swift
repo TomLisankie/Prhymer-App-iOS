@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  FindWordsViewController.swift
 //  Prhymer
 //
 //  Created by Thomas Lisankie on 5/23/16.
