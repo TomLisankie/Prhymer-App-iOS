@@ -221,7 +221,7 @@ class RhymeFinder{
                             
                             
                             for(var l = indexToStartAt+1; l < longerWord.listOfPhonemes.count; l = l + 1){
-                                
+                                //for l in indextTOStartAt+1 < longerWord.listOfPhonemes.count
                                 let longerWordPhoneme = longerWord.listOfPhonemes[l];
                                 let RVBetweenPhonemes = findRVBetweenPhonemes(shorterWordPhoneme, p2: longerWordPhoneme, addWeight: true, weight: Double(l)*weightTowardsWordEnd);
                                 

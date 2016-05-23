@@ -17,11 +17,12 @@ struct Phoneme {
         
         phoneme = phonemeName;
         
-        if(phoneme.hasSuffix("1") || phoneme.hasSuffix("2") || phoneme.hasSuffix("3") || phoneme.hasSuffix("4") || phoneme.hasSuffix("5")) {
+        if(phoneme.hasSuffix("0") || phoneme.hasSuffix("1") || phoneme.hasSuffix("2") || phoneme.hasSuffix("3") || phoneme.hasSuffix("4") || phoneme.hasSuffix("5")) {
             
-            let stressText = phoneme.substringFromIndex(phoneme.endIndex);
-            let thePhoneme = phoneme.substringToIndex(phoneme.endIndex);
+            let stressText = phoneme.substringFromIndex(phoneme.endIndex.predecessor());
+            let thePhoneme = phoneme.substringToIndex(phoneme.endIndex.predecessor());
             self.phoneme = thePhoneme;
+            
             if(stressText != ""){
                 
                 stress = Int(stressText)!;

@@ -29,6 +29,8 @@ struct Word {
             
         }
         
+        print("Number of Syllables in " + wordName + ": ", numOfSyllables);
+        
     }
     
     init?(line: String) {
