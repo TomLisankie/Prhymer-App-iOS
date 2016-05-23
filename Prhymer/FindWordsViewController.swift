@@ -42,6 +42,8 @@ class FindWordsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        wordTextField!.clearButtonMode = .Always;
+        
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(FindWordsViewController.dismissKeyboard));
         view.addGestureRecognizer(tap)

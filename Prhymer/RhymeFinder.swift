@@ -170,11 +170,11 @@ class RhymeFinder{
             let weightTowardsWordEnd = 0.1;
             
             if(firstSearch == true){
-                debugPrint("firstSearch = true");
+                
                 let startNode = Node();
-                debugPrint("startNode created");
+                
                 var l = 0;
-                print("Number of phonemes: ", longerWord.listOfPhonemes.count);
+                
                 for longerWordPhoneme in longerWord.listOfPhonemes{
                     
                     let RVBetweenPhonemes = findRVBetweenPhonemes(shorterWordPhoneme, p2: longerWordPhoneme, addWeight: true, weight: Double(l)*weightTowardsWordEnd);
@@ -189,7 +189,6 @@ class RhymeFinder{
                         
                     }
                     
-                    print("l: ", l);
                     l = l + 1;
                     
                 }
@@ -205,7 +204,7 @@ class RhymeFinder{
                 nodesForThisLayer = [Node]();
                 
             }else{
-                print("ELSE");
+                
                 for nodeBeingExamined in layers[pastLayerNumber].nodes{
                     
                     for setBeingExamined in nodeBeingExamined.indexSets{
@@ -232,8 +231,6 @@ class RhymeFinder{
                                     
                                 }
                                 
-                                print("l: ", l);
-                                
                                 
                             }
                             
@@ -247,18 +244,16 @@ class RhymeFinder{
                 }
                 
                 layers.append(Layer(nodes: nodesForThisLayer));
-                print("appended layer");
                 nodesForThisLayer = [Node]();
                 
                 pastLayerNumber = pastLayerNumber + 1;
                 
             }
-            print("s: ", s);
+            
             s = s + 1;
             
         }
         
-        print("index set creation completed");
         //find best path
         
         var bestSet = IndexSet(index: 0, RVBetweenPhonemes: 0.0);
@@ -268,7 +263,7 @@ class RhymeFinder{
         for layer in layers.reverse(){
             
             for nodeBeingExamined in layer.nodes{
-                print("bestSet LOOP");
+                
                 theNode = nodeBeingExamined;
                 if(nodeBeingExamined.indexSets.count > 0){
                     
@@ -279,7 +274,7 @@ class RhymeFinder{
             }
             
             if(l == 0 && layer.nodes.count == 1){
-                print("LAYER IS 0");
+                
                 bestSet = theNode.bestSet!;
                 
             }
@@ -307,11 +302,11 @@ class RhymeFinder{
             
             if(p1.isEqualTo(p2)){
                 
-                return 2.0 + weight;
+                return 5.0 + weight;
                 
             }else{
                 
-                return 1.0 + weight;
+                return 2.5 + weight;
                 
             }
             

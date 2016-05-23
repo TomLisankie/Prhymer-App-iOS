@@ -31,7 +31,7 @@ class Node {
         var bestSet = IndexSet(index: 0, RVBetweenPhonemes: 0);
         
         var first = true;
-        print("Number of IndexSets: ", indexSets.count);
+        
         for indexSet in indexSets{
         
             if(first){
