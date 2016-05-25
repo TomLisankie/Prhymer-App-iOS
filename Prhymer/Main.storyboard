@@ -29,25 +29,25 @@
                                     <action selector="findWordsButtonTapped" destination="Fxm-iZ-VAR" eventType="touchDown" id="pQ5-r3-Eiy"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Words will appear here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uep-K3-zrB">
-                                <rect key="frame" x="97" y="269" width="175" height="256"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Prhymer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jE4-d7-kKN">
                                 <rect key="frame" x="70" y="28" width="235" height="93"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="64"/>
                                 <color key="textColor" red="0.1715366931" green="0.67606757200000001" blue="0.24435146930000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Words will appear here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ubF-0T-xr5">
+                                <rect key="frame" x="70" y="270" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 2" id="vl9-cn-yC9"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="rhymingWordsLabel" destination="Uep-K3-zrB" id="ZqY-EQ-E6X"/>
+                        <outlet property="rhymingWordsTextView" destination="ubF-0T-xr5" id="7ub-5P-pux"/>
                         <outlet property="wordTextField" destination="Qjc-Cm-kvB" id="wWG-yg-9cr"/>
                     </connections>
                 </viewController>

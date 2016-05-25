@@ -12,7 +12,8 @@ class FindWordsViewController: UIViewController {
     
     
     @IBOutlet weak var wordTextField: UITextField?;
-    @IBOutlet weak var rhymingWordsLabel: UILabel?;
+    @IBOutlet weak var rhymingWordsTextView: UITextView?;
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate;
     var indexesAlreadyExamined = [Int: Bool]();
     var greenWords = Queue<Word>();
     var yellowWords = Queue<Word>();
@@ -20,88 +21,28 @@ class FindWordsViewController: UIViewController {
     
     @IBAction func findWordsButtonTapped(){
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate;
-        
         wordTextField?.backgroundColor = UIColor.clearColor();
         wordTextField?.textColor = UIColor.blackColor();
         
         let wordString = wordTextField?.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).stringByTrimmingCharactersInSet(NSCharacterSet.punctuationCharacterSet());
         
-        //if(wordString == prevWord){
+        if(wordString == prevWord){
         
-            if(wordString == "" || wordString == nil){
-                
-                wordTextField?.backgroundColor = UIColor.redColor();
-                wordTextField?.textColor = UIColor.whiteColor();
-                rhymingWordsLabel?.text = "Must enter a value";
-                
-            }else{
-                
-                if(appDelegate.finder!.dictionary[wordString!.lowercaseString] == nil){
-                    
-                    wordTextField?.backgroundColor = UIColor.redColor();
-                    wordTextField?.textColor = UIColor.whiteColor();
-                    rhymingWordsLabel?.text = "Word couldn't be found";
-                    
-                }else{
-                
-                    let lower : UInt32 = 0;
-                    let upper : UInt32 = UInt32((appDelegate.finder?.dictionary.count)! - 1);
-                    var randomIndexUInt32 = arc4random_uniform(upper - lower) + lower;
-                    var randomIndex = Int(randomIndexUInt32);
-                    
-                    while(indexesAlreadyExamined[randomIndex] == nil){
-                    
-                        randomIndexUInt32 = arc4random_uniform(upper - lower) + lower;
-                        randomIndex = Int(randomIndexUInt32);
-                    
-                    }
-                    
-                    indexesAlreadyExamined[randomIndex] = true;
-                    let initialWord = Word(wordName: wordString!, phonemeString: appDelegate.finder!.dictionary[wordString!]!);
-                    let wordBeingExaminedString = appDelegate.finder!.dictionary.keys[appDelegate.finder!.dictionary.startIndex.advancedBy(randomIndex)];
-                    let wordBeingExamined = Word(wordName: wordBeingExaminedString, phonemeString: appDelegate.finder!.dictionary[wordBeingExaminedString]!);
-                    let rp = appDelegate.finder?.findRhymeValueAndPercentileForWords(initialWord!, satellite: wordBeingExamined!);
-                    
-                    if(rp > 0.65){
-                    
-                        greenWords.enqueue(wordBeingExamined!);
-                    
-                    }else if(rp > 0.45){
-                    
-                        yellowWords.enqueue(wordBeingExamined!)
-                    
-                    }else{
-                    
-                        
-                    
-                    }
-                    
-                    var textForLabel = "";
-                    
-                    var g = 3;
-                    while g != 0 {
-                        
-                        textForLabel = greenWords.dequeue().wordName + "/n";
-                        
-                        g = g - 1;
-                        
-                    }
-                    
-                    var y = 3;
-                    while y != 0 {
-                        
-                        textForLabel = yellowWords.dequeue().wordName + "/n";
-                        
-                        y = y - 1;
-                        
-                    }
-                
-                }
-                
-            }
+            print("wordString was prevWord");
+            findWords(wordString);
         
-        //}
+        }else{
+        
+            print("wordString was NOT prevWord");
+            indexesAlreadyExamined = [Int: Bool]();
+            greenWords = Queue<Word>();
+            yellowWords = Queue<Word>();
+            
+            prevWord = wordString!;
+            
+            findWords(wordString);
+        
+        }
     
         /*
          This process:
@@ -125,6 +66,110 @@ class FindWordsViewController: UIViewController {
          This process can possibly be done on multiple words to find multiple word rhyme by taking each syllable and finding words that rhyme with it.
          */
         
+    }
+    
+    func findWords(wordString: String?){
+    
+        if(wordString == "" || wordString == nil){
+            
+            wordTextField?.backgroundColor = UIColor.redColor();
+            wordTextField?.textColor = UIColor.whiteColor();
+            rhymingWordsTextView?.text = "Must enter a value";
+            
+        }else{
+            
+            if(appDelegate.finder!.dictionary[wordString!.lowercaseString] == nil){
+                
+                wordTextField?.backgroundColor = UIColor.redColor();
+                wordTextField?.textColor = UIColor.whiteColor();
+                rhymingWordsTextView?.text = "Word couldn't be found";
+                
+            }else{
+                
+                while (greenWords.count < 3 && yellowWords.count < 3){
+               
+                    let lower : UInt32 = 0;
+                    let upper : UInt32 = UInt32((appDelegate.finder?.dictionary.count)! - 1);
+                    var randomIndexUInt32 = arc4random_uniform(upper - lower) + lower;
+                    var randomIndex = Int(randomIndexUInt32);
+                    
+                    while(indexesAlreadyExamined[randomIndex] != nil){
+                        
+                        randomIndexUInt32 = arc4random_uniform(upper - lower) + lower;
+                        randomIndex = Int(randomIndexUInt32);
+                        
+                    }
+                    
+                    indexesAlreadyExamined[randomIndex] = true;
+                    let initialWord = Word(wordName: wordString!, phonemeString: appDelegate.finder!.dictionary[wordString!]!);
+                    let wordBeingExaminedString = appDelegate.finder!.dictionary.keys[appDelegate.finder!.dictionary.startIndex.advancedBy(randomIndex)];
+                    let wordBeingExamined = Word(wordName: wordBeingExaminedString, phonemeString: appDelegate.finder!.dictionary[wordBeingExaminedString]!);
+                    let rp = appDelegate.finder?.findRhymeValueAndPercentileForWords(initialWord!, satellite: wordBeingExamined!);
+                    
+                    if(rp > 0.65){
+                        
+                        greenWords.enqueue(wordBeingExamined!);
+                        
+                    }else if(rp > 0.5){
+                        
+                        yellowWords.enqueue(wordBeingExamined!)
+                        
+                    }else{
+                        
+                        
+                        
+                    }
+                    
+                }
+                
+                var textForLabel = "";
+                
+                var g = 3;
+                while g != 0 {
+                    
+                    let word = greenWords.dequeue();
+                    
+                    if(greenWords.isEmpty()){
+                    
+                        print("g: ", g , "EMPTY");
+                        break;
+                    
+                    }else{
+                    
+                        textForLabel = textForLabel + word!.wordName + " (green)"  + "\n";
+                    
+                    }
+                    
+                    g = g - 1;
+                    
+                }
+                
+                var y = 3;
+                while y != 0 {
+                    
+                    let word = yellowWords.dequeue();
+                    
+                    if(yellowWords.isEmpty()){
+                        
+                        print("y: ", y , "EMPTY");
+                        break;
+                        
+                    }else{
+                        
+                        textForLabel = textForLabel + word!.wordName + " (yellow)" + "\n";
+                        
+                    }
+                    
+                    y = y - 1;
+                    
+                }
+                
+                rhymingWordsTextView?.text = textForLabel;
+                
+            }
+            
+        }
+    
     }
     
     override func viewDidLoad() {

@@ -306,7 +306,7 @@ class RhymeFinder{
                 
             }else{
                 
-                return 2.5 + weight;
+                return 1.0 + weight;
                 
             }
             
