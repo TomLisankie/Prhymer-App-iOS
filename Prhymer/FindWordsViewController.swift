@@ -66,6 +66,16 @@ class FindWordsViewController: UIViewController {
          This process can possibly be done on multiple words to find multiple word rhyme by taking each syllable and finding words that rhyme with it.
          */
         
+        /*
+         NEW STRATEGY:
+         - compare the entered word to all the other words in the dictionary
+         - as each words' spelling and their rhyme percentile with the entered word are entered into a new dictionary [String: Int], sort it by rhyme percentile
+         - once this process is done, find the index at which half of the highest rhyme percentile is encountered for the first time.
+         - print three of the high (green) rhyme percentile words and three of the mid (yellow).
+         
+         
+         */
+        
     }
     
     func findWords(wordString: String?){
