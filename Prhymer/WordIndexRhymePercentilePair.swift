@@ -10,13 +10,14 @@ import Foundation
 
 class WordIndexRhymePercentilePair {
     
-    var wordIndex = 0, rhymePercentile = 0.0;
+    var word = "";
+    var rhymePercentile = 0.0;
     
     init(){}
     
-    init(wordIndex: Int, rhymePercentile: Double){
+    init(word: String, rhymePercentile: Double){
     
-        self.wordIndex = wordIndex;
+        self.word = word;
         self.rhymePercentile = rhymePercentile;
     
     }

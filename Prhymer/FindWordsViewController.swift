@@ -14,7 +14,7 @@ class FindWordsViewController: UIViewController {
     @IBOutlet weak var wordTextField: UITextField?;
     @IBOutlet weak var rhymingWordsTextView: UITextView?;
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate;
-    var indexesAlreadyExamined = [Int: Bool]();
+    var rhymingWords = [WordIndexRhymePercentilePair]();
     var greenWords = Queue<Word>();
     var yellowWords = Queue<Word>();
     var prevWord = "";
@@ -34,7 +34,6 @@ class FindWordsViewController: UIViewController {
         }else{
         
             print("wordString was NOT prevWord");
-            indexesAlreadyExamined = [Int: Bool]();
             greenWords = Queue<Word>();
             yellowWords = Queue<Word>();
             
@@ -94,12 +93,35 @@ class FindWordsViewController: UIViewController {
                 wordTextField?.textColor = UIColor.whiteColor();
                 rhymingWordsTextView?.text = "Word couldn't be found";
                 
-            }else{
+            }else{ //write action code here
+                
+                let origWord = Word(wordName: wordString!.lowercaseString, phonemeString: appDelegate.finder!.dictionary[wordString!.lowercaseString]!);
                 
                 for line in (appDelegate.finder?.dictionary)!{
-                
                     
+                    let satellite = Word(wordName: line.0, phonemeString: line.1);
+                    let rp = appDelegate.finder!.findRhymeValueAndPercentileForWords(origWord!, satellite: satellite!);
+                    
+                    if(rp >= 0.5) {
+                        
+                        let wordRPPair = WordIndexRhymePercentilePair(word: line.0, rhymePercentile: rp);
+                        rhymingWords.append(wordRPPair);
+                        rhymingWords.sortInPlace{
+                        
+                            $0.rhymePercentile > $1.rhymePercentile;
+                        
+                        }
+                        
+                    }
                 
+                }
+                
+                for _ in 1...3 {
+                    
+                    let pair = rhymingWords.removeFirst();
+                    rhymingWordsTextView?.text = (rhymingWordsTextView?.text)! + "\n";
+                    rhymingWordsTextView?.text = (rhymingWordsTextView?.text)! + pair.word + ", " + String(pair.rhymePercentile);
+                    
                 }
                 
             }
