@@ -97,14 +97,16 @@ class FindWordsViewController: UIViewController {
                 
                 let origWord = Word(wordName: wordString!.lowercaseString, phonemeString: appDelegate.finder!.dictionary[wordString!.lowercaseString]!);
                 
-                for line in (appDelegate.finder?.dictionary)!{
+                while appDelegate.finder?.dictionary.isEmpty == false{
                     
-                    let satellite = Word(wordName: line.0, phonemeString: line.1);
+                    let line = appDelegate.finder?.dictionary.removeAtIndex((appDelegate.finder?.dictionary.startIndex)!);
+                    let satellite = Word(wordName: line!.0, phonemeString: line!.1);
                     let rp = appDelegate.finder!.findRhymeValueAndPercentileForWords(origWord!, satellite: satellite!);
                     
+                    //if rp >= 0.75
                     if(rp >= 0.5) {
                         
-                        let wordRPPair = WordIndexRhymePercentilePair(word: line.0, rhymePercentile: rp);
+                        let wordRPPair = WordIndexRhymePercentilePair(word: line!.0, rhymePercentile: rp);
                         rhymingWords.append(wordRPPair);
                         rhymingWords.sortInPlace{
                         
