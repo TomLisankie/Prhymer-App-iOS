@@ -14,15 +14,29 @@ class FindWordsViewController: UIViewController {
     @IBOutlet weak var wordTextField: UITextField?;
     @IBOutlet weak var rhymingWordsTextView: UITextView?;
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate;
-    var rhymingWords = [WordIndexRhymePercentilePair]();
-    var greenWords = Queue<Word>();
-    var yellowWords = Queue<Word>();
+    var dictionary = [String : String]();
+    var greenRhymingWords = [WordIndexRhymePercentilePair](); //rhyme very well
+    var yellowRhymingWords = [WordIndexRhymePercentilePair](); //rhyme decently
+    var redRhymingWords = [WordIndexRhymePercentilePair](); //rhyme badly
+    var greenWordsAvailable = true;
+    var yellowWordsAvailable = true;
+    var redWordsAvailable = true;
+    var firstTouch = true;
     var prevWord = "";
     
     @IBAction func findWordsButtonTapped(){
         
         wordTextField?.backgroundColor = UIColor.clearColor();
         wordTextField?.textColor = UIColor.blackColor();
+        
+        rhymingWordsTextView?.text = "";
+        
+        if(firstTouch){
+        
+            dictionary = appDelegate.finder!.dictionary;
+            firstTouch = false;
+        
+        }
         
         let wordString = wordTextField?.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).stringByTrimmingCharactersInSet(NSCharacterSet.punctuationCharacterSet());
         
@@ -34,8 +48,15 @@ class FindWordsViewController: UIViewController {
         }else{
         
             print("wordString was NOT prevWord");
-            greenWords = Queue<Word>();
-            yellowWords = Queue<Word>();
+            
+            greenRhymingWords = [WordIndexRhymePercentilePair](); //rhyme very well
+            yellowRhymingWords = [WordIndexRhymePercentilePair](); //rhyme decently
+            redRhymingWords = [WordIndexRhymePercentilePair](); //rhyme badly
+            greenWordsAvailable = true;
+            yellowWordsAvailable = true;
+            redWordsAvailable = true;
+            
+            dictionary = appDelegate.finder!.dictionary;
             
             prevWord = wordString!;
             
@@ -87,7 +108,7 @@ class FindWordsViewController: UIViewController {
             
         }else{
             
-            if(appDelegate.finder!.dictionary[wordString!.lowercaseString] == nil){
+            if(dictionary[wordString!.lowercaseString] == nil){
                 
                 wordTextField?.backgroundColor = UIColor.redColor();
                 wordTextField?.textColor = UIColor.whiteColor();
@@ -95,22 +116,59 @@ class FindWordsViewController: UIViewController {
                 
             }else{ //write action code here
                 
-                let origWord = Word(wordName: wordString!.lowercaseString, phonemeString: appDelegate.finder!.dictionary[wordString!.lowercaseString]!);
+                let origWord = Word(wordName: wordString!.lowercaseString, phonemeString: dictionary[wordString!.lowercaseString]!);
                 
-                while appDelegate.finder?.dictionary.isEmpty == false{
+                while(greenRhymingWords.count < 20 || yellowRhymingWords.count < 20 || redRhymingWords.count < 20){
                     
-                    let line = appDelegate.finder?.dictionary.removeAtIndex((appDelegate.finder?.dictionary.startIndex)!);
-                    let satellite = Word(wordName: line!.0, phonemeString: line!.1);
+                    let line = dictionary.removeAtIndex(dictionary.startIndex);
+                    let satellite = Word(wordName: line.0, phonemeString: line.1);
                     let rp = appDelegate.finder!.findRhymeValueAndPercentileForWords(origWord!, satellite: satellite!);
                     
-                    //if rp >= 0.75
-                    if(rp >= 0.5) {
+                    //this is just gonna hang up once it gets to the end of all the lines in the array - need to fix
+                    if(dictionary.isEmpty == false){
+                        print(greenRhymingWords.count, yellowRhymingWords.count, redRhymingWords.count);
                         
-                        let wordRPPair = WordIndexRhymePercentilePair(word: line!.0, rhymePercentile: rp);
-                        rhymingWords.append(wordRPPair);
-                        rhymingWords.sortInPlace{
+                        if(rp >= 0.75) {
+                            
+                            if(greenRhymingWords.count != 20){
+                                
+                                let wordRPPair = WordIndexRhymePercentilePair(word: line.0, rhymePercentile: rp);
+                                greenRhymingWords.append(wordRPPair);
+                                greenRhymingWords.sortInPlace{
+                                
+                                    $0.rhymePercentile > $1.rhymePercentile;
+                                
+                                }
+                                
+                            }
+                            
+                        }else if(rp >= 0.5){
+                            
+                            if(yellowRhymingWords.count != 20){
+                                
+                                let wordRPPair = WordIndexRhymePercentilePair(word: line.0, rhymePercentile: rp);
+                                yellowRhymingWords.append(wordRPPair);
+                                yellowRhymingWords.sortInPlace{
+                                    
+                                    $0.rhymePercentile > $1.rhymePercentile;
+                                    
+                                }
+                                
+                            }
                         
-                            $0.rhymePercentile > $1.rhymePercentile;
+                        }else if(rp >= 0.35){
+                        
+                            if(redRhymingWords.count != 20){
+                                
+                                let wordRPPair = WordIndexRhymePercentilePair(word: line.0, rhymePercentile: rp);
+                                redRhymingWords.append(wordRPPair);
+                                redRhymingWords.sortInPlace{
+                                    
+                                    $0.rhymePercentile > $1.rhymePercentile;
+                                    
+                                }
+                                
+                            }
                         
                         }
                         
@@ -118,12 +176,100 @@ class FindWordsViewController: UIViewController {
                 
                 }
                 
-                for _ in 1...3 {
+                if(greenWordsAvailable){
                     
-                    let pair = rhymingWords.removeFirst();
-                    rhymingWordsTextView?.text = (rhymingWordsTextView?.text)! + "\n";
-                    rhymingWordsTextView?.text = (rhymingWordsTextView?.text)! + pair.word + ", " + String(pair.rhymePercentile);
+                    if(greenRhymingWords.count > 2){
+                        
+                        for _ in 1...3 {
+                            
+                            let pair = greenRhymingWords.removeFirst();
+                            rhymingWordsTextView?.text = (rhymingWordsTextView?.text)! + "\n";
+                            rhymingWordsTextView?.text = (rhymingWordsTextView?.text)! + pair.word + ", " + String(pair.rhymePercentile);
+                            
+                        }
+                            
+                    }else{
                     
+                        for _ in 0...greenRhymingWords.count {
+                            
+                            let pair = greenRhymingWords.removeFirst();
+                            rhymingWordsTextView?.text = (rhymingWordsTextView?.text)! + "\n";
+                            rhymingWordsTextView?.text = (rhymingWordsTextView?.text)! + pair.word + ", " + String(pair.rhymePercentile);
+                            
+                        }
+                    
+                    }
+                        
+                }else{
+                
+                    greenWordsAvailable = false;
+                
+                }
+                
+                if(yellowWordsAvailable){
+                    
+                    if(yellowRhymingWords.count > 2){
+                        
+                        for _ in 1...3 {
+                            
+                            let pair = yellowRhymingWords.removeFirst();
+                            rhymingWordsTextView?.text = (rhymingWordsTextView?.text)! + "\n";
+                            rhymingWordsTextView?.text = (rhymingWordsTextView?.text)! + pair.word + ", " + String(pair.rhymePercentile);
+                            
+                        }
+                        
+                    }else{
+                        
+                        for _ in 0...yellowRhymingWords.count {
+                            
+                            let pair = yellowRhymingWords.removeFirst();
+                            rhymingWordsTextView?.text = (rhymingWordsTextView?.text)! + "\n";
+                            rhymingWordsTextView?.text = (rhymingWordsTextView?.text)! + pair.word + ", " + String(pair.rhymePercentile);
+                            
+                        }
+                        
+                    }
+                    
+                }else{
+                    
+                    yellowWordsAvailable = false;
+                    
+                }
+                
+                if(redWordsAvailable && (greenWordsAvailable == false || yellowWordsAvailable == false)){
+                    
+                    if(redRhymingWords.count > 2){
+                        
+                        for _ in 1...3 {
+                            
+                            let pair = redRhymingWords.removeFirst();
+                            rhymingWordsTextView?.text = (rhymingWordsTextView?.text)! + "\n";
+                            rhymingWordsTextView?.text = (rhymingWordsTextView?.text)! + pair.word + ", " + String(pair.rhymePercentile);
+                            
+                        }
+                        
+                    }else{
+                        
+                        for _ in 0...redRhymingWords.count {
+                            
+                            let pair = redRhymingWords.removeFirst();
+                            rhymingWordsTextView?.text = (rhymingWordsTextView?.text)! + "\n";
+                            rhymingWordsTextView?.text = (rhymingWordsTextView?.text)! + pair.word + ", " + String(pair.rhymePercentile);
+                            
+                        }
+                        
+                    }
+                    
+                }else{
+                    
+                    redWordsAvailable = false;
+                    
+                }
+                
+                if(greenWordsAvailable == false && yellowWordsAvailable == false && yellowWordsAvailable == false){
+                
+                    rhymingWordsTextView?.text = "No more words";
+                
                 }
                 
             }
