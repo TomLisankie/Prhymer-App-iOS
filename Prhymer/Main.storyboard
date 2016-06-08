@@ -14,39 +14,42 @@
                         <viewControllerLayoutGuide type="bottom" id="IjJ-Wa-rjj"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="uzh-cF-1zd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a word" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qjc-Cm-kvB">
-                                <rect key="frame" x="103" y="170" width="169" height="30"/>
+                                <rect key="frame" x="69" y="170" width="169" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oa5-As-pUc">
-                                <rect key="frame" x="98" y="208" width="174" height="30"/>
+                                <rect key="frame" x="64" y="208" width="174" height="30"/>
                                 <state key="normal" title="Find Words That Rhyme"/>
                                 <connections>
                                     <action selector="findWordsButtonTapped" destination="Fxm-iZ-VAR" eventType="touchDown" id="pQ5-r3-Eiy"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Prhymer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jE4-d7-kKN">
-                                <rect key="frame" x="70" y="28" width="235" height="93"/>
+                                <rect key="frame" x="39" y="28" width="235" height="93"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="64"/>
                                 <color key="textColor" red="0.1715366931" green="0.67606757200000001" blue="0.24435146930000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Words will appear here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ubF-0T-xr5">
-                                <rect key="frame" x="70" y="270" width="240" height="128"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Words will appear here" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ubF-0T-xr5">
+                                <rect key="frame" x="34" y="270" width="240" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ok7-D0-yOJ">
+                                <rect key="frame" x="141" y="246" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 2" id="vl9-cn-yC9"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="loading" destination="ok7-D0-yOJ" id="Nr2-nW-aHY"/>
                         <outlet property="rhymingWordsTextView" destination="ubF-0T-xr5" id="7ub-5P-pux"/>
                         <outlet property="wordTextField" destination="Qjc-Cm-kvB" id="wWG-yg-9cr"/>
                     </connections>
@@ -64,11 +67,11 @@
                         <viewControllerLayoutGuide type="bottom" id="aTn-LD-hEc"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Kmf-qO-fcH">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5gH-LC-AVw">
-                                <rect key="frame" x="70" y="236" width="256" height="30"/>
+                                <rect key="frame" x="60" y="236" width="256" height="30"/>
                                 <state key="normal" title="Find How Well They Rhyme"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="130" y="301" width="141" height="30"/>
@@ -78,7 +81,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Word" textAlignment="natural" minimumFontSize="24" translatesAutoresizingMaskIntoConstraints="NO" id="SUC-Ob-giP">
-                                <rect key="frame" x="70" y="159" width="256" height="30"/>
+                                <rect key="frame" x="60" y="159" width="256" height="30"/>
                                 <accessibility key="accessibilityConfiguration" hint="First Word">
                                     <accessibilityTraits key="traits" none="YES"/>
                                 </accessibility>
@@ -87,7 +90,7 @@
                                 <attributedString key="userComments">
                                     <fragment content="First Word">
                                         <attributes>
-                                            <font key="NSFont" metaFont="smallSystem"/>
+                                            <font key="NSFont" metaFont="controlContent" size="11"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
@@ -97,7 +100,7 @@
                                 </variation>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Second Word" textAlignment="natural" minimumFontSize="24" translatesAutoresizingMaskIntoConstraints="NO" id="xXH-6Q-X8r">
-                                <rect key="frame" x="70" y="198" width="256" height="30"/>
+                                <rect key="frame" x="60" y="198" width="256" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
@@ -105,7 +108,7 @@
                                 </variation>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rhyme Percentile: 0.0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WtT-aT-xWm">
-                                <rect key="frame" x="48" y="292" width="278" height="21"/>
+                                <rect key="frame" x="38" y="292" width="278" height="21"/>
                                 <accessibility key="accessibilityConfiguration" label="Rhyme Percentile: "/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -115,7 +118,7 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Prhymer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rim-ja-mCd">
-                                <rect key="frame" x="81" y="28" width="235" height="93"/>
+                                <rect key="frame" x="71" y="28" width="235" height="93"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="64"/>
                                 <color key="textColor" red="0.1715366931" green="0.67606757200000001" blue="0.24435146930000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -124,7 +127,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="7bM-m6-PrN"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="firstTextField" destination="SUC-Ob-giP" id="LFt-X7-POl"/>
                         <outlet property="rhymePercentileLabel" destination="WtT-aT-xWm" id="KTl-OA-GHR"/>

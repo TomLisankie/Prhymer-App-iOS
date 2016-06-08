@@ -9,7 +9,6 @@
 import UIKit
 
 class CompareWordsViewController: UIViewController {
-
     
     @IBOutlet weak var firstTextField: UITextField?;
     @IBOutlet weak var secondTextField: UITextField?;

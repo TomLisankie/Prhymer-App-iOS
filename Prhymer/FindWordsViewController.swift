@@ -13,6 +13,8 @@ class FindWordsViewController: UIViewController {
     
     @IBOutlet weak var wordTextField: UITextField?;
     @IBOutlet weak var rhymingWordsTextView: UITextView?;
+    @IBOutlet weak var loading: UIActivityIndicatorView?;
+    
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate;
     var dictionary = [String : String]();
     var greenRhymingWords = [WordIndexRhymePercentilePair](); //rhyme very well
@@ -37,6 +39,9 @@ class FindWordsViewController: UIViewController {
             firstTouch = false;
         
         }
+        
+        loading?.hidden = false;
+        loading?.startAnimating();
         
         let wordString = wordTextField?.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).stringByTrimmingCharactersInSet(NSCharacterSet.punctuationCharacterSet());
         
@@ -63,6 +68,8 @@ class FindWordsViewController: UIViewController {
             findWords(wordString);
         
         }
+        
+        loading?.stopAnimating();
     
         /*
          This process:

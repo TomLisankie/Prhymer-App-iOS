@@ -21,6 +21,7 @@
 		E9AD324F1CF3B3A9004FE2A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9AD324E1CF3B3A9004FE2A2 /* Main.storyboard */; };
 		E9AD32511CF3B7C1004FE2A2 /* FindWordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AD32501CF3B7C1004FE2A2 /* FindWordsViewController.swift */; };
 		E9EA05071C33392300610E52 /* StreamReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EA05061C33392300610E52 /* StreamReader.swift */; };
+		E9EB8B301CFF459D002DDCC0 /* SELOGO.png in Resources */ = {isa = PBXBuildFile; fileRef = E9EB8B2F1CFF459D002DDCC0 /* SELOGO.png */; };
 		E9FB1C211CE58B9200BFC47E /* RhymeFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FB1C201CE58B9200BFC47E /* RhymeFinder.swift */; };
 		E9FB882C1C6A3E8800BAE96B /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FB882B1C6A3E8800BAE96B /* Layer.swift */; };
 		E9FB882E1C6A3F2100BAE96B /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FB882D1C6A3F2100BAE96B /* Node.swift */; };
@@ -65,6 +66,7 @@
 		E9AD324E1CF3B3A9004FE2A2 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E9AD32501CF3B7C1004FE2A2 /* FindWordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindWordsViewController.swift; sourceTree = "<group>"; };
 		E9EA05061C33392300610E52 /* StreamReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StreamReader.swift; path = ../StreamReader.swift; sourceTree = "<group>"; };
+		E9EB8B2F1CFF459D002DDCC0 /* SELOGO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SELOGO.png; sourceTree = "<group>"; };
 		E9FB1C201CE58B9200BFC47E /* RhymeFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RhymeFinder.swift; sourceTree = "<group>"; };
 		E9FB882B1C6A3E8800BAE96B /* Layer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
 		E9FB882D1C6A3F2100BAE96B /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				E9AD324E1CF3B3A9004FE2A2 /* Main.storyboard */,
 				E964C2181C32451500A1AFCD /* Assets.xcassets */,
 				E964C21A1C32451500A1AFCD /* LaunchScreen.storyboard */,
+				E9EB8B311CFF45B5002DDCC0 /* Images */,
 				E964C21D1C32451500A1AFCD /* Info.plist */,
 			);
 			path = Prhymer;
@@ -158,6 +161,14 @@
 				E964C2331C32451500A1AFCD /* Info.plist */,
 			);
 			path = PrhymerUITests;
+			sourceTree = "<group>";
+		};
+		E9EB8B311CFF45B5002DDCC0 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				E9EB8B2F1CFF459D002DDCC0 /* SELOGO.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 		E9FB1C221CE58BD600BFC47E /* Rhyme Essentials */ = {
@@ -279,6 +290,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9EB8B301CFF459D002DDCC0 /* SELOGO.png in Resources */,
 				E9AD324F1CF3B3A9004FE2A2 /* Main.storyboard in Resources */,
 				E964C2421C324DDF00A1AFCD /* cmudict-0.7b_modified.txt in Resources */,
 				E964C21C1C32451500A1AFCD /* LaunchScreen.storyboard in Resources */,
