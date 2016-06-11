@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E92FDE391D0C85B90016A936 /* CompareWordsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E92FDE381D0C85B90016A936 /* CompareWordsViewController.xib */; };
+		E92FDE3C1D0C865A0016A936 /* FindWordsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E92FDE3B1D0C865A0016A936 /* FindWordsViewController.xib */; };
+		E92FDE3E1D0C86FB0016A936 /* ParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92FDE3D1D0C86FB0016A936 /* ParentViewController.swift */; };
+		E92FDE411D0C9E620016A936 /* EZSwipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92FDE401D0C9E620016A936 /* EZSwipeController.swift */; };
 		E94C6BCB1CF5287700E4288E /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94C6BCA1CF5287700E4288E /* Queue.swift */; };
 		E9507F2D1C45D58C00DD6F2B /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9507F2C1C45D58C00DD6F2B /* Word.swift */; };
 		E9507F2F1C45FE7D00DD6F2B /* WordIndexRhymePercentilePair.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9507F2E1C45FE7D00DD6F2B /* WordIndexRhymePercentilePair.swift */; };
@@ -20,7 +24,6 @@
 		E964C2421C324DDF00A1AFCD /* cmudict-0.7b_modified.txt in Resources */ = {isa = PBXBuildFile; fileRef = E964C2411C324DDF00A1AFCD /* cmudict-0.7b_modified.txt */; };
 		E9AD324F1CF3B3A9004FE2A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9AD324E1CF3B3A9004FE2A2 /* Main.storyboard */; };
 		E9AD32511CF3B7C1004FE2A2 /* FindWordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AD32501CF3B7C1004FE2A2 /* FindWordsViewController.swift */; };
-		E9EA05071C33392300610E52 /* StreamReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EA05061C33392300610E52 /* StreamReader.swift */; };
 		E9EB8B301CFF459D002DDCC0 /* SELOGO.png in Resources */ = {isa = PBXBuildFile; fileRef = E9EB8B2F1CFF459D002DDCC0 /* SELOGO.png */; };
 		E9FB1C211CE58B9200BFC47E /* RhymeFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FB1C201CE58B9200BFC47E /* RhymeFinder.swift */; };
 		E9FB882C1C6A3E8800BAE96B /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FB882B1C6A3E8800BAE96B /* Layer.swift */; };
@@ -46,6 +49,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E92FDE381D0C85B90016A936 /* CompareWordsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompareWordsViewController.xib; sourceTree = "<group>"; };
+		E92FDE3B1D0C865A0016A936 /* FindWordsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FindWordsViewController.xib; sourceTree = "<group>"; };
+		E92FDE3D1D0C86FB0016A936 /* ParentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParentViewController.swift; sourceTree = "<group>"; };
+		E92FDE401D0C9E620016A936 /* EZSwipeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZSwipeController.swift; sourceTree = "<group>"; };
 		E94C6BCA1CF5287700E4288E /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		E9507F2C1C45D58C00DD6F2B /* Word.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		E9507F2E1C45FE7D00DD6F2B /* WordIndexRhymePercentilePair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordIndexRhymePercentilePair.swift; sourceTree = "<group>"; };
@@ -65,7 +72,6 @@
 		E964C2411C324DDF00A1AFCD /* cmudict-0.7b_modified.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "cmudict-0.7b_modified.txt"; sourceTree = "<group>"; };
 		E9AD324E1CF3B3A9004FE2A2 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E9AD32501CF3B7C1004FE2A2 /* FindWordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindWordsViewController.swift; sourceTree = "<group>"; };
-		E9EA05061C33392300610E52 /* StreamReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StreamReader.swift; path = ../StreamReader.swift; sourceTree = "<group>"; };
 		E9EB8B2F1CFF459D002DDCC0 /* SELOGO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SELOGO.png; sourceTree = "<group>"; };
 		E9FB1C201CE58B9200BFC47E /* RhymeFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RhymeFinder.swift; sourceTree = "<group>"; };
 		E9FB882B1C6A3E8800BAE96B /* Layer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
@@ -98,6 +104,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E92FDE3A1D0C85CA0016A936 /* Interface Stuff */ = {
+			isa = PBXGroup;
+			children = (
+				E92FDE381D0C85B90016A936 /* CompareWordsViewController.xib */,
+				E92FDE3B1D0C865A0016A936 /* FindWordsViewController.xib */,
+				E9AD324E1CF3B3A9004FE2A2 /* Main.storyboard */,
+				E964C21A1C32451500A1AFCD /* LaunchScreen.storyboard */,
+			);
+			name = "Interface Stuff";
+			sourceTree = "<group>";
+		};
+		E92FDE3F1D0C8C480016A936 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E92FDE3D1D0C86FB0016A936 /* ParentViewController.swift */,
+				E964C2131C32451500A1AFCD /* CompareWordsViewController.swift */,
+				E9AD32501CF3B7C1004FE2A2 /* FindWordsViewController.swift */,
+				E92FDE401D0C9E620016A936 /* EZSwipeController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
 		E9480C931CEAECE5001981A0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,16 +157,13 @@
 		E964C2101C32451500A1AFCD /* Prhymer */ = {
 			isa = PBXGroup;
 			children = (
-				E9480C931CEAECE5001981A0 /* Resources */,
-				E9EA05061C33392300610E52 /* StreamReader.swift */,
 				E964C2111C32451500A1AFCD /* AppDelegate.swift */,
-				E964C2131C32451500A1AFCD /* CompareWordsViewController.swift */,
-				E9AD32501CF3B7C1004FE2A2 /* FindWordsViewController.swift */,
 				E94C6BCA1CF5287700E4288E /* Queue.swift */,
+				E92FDE3F1D0C8C480016A936 /* View Controllers */,
 				E9FB1C221CE58BD600BFC47E /* Rhyme Essentials */,
-				E9AD324E1CF3B3A9004FE2A2 /* Main.storyboard */,
+				E92FDE3A1D0C85CA0016A936 /* Interface Stuff */,
+				E9480C931CEAECE5001981A0 /* Resources */,
 				E964C2181C32451500A1AFCD /* Assets.xcassets */,
-				E964C21A1C32451500A1AFCD /* LaunchScreen.storyboard */,
 				E9EB8B311CFF45B5002DDCC0 /* Images */,
 				E964C21D1C32451500A1AFCD /* Info.plist */,
 			);
@@ -290,6 +315,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E92FDE391D0C85B90016A936 /* CompareWordsViewController.xib in Resources */,
+				E92FDE3C1D0C865A0016A936 /* FindWordsViewController.xib in Resources */,
 				E9EB8B301CFF459D002DDCC0 /* SELOGO.png in Resources */,
 				E9AD324F1CF3B3A9004FE2A2 /* Main.storyboard in Resources */,
 				E964C2421C324DDF00A1AFCD /* cmudict-0.7b_modified.txt in Resources */,
@@ -319,14 +346,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9EA05071C33392300610E52 /* StreamReader.swift in Sources */,
 				E9FB882E1C6A3F2100BAE96B /* Node.swift in Sources */,
 				E9FB88301C6A3F3D00BAE96B /* IndexSet.swift in Sources */,
 				E964C2401C3245AB00A1AFCD /* Phoneme.swift in Sources */,
 				E9507F2F1C45FE7D00DD6F2B /* WordIndexRhymePercentilePair.swift in Sources */,
 				E9507F2D1C45D58C00DD6F2B /* Word.swift in Sources */,
 				E9FB882C1C6A3E8800BAE96B /* Layer.swift in Sources */,
+				E92FDE411D0C9E620016A936 /* EZSwipeController.swift in Sources */,
 				E94C6BCB1CF5287700E4288E /* Queue.swift in Sources */,
+				E92FDE3E1D0C86FB0016A936 /* ParentViewController.swift in Sources */,
 				E9FB1C211CE58B9200BFC47E /* RhymeFinder.swift in Sources */,
 				E964C2141C32451500A1AFCD /* CompareWordsViewController.swift in Sources */,
 				E9AD32511CF3B7C1004FE2A2 /* FindWordsViewController.swift in Sources */,

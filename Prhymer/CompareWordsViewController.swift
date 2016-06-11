@@ -167,7 +167,7 @@ class CompareWordsViewController: UIViewController {
                 
                 print("Rhyme Percentile: ", rhymePercentile);
                 
-                rhymePercentileLabel?.text = "Rhyme Percentile: " + String(Double(round(100*rhymePercentile)/100) * 100) + String("%");
+                rhymePercentileLabel?.text = String(Double(round(100*rhymePercentile)/100) * 100) + String("%");
             }
             
         }
