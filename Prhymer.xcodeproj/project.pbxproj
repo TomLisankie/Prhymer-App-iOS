@@ -118,12 +118,20 @@
 		E92FDE3F1D0C8C480016A936 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E92FDE421D0CB4FA0016A936 /* Views */,
 				E92FDE3D1D0C86FB0016A936 /* ParentViewController.swift */,
-				E964C2131C32451500A1AFCD /* CompareWordsViewController.swift */,
-				E9AD32501CF3B7C1004FE2A2 /* FindWordsViewController.swift */,
 				E92FDE401D0C9E620016A936 /* EZSwipeController.swift */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		E92FDE421D0CB4FA0016A936 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E9AD32501CF3B7C1004FE2A2 /* FindWordsViewController.swift */,
+				E964C2131C32451500A1AFCD /* CompareWordsViewController.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		E9480C931CEAECE5001981A0 /* Resources */ = {
