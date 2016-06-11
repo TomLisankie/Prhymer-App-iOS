@@ -14,6 +14,17 @@ class CompareWordsViewController: UIViewController {
     @IBOutlet weak var secondTextField: UITextField?;
     @IBOutlet weak var rhymePercentileLabel: UILabel?;
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        firstTextField!.clearButtonMode = .Always;
+        secondTextField!.clearButtonMode = .Always;
+        
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
+    }
+    
     @IBAction func buttonTapped(){
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate;
@@ -161,17 +172,6 @@ class CompareWordsViewController: UIViewController {
             
         }
     
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        firstTextField!.clearButtonMode = .Always;
-        secondTextField!.clearButtonMode = .Always;
-        
-        //Looks for single or multiple taps.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
-        view.addGestureRecognizer(tap)
     }
     
     //Calls this function when the tap is recognized.
