@@ -50,7 +50,7 @@ public class EZSwipeController: UIViewController {
             }
         }
         public static let navigationBarHeight: CGFloat = 44
-        public static let lightGrayColor = UIColor(red: 248, green: 248, blue: 248, alpha: 1)
+        public static let lightGrayColor = UIColor(red: 248, green: 248, blue: 248, alpha: 1);
     }
 
     public var stackNavBars = [UINavigationBar]()
@@ -82,6 +82,7 @@ public class EZSwipeController: UIViewController {
     }
 
     private func setupDefaultNavigationBars(pageTitles: [String]) {
+        
         guard !navigationBarShouldNotExist else { return }
 
         var navBars = [UINavigationBar]()
