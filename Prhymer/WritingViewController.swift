@@ -8,11 +8,18 @@
 
 import UIKit
 
-class FindWordsViewController: UIViewController {
+class WordSelector: UITableViewController{
+
+    
+
+}
+
+class WritingViewController: UIViewController {
     
     
     @IBOutlet weak var wordTextField: UITextField?;
     @IBOutlet weak var rhymingWordsTextView: UITextView?;
+    @IBOutlet weak var wordSelector: WordSelector?;
     @IBOutlet weak var loading: UIActivityIndicatorView?;
     
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate;
@@ -285,20 +292,26 @@ class FindWordsViewController: UIViewController {
     
     }
     
+    func suggestRhymingWords() {
+        
+        dismissKeyboard();
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //wordTextField!.clearButtonMode = .Always;
         
         //Looks for single or multiple taps.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(FindWordsViewController.dismissKeyboard));
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(WritingViewController.dismissKeyboard));
         view.addGestureRecognizer(tap)
     }
     
     //Calls this function when the tap is recognized.
     func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
-        view.endEditing(true)
+        view.endEditing(true);
     }
     
     override func didReceiveMemoryWarning() {
