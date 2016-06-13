@@ -18,24 +18,28 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="43w-bT-whR">
-                    <rect key="frame" x="60" y="236" width="256" height="30"/>
+                    <rect key="frame" x="172" y="236" width="256" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                    <state key="normal" title="Compare"/>
+                    <state key="normal" title="Compare">
+                        <color key="titleColor" red="0.69803921570000005" green="0.85882352939999995" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="130" y="301" width="141" height="30"/>
+                        <rect key="frame" x="128" y="246" width="141" height="30"/>
                     </variation>
                     <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="83" y="281" width="235" height="30"/>
+                        <rect key="frame" x="83" y="189" width="235" height="30"/>
                     </variation>
                     <connections>
                         <action selector="buttonTapped" destination="-1" eventType="touchDown" id="CCu-gp-1EA"/>
                     </connections>
                 </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Word" textAlignment="natural" minimumFontSize="32" translatesAutoresizingMaskIntoConstraints="NO" id="J6k-gH-D0v">
-                    <rect key="frame" x="60" y="159" width="256" height="30"/>
+                    <rect key="frame" x="183" y="101" width="235" height="60"/>
+                    <color key="backgroundColor" red="0.43921568630000002" green="0.75686274509999996" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
                     <accessibility key="accessibilityConfiguration" hint="First Word">
                         <accessibilityTraits key="traits" none="YES"/>
                     </accessibility>
+                    <color key="textColor" red="0.95294117649999999" green="1" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="32"/>
                     <textInputTraits key="textInputTraits"/>
                     <attributedString key="userComments">
@@ -47,47 +51,40 @@
                         </fragment>
                     </attributedString>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="152" y="225" width="97" height="30"/>
+                        <rect key="frame" x="83" y="110" width="235" height="60"/>
                     </variation>
                     <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="83" y="145" width="235" height="60"/>
+                        <rect key="frame" x="83" y="53" width="235" height="60"/>
                     </variation>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Second Word" textAlignment="natural" minimumFontSize="32" translatesAutoresizingMaskIntoConstraints="NO" id="EdS-T5-iJC">
-                    <rect key="frame" x="60" y="198" width="256" height="30"/>
+                    <rect key="frame" x="183" y="168" width="235" height="60"/>
+                    <color key="backgroundColor" red="0.43921568630000002" green="0.75686274509999996" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.95294117649999999" green="1" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="32"/>
                     <textInputTraits key="textInputTraits"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="152" y="263" width="97" height="30"/>
+                        <rect key="frame" x="83" y="178" width="235" height="60"/>
                     </variation>
                     <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="83" y="213" width="235" height="60"/>
+                        <rect key="frame" x="83" y="121" width="235" height="60"/>
                     </variation>
                 </textField>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Prhymer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="50k-dv-foa">
-                    <rect key="frame" x="71" y="28" width="235" height="93"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="64"/>
-                    <color key="textColor" red="0.1715366931" green="0.67606757200000001" blue="0.24435146930000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="83" y="44" width="235" height="93"/>
-                    </variation>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TVm-p5-BDl">
-                    <rect key="frame" x="38" y="292" width="278" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TVm-p5-BDl">
+                    <rect key="frame" x="161" y="289" width="278" height="173"/>
                     <accessibility key="accessibilityConfiguration" label="Rhyme Percentile: "/>
-                    <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                    <color key="textColor" red="0.95294117647058818" green="1" blue="0.74117647058823533" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="131" y="339" width="138" height="21"/>
+                        <rect key="frame" x="128" y="284" width="138" height="139"/>
                     </variation>
                     <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="83" y="319" width="235" height="70"/>
+                        <rect key="frame" x="83" y="227" width="235" height="132"/>
                     </variation>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.14117647059999999" green="0.4823529412" blue="0.62745098040000002" alpha="1" colorSpace="calibratedRGB"/>
         </view>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
     </objects>

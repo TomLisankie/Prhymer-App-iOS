@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         finder = RhymeFinder(pathToDict: fileInBundle!);
         
-        return true
+        return true;
     }
     
     func getFileURL(fileName: String) -> NSURL {

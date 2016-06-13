@@ -49,7 +49,7 @@ public class EZSwipeController: UIViewController {
                 return UIScreen.mainScreen().bounds.width - StatusBarHeight
             }
         }
-        public static let navigationBarHeight: CGFloat = 44
+        public static let navigationBarHeight: CGFloat = 70
         public static let lightGrayColor = UIColor(red: 248, green: 248, blue: 248, alpha: 1);
     }
 
@@ -67,9 +67,9 @@ public class EZSwipeController: UIViewController {
     }
     public var datasource: EZSwipeControllerDataSource?
 
-    public var navigationBarShouldBeOnBottom = false
-    public var navigationBarShouldNotExist = false
-    public var cancelStandardButtonEvents = false
+    public var navigationBarShouldBeOnBottom = false;
+    public var navigationBarShouldNotExist = false;
+    public var cancelStandardButtonEvents = false;
 
     public init() {
         super.init(nibName: nil, bundle: nil)
@@ -142,22 +142,35 @@ public class EZSwipeController: UIViewController {
     }
 
     private func setupViewControllers() {
-        stackPageVC = [UIViewController]()
-        stackVC.enumerate().forEach { index, viewController in
-            let pageViewController = UIViewController()
-            if !navigationBarShouldBeOnBottom && !navigationBarShouldNotExist {
-                viewController.view.frame.origin.y += Constants.navigationBarHeight
+        
+        stackPageVC = [UIViewController]();
+        
+        for (index, viewController) in stackVC.enumerate(){
+        
+            let pageViewController = UIViewController();
+            
+            if(navigationBarShouldBeOnBottom == false && navigationBarShouldNotExist == false) {
+                
+                viewController.view.frame.origin.y += Constants.navigationBarHeight;
+                
             }
-            pageViewController.addChildViewController(viewController)
-            pageViewController.view.addSubview(viewController.view)
-            viewController.didMoveToParentViewController(pageViewController)
+            
+            pageViewController.addChildViewController(viewController);
+            pageViewController.view.addSubview(viewController.view);
+            viewController.didMoveToParentViewController(pageViewController);
+            
             if !stackNavBars.isEmpty {
-                pageViewController.view.addSubview(stackNavBars[index])
+                
+                pageViewController.view.addSubview(stackNavBars[index]);
+                
             }
-            stackPageVC.append(pageViewController)
+            
+            stackPageVC.append(pageViewController);
+            
         }
         
-        currentStackVC = stackPageVC[stackStartLocation]
+        currentStackVC = stackPageVC[stackStartLocation];
+        
     }
 
     private func setupPageViewController() {
@@ -184,6 +197,15 @@ public class EZSwipeController: UIViewController {
 
     public func setupView() {
 
+    }
+    
+    func setDefaultVC(index: Int){
+    
+        let newVCIndex = index;
+        datasource?.changedToPageIndex?(newVCIndex);
+        currentStackVC = stackPageVC[newVCIndex];
+        pageViewController.setViewControllers([currentStackVC], direction: .Forward, animated: false, completion: nil);
+    
     }
     
     public func setFrameForCurrentOrientation(){

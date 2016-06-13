@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E925EA1F1D0E757C0019706B /* PiecesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E925EA1D1D0E757C0019706B /* PiecesViewController.swift */; };
+		E925EA201D0E757C0019706B /* PiecesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E925EA1E1D0E757C0019706B /* PiecesViewController.xib */; };
 		E92FDE391D0C85B90016A936 /* CompareWordsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E92FDE381D0C85B90016A936 /* CompareWordsViewController.xib */; };
 		E92FDE3C1D0C865A0016A936 /* FindWordsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E92FDE3B1D0C865A0016A936 /* FindWordsViewController.xib */; };
 		E92FDE3E1D0C86FB0016A936 /* ParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92FDE3D1D0C86FB0016A936 /* ParentViewController.swift */; };
@@ -49,6 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E925EA1D1D0E757C0019706B /* PiecesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PiecesViewController.swift; sourceTree = "<group>"; };
+		E925EA1E1D0E757C0019706B /* PiecesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PiecesViewController.xib; sourceTree = "<group>"; };
 		E92FDE381D0C85B90016A936 /* CompareWordsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompareWordsViewController.xib; sourceTree = "<group>"; };
 		E92FDE3B1D0C865A0016A936 /* FindWordsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FindWordsViewController.xib; sourceTree = "<group>"; };
 		E92FDE3D1D0C86FB0016A936 /* ParentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParentViewController.swift; sourceTree = "<group>"; };
@@ -107,8 +111,9 @@
 		E92FDE3A1D0C85CA0016A936 /* Interface Stuff */ = {
 			isa = PBXGroup;
 			children = (
-				E92FDE381D0C85B90016A936 /* CompareWordsViewController.xib */,
+				E925EA1E1D0E757C0019706B /* PiecesViewController.xib */,
 				E92FDE3B1D0C865A0016A936 /* FindWordsViewController.xib */,
+				E92FDE381D0C85B90016A936 /* CompareWordsViewController.xib */,
 				E9AD324E1CF3B3A9004FE2A2 /* Main.storyboard */,
 				E964C21A1C32451500A1AFCD /* LaunchScreen.storyboard */,
 			);
@@ -128,6 +133,7 @@
 		E92FDE421D0CB4FA0016A936 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E925EA1D1D0E757C0019706B /* PiecesViewController.swift */,
 				E9AD32501CF3B7C1004FE2A2 /* FindWordsViewController.swift */,
 				E964C2131C32451500A1AFCD /* CompareWordsViewController.swift */,
 			);
@@ -324,6 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E92FDE391D0C85B90016A936 /* CompareWordsViewController.xib in Resources */,
+				E925EA201D0E757C0019706B /* PiecesViewController.xib in Resources */,
 				E92FDE3C1D0C865A0016A936 /* FindWordsViewController.xib in Resources */,
 				E9EB8B301CFF459D002DDCC0 /* SELOGO.png in Resources */,
 				E9AD324F1CF3B3A9004FE2A2 /* Main.storyboard in Resources */,
@@ -355,6 +362,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9FB882E1C6A3F2100BAE96B /* Node.swift in Sources */,
+				E925EA1F1D0E757C0019706B /* PiecesViewController.swift in Sources */,
 				E9FB88301C6A3F3D00BAE96B /* IndexSet.swift in Sources */,
 				E964C2401C3245AB00A1AFCD /* Phoneme.swift in Sources */,
 				E9507F2F1C45FE7D00DD6F2B /* WordIndexRhymePercentilePair.swift in Sources */,

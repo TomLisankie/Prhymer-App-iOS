@@ -30,10 +30,10 @@ class CompareWordsViewController: UIViewController {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate;
         var findRP = true;
         
-        firstTextField?.backgroundColor = UIColor.clearColor();
-        firstTextField?.textColor = UIColor.blackColor();
-        secondTextField?.backgroundColor = UIColor.clearColor();
-        secondTextField?.textColor = UIColor.blackColor();
+        firstTextField?.backgroundColor = UIColor(red:0.44, green:0.76, blue:0.70, alpha:1.0);
+        firstTextField?.textColor = UIColor(red:0.95, green:1.00, blue:0.74, alpha:1.0);
+        secondTextField?.backgroundColor = UIColor(red:0.44, green:0.76, blue:0.70, alpha:1.0);
+        secondTextField?.textColor = UIColor(red:0.95, green:1.00, blue:0.74, alpha:1.0);
         
         let string1 = firstTextField?.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).stringByTrimmingCharactersInSet(NSCharacterSet.punctuationCharacterSet());
         
@@ -167,7 +167,7 @@ class CompareWordsViewController: UIViewController {
                 
                 print("Rhyme Percentile: ", rhymePercentile);
                 
-                rhymePercentileLabel?.text = String(Double(round(100*rhymePercentile)/100) * 100) + String("%");
+                rhymePercentileLabel?.text = String(Int(Double(round(100*rhymePercentile)/100) * 100)) + String("%");
             }
             
         }

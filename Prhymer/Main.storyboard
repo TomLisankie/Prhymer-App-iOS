@@ -1,40 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="s5U-Xr-09o">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="PrL-2p-tPJ">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--Parent View Controller-->
-        <scene sceneID="4zE-KE-Pjh">
+        <scene sceneID="3hu-Jl-9Xw">
             <objects>
-                <viewController id="s5U-Xr-09o" customClass="ParentViewController" customModule="Prhymer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="PrL-2p-tPJ" customClass="ParentViewController" customModule="Prhymer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Bk6-sy-kt8"/>
-                        <viewControllerLayoutGuide type="bottom" id="ZjA-D0-cgp"/>
+                        <viewControllerLayoutGuide type="top" id="d2I-lg-5zQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="9Dw-Ai-wOW"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="KxQ-w1-UAa">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <view key="view" contentMode="scaleToFill" id="6bO-oX-X0C">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f0h-ye-uJ2">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="28" width="320" height="540"/>
-                                </variation>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6EU-Q7-o1T">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="scrollView" destination="f0h-ye-uJ2" id="cS9-3b-zkM"/>
+                        <outlet property="scrollView" destination="6EU-Q7-o1T" id="4HS-cO-Npi"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="U2g-xa-Mx7" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BgY-tr-KtF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="420" y="204"/>
+            <point key="canvasLocation" x="292" y="195"/>
         </scene>
     </scenes>
 </document>

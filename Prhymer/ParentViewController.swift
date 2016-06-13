@@ -12,26 +12,28 @@ extension ParentViewController: EZSwipeControllerDataSource {
     
     func viewControllerData() -> [UIViewController] {
         
+        let pieces : PiecesViewController =  PiecesViewController(nibName: "PiecesViewController", bundle: nil);
+        
         let findWords : FindWordsViewController =  FindWordsViewController(nibName: "FindWordsViewController", bundle: nil);
         
         let compareWords : CompareWordsViewController =  CompareWordsViewController(nibName: "CompareWordsViewController", bundle: nil);
         
-        return [findWords, compareWords];
+        return [pieces, findWords, compareWords];
         
     }
     
     func titlesForPages() -> [String] {
-        return ["Writing", "Compare Words"]
+        return ["Pieces", "Writing", "Compare Words"]
     }
     
     func navigationBarDataForPageIndex(index: Int) -> UINavigationBar {
         var title = ""
         if index == 0 {
-            title = "Writing"
+            title = "Pieces";
         } else if index == 1 {
-            title = "Compare Words"
+            title = "Writing";
         } else if index == 2 {
-            title = "Bulbasaur"
+            title = "Compare Words";
         }
         
         let navigationBar = UINavigationBar()
@@ -45,40 +47,26 @@ extension ParentViewController: EZSwipeControllerDataSource {
         navigationItem.hidesBackButton = true
         
         if index == 0 {
-            
-            var sImage = UIImage(named: "squir")!
-            sImage = scaleTo(image: sImage, w: 22, h: 22)
-            let rightButtonItem = UIBarButtonItem(image: sImage, style: UIBarButtonItemStyle.Plain, target: self, action: "a")
-            rightButtonItem.tintColor = UIColor.blueColor()
+            let rightButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: "a")
+            rightButtonItem.tintColor = UIColor.blackColor()
             
             navigationItem.leftBarButtonItem = nil
             navigationItem.rightBarButtonItem = rightButtonItem
-            
         } else if index == 1 {
+            let rightButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Bookmarks, target: self, action: "a")
+            rightButtonItem.tintColor = UIColor.blackColor()
             
-            var cImage = UIImage(named: "char")!
-            cImage = scaleTo(image: cImage, w: 22, h: 22)
-            let leftButtonItem = UIBarButtonItem(image: cImage, style: UIBarButtonItemStyle.Plain, target: self, action: "a")
-            leftButtonItem.tintColor = UIColor.redColor()
-            
-            var bImage = UIImage(named: "bulb")!
-            bImage = scaleTo(image: bImage, w: 22, h: 22)
-            let rightButtonItem = UIBarButtonItem(image: bImage, style: UIBarButtonItemStyle.Plain, target: self, action: "a")
-            rightButtonItem.tintColor = UIColor.greenColor()
+            let leftButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Camera, target: self, action: "a")
+            leftButtonItem.tintColor = UIColor.blackColor()
             
             navigationItem.leftBarButtonItem = leftButtonItem
             navigationItem.rightBarButtonItem = rightButtonItem
-            
         } else if index == 2 {
-            
-            var sImage = UIImage(named: "squir")!
-            sImage = scaleTo(image: sImage, w: 22, h: 22)
-            let leftButtonItem = UIBarButtonItem(image: sImage, style: UIBarButtonItemStyle.Plain, target: self, action: "a")
-            leftButtonItem.tintColor = UIColor.blueColor()
+            let leftButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: "a")
+            leftButtonItem.tintColor = UIColor.blackColor()
             
             navigationItem.leftBarButtonItem = leftButtonItem
             navigationItem.rightBarButtonItem = nil
-            
         }
         
         navigationBar.pushNavigationItem(navigationItem, animated: false)
@@ -109,6 +97,7 @@ class ParentViewController: EZSwipeController {
     
     override func viewDidLoad() {
         
+        setDefaultVC(1);
         super.viewDidLoad();
 
     }
