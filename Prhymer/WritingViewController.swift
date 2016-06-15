@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WordSelector: UITableViewController{
+class WordSelector: UITableView{
 
     
 
@@ -16,9 +16,7 @@ class WordSelector: UITableViewController{
 
 class WritingViewController: UIViewController {
     
-    
-    @IBOutlet weak var wordTextField: UITextField?;
-    @IBOutlet weak var rhymingWordsTextView: UITextView?;
+    @IBOutlet weak var writingTextView: UITextView?;
     @IBOutlet weak var wordSelector: WordSelector?;
     @IBOutlet weak var loading: UIActivityIndicatorView?;
     
@@ -34,49 +32,6 @@ class WritingViewController: UIViewController {
     var prevWord = "";
     
     @IBAction func findWordsButtonTapped(){
-        
-        wordTextField?.backgroundColor = UIColor.clearColor();
-        wordTextField?.textColor = UIColor.blackColor();
-        
-        rhymingWordsTextView?.text = "";
-        
-        if(firstTouch){
-        
-            dictionary = appDelegate.finder!.dictionary;
-            firstTouch = false;
-        
-        }
-        
-        loading?.hidden = false;
-        loading?.startAnimating();
-        
-        let wordString = wordTextField?.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).stringByTrimmingCharactersInSet(NSCharacterSet.punctuationCharacterSet());
-        
-        if(wordString == prevWord){
-        
-            print("wordString was prevWord");
-            findWords(wordString);
-        
-        }else{
-        
-            print("wordString was NOT prevWord");
-            
-            greenRhymingWords = [WordIndexRhymePercentilePair](); //rhyme very well
-            yellowRhymingWords = [WordIndexRhymePercentilePair](); //rhyme decently
-            redRhymingWords = [WordIndexRhymePercentilePair](); //rhyme badly
-            greenWordsAvailable = true;
-            yellowWordsAvailable = true;
-            redWordsAvailable = true;
-            
-            dictionary = appDelegate.finder!.dictionary;
-            
-            prevWord = wordString!;
-            
-            findWords(wordString);
-        
-        }
-        
-        loading?.stopAnimating();
     
         /*
          This process:
@@ -116,17 +71,13 @@ class WritingViewController: UIViewController {
     
         if(wordString == "" || wordString == nil){
             
-            wordTextField?.backgroundColor = UIColor.redColor();
-            wordTextField?.textColor = UIColor.whiteColor();
-            rhymingWordsTextView?.text = "Must enter a value";
+            writingTextView?.text = "Must enter a value";
             
         }else{
             
             if(dictionary[wordString!.lowercaseString] == nil){
                 
-                wordTextField?.backgroundColor = UIColor.redColor();
-                wordTextField?.textColor = UIColor.whiteColor();
-                rhymingWordsTextView?.text = "Word couldn't be found";
+                writingTextView?.text = "Word couldn't be found";
                 
             }else{ //write action code here
                 
@@ -197,8 +148,8 @@ class WritingViewController: UIViewController {
                         for _ in 1...3 {
                             
                             let pair = greenRhymingWords.removeFirst();
-                            rhymingWordsTextView?.text = (rhymingWordsTextView?.text)! + "\n";
-                            rhymingWordsTextView?.text = (rhymingWordsTextView?.text)! + pair.word + ", " + String(pair.rhymePercentile);
+                            writingTextView?.text = (writingTextView?.text)! + "\n";
+                            writingTextView?.text = (writingTextView?.text)! + pair.word + ", " + String(pair.rhymePercentile);
                             
                         }
                             
@@ -207,8 +158,8 @@ class WritingViewController: UIViewController {
                         for _ in 0...greenRhymingWords.count {
                             
                             let pair = greenRhymingWords.removeFirst();
-                            rhymingWordsTextView?.text = (rhymingWordsTextView?.text)! + "\n";
-                            rhymingWordsTextView?.text = (rhymingWordsTextView?.text)! + pair.word + ", " + String(pair.rhymePercentile);
+                            writingTextView?.text = (writingTextView?.text)! + "\n";
+                            writingTextView?.text = (writingTextView?.text)! + pair.word + ", " + String(pair.rhymePercentile);
                             
                         }
                     
@@ -227,8 +178,8 @@ class WritingViewController: UIViewController {
                         for _ in 1...3 {
                             
                             let pair = yellowRhymingWords.removeFirst();
-                            rhymingWordsTextView?.text = (rhymingWordsTextView?.text)! + "\n";
-                            rhymingWordsTextView?.text = (rhymingWordsTextView?.text)! + pair.word + ", " + String(pair.rhymePercentile);
+                            writingTextView?.text = (writingTextView?.text)! + "\n";
+                            writingTextView?.text = (writingTextView?.text)! + pair.word + ", " + String(pair.rhymePercentile);
                             
                         }
                         
@@ -237,8 +188,8 @@ class WritingViewController: UIViewController {
                         for _ in 0...yellowRhymingWords.count {
                             
                             let pair = yellowRhymingWords.removeFirst();
-                            rhymingWordsTextView?.text = (rhymingWordsTextView?.text)! + "\n";
-                            rhymingWordsTextView?.text = (rhymingWordsTextView?.text)! + pair.word + ", " + String(pair.rhymePercentile);
+                            writingTextView?.text = (writingTextView?.text)! + "\n";
+                            writingTextView?.text = (writingTextView?.text)! + pair.word + ", " + String(pair.rhymePercentile);
                             
                         }
                         
@@ -257,8 +208,8 @@ class WritingViewController: UIViewController {
                         for _ in 1...3 {
                             
                             let pair = redRhymingWords.removeFirst();
-                            rhymingWordsTextView?.text = (rhymingWordsTextView?.text)! + "\n";
-                            rhymingWordsTextView?.text = (rhymingWordsTextView?.text)! + pair.word + ", " + String(pair.rhymePercentile);
+                            writingTextView?.text = (writingTextView?.text)! + "\n";
+                            writingTextView?.text = (writingTextView?.text)! + pair.word + ", " + String(pair.rhymePercentile);
                             
                         }
                         
@@ -267,8 +218,8 @@ class WritingViewController: UIViewController {
                         for _ in 0...redRhymingWords.count {
                             
                             let pair = redRhymingWords.removeFirst();
-                            rhymingWordsTextView?.text = (rhymingWordsTextView?.text)! + "\n";
-                            rhymingWordsTextView?.text = (rhymingWordsTextView?.text)! + pair.word + ", " + String(pair.rhymePercentile);
+                            writingTextView?.text = (writingTextView?.text)! + "\n";
+                            writingTextView?.text = (writingTextView?.text)! + pair.word + ", " + String(pair.rhymePercentile);
                             
                         }
                         
@@ -282,7 +233,7 @@ class WritingViewController: UIViewController {
                 
                 if(greenWordsAvailable == false && yellowWordsAvailable == false && yellowWordsAvailable == false){
                 
-                    rhymingWordsTextView?.text = "No more words";
+                    writingTextView?.text = "No more words";
                 
                 }
                 
@@ -292,9 +243,15 @@ class WritingViewController: UIViewController {
     
     }
     
-    func suggestRhymingWords() {
+    func suggestRhymingWords(wordString: String?) {
         
         dismissKeyboard();
+        wordSelector?.hidden = false;
+        loading?.hidden = false;
+        loading?.startAnimating(); //this need to go in some thread stuff
+        findWords("FILLER WORD");
+        loading?.hidden = true;
+        loading?.stopAnimating();
         
     }
     

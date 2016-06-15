@@ -5,9 +5,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FindWordsViewController" customModule="Prhymer" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WritingViewController" customModule="Prhymer" customModuleProvider="target">
             <connections>
                 <outlet property="view" destination="bTK-n0-z28" id="z8z-dx-CB6"/>
+                <outlet property="wordSelector" destination="VtI-6P-4Va" id="g0R-jT-Egb"/>
+                <outlet property="writingTextView" destination="RsF-Az-fTi" id="cga-nG-Ill"/>
             </connections>
         </placeholder>
         <view contentMode="scaleToFill" id="bTK-n0-z28">
@@ -21,7 +23,7 @@
                     <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="20"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
-                <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VtI-6P-4Va">
+                <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VtI-6P-4Va" customClass="WordSelector" customModule="Prhymer" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="279" width="600" height="321"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
