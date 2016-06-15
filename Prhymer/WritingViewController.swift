@@ -8,10 +8,22 @@
 
 import UIKit
 
-class WordSelector: UITableView{
+class WordSelectorController: UICollectionViewController{
+    
+    
+    
+}
+
+class WordSelector: UICollectionView{
 
     
 
+}
+
+class WordSelectorCell: UITableViewCell{
+    
+    
+    
 }
 
 class WritingViewController: UIViewController {
@@ -71,19 +83,19 @@ class WritingViewController: UIViewController {
     
         if(wordString == "" || wordString == nil){
             
-            writingTextView?.text = "Must enter a value";
+            //TODO have a pop up window come up saying that the user has to enter a word
             
         }else{
             
             if(dictionary[wordString!.lowercaseString] == nil){
                 
-                writingTextView?.text = "Word couldn't be found";
+                //TODO have a pop up window come up saying that the word was not recognized.
                 
             }else{ //write action code here
                 
                 let origWord = Word(wordName: wordString!.lowercaseString, phonemeString: dictionary[wordString!.lowercaseString]!);
                 
-                while(greenRhymingWords.count < 20 || yellowRhymingWords.count < 20 || redRhymingWords.count < 20){
+                while(greenRhymingWords.count < 10 || yellowRhymingWords.count < 10 || redRhymingWords.count < 10){
                     
                     let line = dictionary.removeAtIndex(dictionary.startIndex);
                     let satellite = Word(wordName: line.0, phonemeString: line.1);
@@ -95,7 +107,7 @@ class WritingViewController: UIViewController {
                         
                         if(rp >= 0.75) {
                             
-                            if(greenRhymingWords.count != 20){
+                            if(greenRhymingWords.count != 10){
                                 
                                 let wordRPPair = WordIndexRhymePercentilePair(word: line.0, rhymePercentile: rp);
                                 greenRhymingWords.append(wordRPPair);
@@ -109,7 +121,7 @@ class WritingViewController: UIViewController {
                             
                         }else if(rp >= 0.5){
                             
-                            if(yellowRhymingWords.count != 20){
+                            if(yellowRhymingWords.count != 10){
                                 
                                 let wordRPPair = WordIndexRhymePercentilePair(word: line.0, rhymePercentile: rp);
                                 yellowRhymingWords.append(wordRPPair);
@@ -123,7 +135,7 @@ class WritingViewController: UIViewController {
                         
                         }else if(rp >= 0.35){
                         
-                            if(redRhymingWords.count != 20){
+                            if(redRhymingWords.count != 10){
                                 
                                 let wordRPPair = WordIndexRhymePercentilePair(word: line.0, rhymePercentile: rp);
                                 redRhymingWords.append(wordRPPair);
@@ -233,7 +245,7 @@ class WritingViewController: UIViewController {
                 
                 if(greenWordsAvailable == false && yellowWordsAvailable == false && yellowWordsAvailable == false){
                 
-                    writingTextView?.text = "No more words";
+                    //TODO have a popup come up saying that there are no more suggestions.
                 
                 }
                 
@@ -246,7 +258,7 @@ class WritingViewController: UIViewController {
     func suggestRhymingWords(wordString: String?) {
         
         dismissKeyboard();
-        wordSelector?.hidden = false;
+        wordSelector?.hidden = false; //need to change this to the UIView that contains the WordSelector.
         loading?.hidden = false;
         loading?.startAnimating(); //this need to go in some thread stuff
         findWords("FILLER WORD");
