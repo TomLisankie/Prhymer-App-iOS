@@ -30,9 +30,6 @@ class WordSelectorCell: UITableViewCell{
 class WritingViewController: UIViewController {
     
     @IBOutlet weak var writingTextView: UITextView?;
-    @IBOutlet weak var containerView : UIView?;
-    
-    var containerController = WordSelectorContainerController();
     
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate;
     var dictionary = [String : String]();
@@ -45,14 +42,7 @@ class WritingViewController: UIViewController {
     var firstTouch = true;
     var prevWord = "";
     
-    @IBAction func testButtonTapped(){
-    
-        containerController.view.hidden = false;
-        print("test button tapped");
-    
-    }
-    
-    @IBAction func findWordsButtonTapped(){
+    @IBAction func suggestWordsActionButtonTapped(){
     
         suggestRhymingWords("FILLER STRING");
         
@@ -90,7 +80,19 @@ class WritingViewController: UIViewController {
         
     }
     
-    func findWords(wordString: String?){
+    func suggestRhymingWords(wordString: String?) {
+        
+//        dismissKeyboard();
+//        containerController.wordSelector?.hidden = false; //need to change this to the UIView that contains the WordSelector.
+//        containerController.loading?.hidden = false;
+//        containerController.loading?.startAnimating(); //this need to go in some thread stuff
+//        suggestWordsAndFillSuggestor(wordString);
+//        containerController.loading?.hidden = true;
+//        containerController.loading?.stopAnimating();
+        
+    }
+    
+    func suggestWordsAndFillSuggestor(wordString: String?){
     
         if(wordString == "" || wordString == nil){
             
@@ -266,25 +268,9 @@ class WritingViewController: UIViewController {
     
     }
     
-    func suggestRhymingWords(wordString: String?) {
-        
-        dismissKeyboard();
-        containerController.wordSelector?.hidden = false; //need to change this to the UIView that contains the WordSelector.
-        containerController.loading?.hidden = false;
-        containerController.loading?.startAnimating(); //this need to go in some thread stuff
-        findWords(wordString);
-        containerController.loading?.hidden = true;
-        containerController.loading?.stopAnimating();
-        
-    }
-    
     override func viewDidLoad() {
-        super.viewDidLoad()
         
-        containerController = WordSelectorContainerController();
-        addChildViewController(containerController);
-        containerController.didMoveToParentViewController(self);
-        self.view.addSubview(containerController.view);
+        super.viewDidLoad()
         
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(WritingViewController.dismissKeyboard));

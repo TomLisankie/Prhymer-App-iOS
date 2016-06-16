@@ -12,11 +12,13 @@ extension ParentViewController: EZSwipeControllerDataSource {
     
     func viewControllerData() -> [UIViewController] {
         
-        let pieces : PiecesViewController =  PiecesViewController(nibName: "PiecesViewController", bundle: nil);
+        let pieces =  PiecesViewController(nibName: "PiecesViewController", bundle: nil);
         
-        let findWords : WritingViewController =  WritingViewController(nibName: "WritingViewController", bundle: nil);
+        let storyboard = UIStoryboard(name: "Writing", bundle: nil);
         
-        let compareWords : CompareWordsViewController =  CompareWordsViewController(nibName: "CompareWordsViewController", bundle: nil);
+        let findWords =  storyboard.instantiateViewControllerWithIdentifier("Writing");
+        
+        let compareWords =  CompareWordsViewController(nibName: "CompareWordsViewController", bundle: nil);
         
         return [pieces, findWords, compareWords];
         

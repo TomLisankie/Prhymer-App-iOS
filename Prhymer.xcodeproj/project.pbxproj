@@ -10,9 +10,9 @@
 		E925EA1F1D0E757C0019706B /* PiecesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E925EA1D1D0E757C0019706B /* PiecesViewController.swift */; };
 		E925EA201D0E757C0019706B /* PiecesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E925EA1E1D0E757C0019706B /* PiecesViewController.xib */; };
 		E92FDE391D0C85B90016A936 /* CompareWordsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E92FDE381D0C85B90016A936 /* CompareWordsViewController.xib */; };
-		E92FDE3C1D0C865A0016A936 /* WritingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E92FDE3B1D0C865A0016A936 /* WritingViewController.xib */; };
 		E92FDE3E1D0C86FB0016A936 /* ParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92FDE3D1D0C86FB0016A936 /* ParentViewController.swift */; };
 		E92FDE411D0C9E620016A936 /* EZSwipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92FDE401D0C9E620016A936 /* EZSwipeController.swift */; };
+		E936D36C1D13632400564EF7 /* Writing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E936D36B1D13632400564EF7 /* Writing.storyboard */; };
 		E94280981D10BD630069724C /* Prhymer Logo Black 1024.png in Resources */ = {isa = PBXBuildFile; fileRef = E94280971D10BD630069724C /* Prhymer Logo Black 1024.png */; };
 		E94C6BCB1CF5287700E4288E /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94C6BCA1CF5287700E4288E /* Queue.swift */; };
 		E9507F2D1C45D58C00DD6F2B /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9507F2C1C45D58C00DD6F2B /* Word.swift */; };
@@ -54,9 +54,9 @@
 		E925EA1D1D0E757C0019706B /* PiecesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PiecesViewController.swift; sourceTree = "<group>"; };
 		E925EA1E1D0E757C0019706B /* PiecesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PiecesViewController.xib; sourceTree = "<group>"; };
 		E92FDE381D0C85B90016A936 /* CompareWordsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompareWordsViewController.xib; sourceTree = "<group>"; };
-		E92FDE3B1D0C865A0016A936 /* WritingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WritingViewController.xib; sourceTree = "<group>"; };
 		E92FDE3D1D0C86FB0016A936 /* ParentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParentViewController.swift; sourceTree = "<group>"; };
 		E92FDE401D0C9E620016A936 /* EZSwipeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZSwipeController.swift; sourceTree = "<group>"; };
+		E936D36B1D13632400564EF7 /* Writing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Writing.storyboard; sourceTree = "<group>"; };
 		E94280971D10BD630069724C /* Prhymer Logo Black 1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Prhymer Logo Black 1024.png"; sourceTree = "<group>"; };
 		E94C6BCA1CF5287700E4288E /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		E9507F2C1C45D58C00DD6F2B /* Word.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
@@ -112,7 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				E925EA1E1D0E757C0019706B /* PiecesViewController.xib */,
-				E92FDE3B1D0C865A0016A936 /* WritingViewController.xib */,
+				E936D36B1D13632400564EF7 /* Writing.storyboard */,
 				E92FDE381D0C85B90016A936 /* CompareWordsViewController.xib */,
 				E9AD324E1CF3B3A9004FE2A2 /* Main.storyboard */,
 				E964C21A1C32451500A1AFCD /* LaunchScreen.storyboard */,
@@ -332,7 +332,7 @@
 				E92FDE391D0C85B90016A936 /* CompareWordsViewController.xib in Resources */,
 				E925EA201D0E757C0019706B /* PiecesViewController.xib in Resources */,
 				E94280981D10BD630069724C /* Prhymer Logo Black 1024.png in Resources */,
-				E92FDE3C1D0C865A0016A936 /* WritingViewController.xib in Resources */,
+				E936D36C1D13632400564EF7 /* Writing.storyboard in Resources */,
 				E9AD324F1CF3B3A9004FE2A2 /* Main.storyboard in Resources */,
 				E964C2421C324DDF00A1AFCD /* cmudict-0.7b_modified.txt in Resources */,
 				E964C21C1C32451500A1AFCD /* LaunchScreen.storyboard in Resources */,
