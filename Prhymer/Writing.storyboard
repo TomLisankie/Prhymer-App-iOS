@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Writing View Controller-->
         <scene sceneID="1RQ-6C-Oc6">
             <objects>
-                <viewController storyboardIdentifier="Writing" id="WPB-6S-TAV" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Writing" id="WPB-6S-TAV" customClass="WritingViewController" customModule="Prhymer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="j3B-rm-U9o"/>
                         <viewControllerLayoutGuide type="bottom" id="R1P-qm-SyU"/>
@@ -32,15 +32,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="textView" destination="N7w-h1-Sbc" id="jfb-aj-MfV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="81a-Xi-yTa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="304" y="81"/>
         </scene>
-        <!--View Controller-->
+        <!--Word Selector View Controller-->
         <scene sceneID="QCE-YS-QIk">
             <objects>
-                <viewController id="DBC-ba-z0l" sceneMemberID="viewController">
+                <viewController id="DBC-ba-z0l" customClass="WordSelectorViewController" customModule="Prhymer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hGB-oZ-ZeZ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="347"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

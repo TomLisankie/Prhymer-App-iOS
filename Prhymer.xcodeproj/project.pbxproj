@@ -13,6 +13,8 @@
 		E92FDE3E1D0C86FB0016A936 /* ParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92FDE3D1D0C86FB0016A936 /* ParentViewController.swift */; };
 		E92FDE411D0C9E620016A936 /* EZSwipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92FDE401D0C9E620016A936 /* EZSwipeController.swift */; };
 		E936D36C1D13632400564EF7 /* Writing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E936D36B1D13632400564EF7 /* Writing.storyboard */; };
+		E936D36E1D1368B800564EF7 /* WordSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E936D36D1D1368B800564EF7 /* WordSelectorViewController.swift */; };
+		E936D3701D13693600564EF7 /* WritingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E936D36F1D13693600564EF7 /* WritingViewController.swift */; };
 		E94280981D10BD630069724C /* Prhymer Logo Black 1024.png in Resources */ = {isa = PBXBuildFile; fileRef = E94280971D10BD630069724C /* Prhymer Logo Black 1024.png */; };
 		E94C6BCB1CF5287700E4288E /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94C6BCA1CF5287700E4288E /* Queue.swift */; };
 		E9507F2D1C45D58C00DD6F2B /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9507F2C1C45D58C00DD6F2B /* Word.swift */; };
@@ -26,7 +28,6 @@
 		E964C2401C3245AB00A1AFCD /* Phoneme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E964C23F1C3245AB00A1AFCD /* Phoneme.swift */; };
 		E964C2421C324DDF00A1AFCD /* cmudict-0.7b_modified.txt in Resources */ = {isa = PBXBuildFile; fileRef = E964C2411C324DDF00A1AFCD /* cmudict-0.7b_modified.txt */; };
 		E9AD324F1CF3B3A9004FE2A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9AD324E1CF3B3A9004FE2A2 /* Main.storyboard */; };
-		E9AD32511CF3B7C1004FE2A2 /* WritingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AD32501CF3B7C1004FE2A2 /* WritingViewController.swift */; };
 		E9FB1C211CE58B9200BFC47E /* RhymeFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FB1C201CE58B9200BFC47E /* RhymeFinder.swift */; };
 		E9FB882C1C6A3E8800BAE96B /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FB882B1C6A3E8800BAE96B /* Layer.swift */; };
 		E9FB882E1C6A3F2100BAE96B /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FB882D1C6A3F2100BAE96B /* Node.swift */; };
@@ -57,6 +58,8 @@
 		E92FDE3D1D0C86FB0016A936 /* ParentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParentViewController.swift; sourceTree = "<group>"; };
 		E92FDE401D0C9E620016A936 /* EZSwipeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZSwipeController.swift; sourceTree = "<group>"; };
 		E936D36B1D13632400564EF7 /* Writing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Writing.storyboard; sourceTree = "<group>"; };
+		E936D36D1D1368B800564EF7 /* WordSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordSelectorViewController.swift; sourceTree = "<group>"; };
+		E936D36F1D13693600564EF7 /* WritingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WritingViewController.swift; sourceTree = "<group>"; };
 		E94280971D10BD630069724C /* Prhymer Logo Black 1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Prhymer Logo Black 1024.png"; sourceTree = "<group>"; };
 		E94C6BCA1CF5287700E4288E /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		E9507F2C1C45D58C00DD6F2B /* Word.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
@@ -76,7 +79,6 @@
 		E964C23F1C3245AB00A1AFCD /* Phoneme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Phoneme.swift; sourceTree = "<group>"; };
 		E964C2411C324DDF00A1AFCD /* cmudict-0.7b_modified.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "cmudict-0.7b_modified.txt"; sourceTree = "<group>"; };
 		E9AD324E1CF3B3A9004FE2A2 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		E9AD32501CF3B7C1004FE2A2 /* WritingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WritingViewController.swift; sourceTree = "<group>"; };
 		E9FB1C201CE58B9200BFC47E /* RhymeFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RhymeFinder.swift; sourceTree = "<group>"; };
 		E9FB882B1C6A3E8800BAE96B /* Layer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
 		E9FB882D1C6A3F2100BAE96B /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
@@ -134,7 +136,8 @@
 			isa = PBXGroup;
 			children = (
 				E925EA1D1D0E757C0019706B /* PiecesViewController.swift */,
-				E9AD32501CF3B7C1004FE2A2 /* WritingViewController.swift */,
+				E936D36F1D13693600564EF7 /* WritingViewController.swift */,
+				E936D36D1D1368B800564EF7 /* WordSelectorViewController.swift */,
 				E964C2131C32451500A1AFCD /* CompareWordsViewController.swift */,
 			);
 			name = Views;
@@ -361,6 +364,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E936D36E1D1368B800564EF7 /* WordSelectorViewController.swift in Sources */,
 				E9FB882E1C6A3F2100BAE96B /* Node.swift in Sources */,
 				E925EA1F1D0E757C0019706B /* PiecesViewController.swift in Sources */,
 				E9FB88301C6A3F3D00BAE96B /* IndexSet.swift in Sources */,
@@ -370,10 +374,10 @@
 				E9FB882C1C6A3E8800BAE96B /* Layer.swift in Sources */,
 				E92FDE411D0C9E620016A936 /* EZSwipeController.swift in Sources */,
 				E94C6BCB1CF5287700E4288E /* Queue.swift in Sources */,
+				E936D3701D13693600564EF7 /* WritingViewController.swift in Sources */,
 				E92FDE3E1D0C86FB0016A936 /* ParentViewController.swift in Sources */,
 				E9FB1C211CE58B9200BFC47E /* RhymeFinder.swift in Sources */,
 				E964C2141C32451500A1AFCD /* CompareWordsViewController.swift in Sources */,
-				E9AD32511CF3B7C1004FE2A2 /* WritingViewController.swift in Sources */,
 				E964C2121C32451500A1AFCD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
