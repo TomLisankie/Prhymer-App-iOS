@@ -9,32 +9,12 @@
 import UIKit
 
 class WordSelectorViewController: UIViewController {
-
-    @IBAction func suggestWordsActionButtonTapped(){
-        
-        dismissKeyboard();
-        containerController.wordSelector?.hidden = false; //need to change this to the UIView that contains the WordSelector.
-        containerController.loading?.hidden = false;
-        containerController.loading?.startAnimating(); //this need to go in some thread stuff
-        suggestWordsAndFillSuggestor(wordString);
-        containerController.loading?.hidden = true;
-        containerController.loading?.stopAnimating();
-        
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print("WORD SELECTOR LOADED");
         // Do any additional setup after loading the view.
         
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(WritingViewController.dismissKeyboard));
-        view.addGestureRecognizer(tap);
-    }
-
-    //Calls this function when the tap is recognized.
-    func dismissKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
-        view.endEditing(true);
     }
     
     override func didReceiveMemoryWarning() {

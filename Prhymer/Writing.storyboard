@@ -34,6 +34,7 @@
                     </view>
                     <connections>
                         <outlet property="textView" destination="N7w-h1-Sbc" id="jfb-aj-MfV"/>
+                        <outlet property="wordSelector" destination="FKo-Rj-uJS" id="FAu-Hd-Bye"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="81a-Xi-yTa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -44,6 +45,10 @@
         <scene sceneID="QCE-YS-QIk">
             <objects>
                 <viewController id="DBC-ba-z0l" customClass="WordSelectorViewController" customModule="Prhymer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jqs-jI-pzz"/>
+                        <viewControllerLayoutGuide type="bottom" id="DoC-Xy-tPg"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hGB-oZ-ZeZ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="347"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
