@@ -86,21 +86,26 @@ public class EZSwipeController: UIViewController {
         guard !navigationBarShouldNotExist else { return }
 
         var navBars = [UINavigationBar]()
-        pageTitles.forEach { title in
+        for title in pageTitles{
+            
             let navigationBarSize = CGSize(width: Constants.ScreenWidth, height: Constants.navigationBarHeight)
             let navigationBar = UINavigationBar(frame: CGRect(origin: CGPoint.zero, size: navigationBarSize))
             navigationBar.barStyle = .Default
             navigationBar.barTintColor = Constants.lightGrayColor
 
             let navigationItem = UINavigationItem(title: title)
+            
             navigationItem.hidesBackButton = true
             navigationItem.leftBarButtonItem = nil
             navigationItem.rightBarButtonItem = nil
 
             navigationBar.pushNavigationItem(navigationItem, animated: false)
             navBars.append(navigationBar)
+            
         }
+        
         stackNavBars = navBars
+        
     }
 
     private func setupNavigationBar() {
@@ -119,7 +124,7 @@ public class EZSwipeController: UIViewController {
 
             if let nav = navigationBar {
                 if navigationBarShouldBeOnBottom {
-                    nav.frame = CGRect(x: 0, y: Constants.ScreenHeightWithoutStatusBar - Constants.navigationBarHeight, width: Constants.ScreenWidth, height: Constants.navigationBarHeight)
+                    nav.frame = CGRect(x: 0, y: Constants.ScreenHeight - Constants.navigationBarHeight, width: Constants.ScreenWidth, height: Constants.navigationBarHeight)
                 } else {
                     nav.frame = CGRect(x: 0, y: 0, width: Constants.ScreenWidth, height: Constants.navigationBarHeight)
                 }
@@ -184,8 +189,10 @@ public class EZSwipeController: UIViewController {
             pageViewControllerY = 0
             pageViewControllerH = Constants.ScreenHeight
         } else {
+            
             pageViewControllerY = Constants.StatusBarHeight
-            pageViewControllerH = Constants.ScreenHeightWithoutStatusBar
+            pageViewControllerH = Constants.ScreenHeightWithoutStatusBar;
+            
         }
         pageViewController.view.frame = CGRect(x: 0, y: pageViewControllerY, width: Constants.ScreenWidth, height: pageViewControllerH)
         pageViewController.view.backgroundColor = UIColor.clearColor()

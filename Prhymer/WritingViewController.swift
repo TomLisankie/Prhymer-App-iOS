@@ -12,8 +12,8 @@ class WritingViewController: UIViewController {
 
     @IBOutlet weak var writingTextView: UITextView!;
     @IBOutlet weak var wordSelector: UIView!;
-    @IBOutlet weak var toolbar: UIToolbar!;
-    @IBOutlet var toolbarButton: UIBarButtonItem!;
+    var toolbar: UIToolbar!;
+    var toolbarButton: UIBarButtonItem!;
     
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate;
     var dictionary = [String : String]();
@@ -223,8 +223,24 @@ class WritingViewController: UIViewController {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardUp), name: UIKeyboardWillShowNotification, object: nil);
         
+        setupToolbar();
+        
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(WritingViewController.dismissKeyboard));
         view.addGestureRecognizer(tap);
+        
+    }
+    
+    func setupToolbar() {
+        
+        let emptySpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil);
+        
+        let doneButton = UIBarButtonItem(title: "Suggest Rhymes", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(suggestRhymesButtonTapped));
+        
+        let items = [emptySpace, doneButton];
+        toolbar = UIToolbar(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.width, 60));
+        self.toolbar.setItems(items, animated: false);
+        toolbarButton = toolbar.items![1];
+        self.view.addSubview(toolbar);
         
     }
     
@@ -237,6 +253,7 @@ class WritingViewController: UIViewController {
         
         toolbarButton.title = "Done";
         toolbarButton.action = #selector(doneButtonTapped);
+        toolbarButton.style = UIBarButtonItemStyle.Done;
         
     }
     
@@ -248,9 +265,10 @@ class WritingViewController: UIViewController {
     
     @IBAction func doneButtonTapped(){
     
+        dismissKeyboard();
         toolbarButton.title = "Suggest Rhymes";
         toolbarButton.action = #selector(suggestRhymesButtonTapped);
-        dismissKeyboard();
+        toolbarButton.style = UIBarButtonItemStyle.Plain;
     
     }
     

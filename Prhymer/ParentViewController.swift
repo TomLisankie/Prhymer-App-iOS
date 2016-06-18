@@ -16,11 +16,11 @@ extension ParentViewController: EZSwipeControllerDataSource {
         
         let storyboard = UIStoryboard(name: "Writing", bundle: nil);
         
-        let findWords =  storyboard.instantiateViewControllerWithIdentifier("Writing");
+        let writing =  storyboard.instantiateViewControllerWithIdentifier("Writing");
         
         let compareWords =  CompareWordsViewController(nibName: "CompareWordsViewController", bundle: nil);
         
-        return [pieces, findWords, compareWords];
+        return [pieces, writing, compareWords];
         
     }
     
