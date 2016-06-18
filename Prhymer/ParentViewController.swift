@@ -94,6 +94,7 @@ class ParentViewController: EZSwipeController {
     override func setupView(){
         print("setupView")
         datasource = self
+        self.navigationBarShouldBeOnBottom = true;
         
     }
     
