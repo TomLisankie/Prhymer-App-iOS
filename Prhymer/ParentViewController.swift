@@ -50,29 +50,29 @@ extension ParentViewController: EZSwipeControllerDataSource {
         
         if index == 0 {
             let rightButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: "a")
-            rightButtonItem.tintColor = UIColor.blackColor()
+            rightButtonItem.tintColor = UIColor.blackColor();
             
             navigationItem.leftBarButtonItem = nil
             navigationItem.rightBarButtonItem = rightButtonItem
         } else if index == 1 {
-            let rightButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Bookmarks, target: self, action: "a")
-            rightButtonItem.tintColor = UIColor.blackColor()
+            let rightButtonItem = UIBarButtonItem(image: UIImage(named: "R.png"), style: UIBarButtonItemStyle.Plain, target: self, action: "a");
+            rightButtonItem.tintColor = UIColor.blackColor();
             
-            let leftButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Camera, target: self, action: "a")
-            leftButtonItem.tintColor = UIColor.blackColor()
+            let leftButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Camera, target: self, action: "a");
+            leftButtonItem.tintColor = UIColor.blackColor();
             
-            navigationItem.leftBarButtonItem = leftButtonItem
-            navigationItem.rightBarButtonItem = rightButtonItem
+            navigationItem.leftBarButtonItem = leftButtonItem;
+            navigationItem.rightBarButtonItem = rightButtonItem;
         } else if index == 2 {
-            let leftButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: "a")
-            leftButtonItem.tintColor = UIColor.blackColor()
+            let leftButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Search, target: self, action: "a");
+            leftButtonItem.tintColor = UIColor.blackColor();
             
-            navigationItem.leftBarButtonItem = leftButtonItem
-            navigationItem.rightBarButtonItem = nil
+            navigationItem.leftBarButtonItem = leftButtonItem;
+            navigationItem.rightBarButtonItem = nil;
         }
         
         navigationBar.pushNavigationItem(navigationItem, animated: false)
-        return navigationBar
+        return navigationBar;
     }
     
 }
@@ -92,9 +92,9 @@ class ParentViewController: EZSwipeController {
     @IBOutlet var scrollView: UIScrollView?;
     
     override func setupView(){
-        print("setupView")
-        datasource = self
-        self.navigationBarShouldBeOnBottom = true;
+        print("setupView");
+        datasource = self;
+        //self.navigationBarShouldBeOnBottom = true;
         
     }
     

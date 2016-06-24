@@ -72,6 +72,7 @@ public class EZSwipeController: UIViewController {
     public var cancelStandardButtonEvents = false;
 
     public init() {
+        print("SETUP");
         super.init(nibName: nil, bundle: nil)
         setupView()
     }

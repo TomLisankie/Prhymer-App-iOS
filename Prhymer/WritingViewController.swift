@@ -237,7 +237,8 @@ class WritingViewController: UIViewController {
         let doneButton = UIBarButtonItem(title: "Suggest Rhymes", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(suggestRhymesButtonTapped));
         
         let items = [emptySpace, doneButton];
-        toolbar = UIToolbar(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.width, 60));
+        toolbar = UIToolbar(frame: CGRectMake(0, UIScreen.mainScreen().bounds.size.height - 50 - 70, UIScreen.mainScreen().bounds.size.width, 50));
+        //CGRect frame = CGRectMake(0, [[UIScreen mainScreen] bounds].size.height - 44, [[UIScreen mainScreen] bounds].size.width, 44);
         self.toolbar.setItems(items, animated: false);
         toolbarButton = toolbar.items![1];
         self.view.addSubview(toolbar);

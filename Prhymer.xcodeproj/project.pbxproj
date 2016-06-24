@@ -19,6 +19,7 @@
 		E94C6BCB1CF5287700E4288E /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94C6BCA1CF5287700E4288E /* Queue.swift */; };
 		E9507F2D1C45D58C00DD6F2B /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9507F2C1C45D58C00DD6F2B /* Word.swift */; };
 		E9507F2F1C45FE7D00DD6F2B /* WordIndexRhymePercentilePair.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9507F2E1C45FE7D00DD6F2B /* WordIndexRhymePercentilePair.swift */; };
+		E96060DD1D1DB6400068AE26 /* R.png in Resources */ = {isa = PBXBuildFile; fileRef = E96060DC1D1DB6400068AE26 /* R.png */; };
 		E964C2121C32451500A1AFCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E964C2111C32451500A1AFCD /* AppDelegate.swift */; };
 		E964C2141C32451500A1AFCD /* CompareWordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E964C2131C32451500A1AFCD /* CompareWordsViewController.swift */; };
 		E964C2191C32451500A1AFCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E964C2181C32451500A1AFCD /* Assets.xcassets */; };
@@ -64,6 +65,7 @@
 		E94C6BCA1CF5287700E4288E /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		E9507F2C1C45D58C00DD6F2B /* Word.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		E9507F2E1C45FE7D00DD6F2B /* WordIndexRhymePercentilePair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordIndexRhymePercentilePair.swift; sourceTree = "<group>"; };
+		E96060DC1D1DB6400068AE26 /* R.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = R.png; sourceTree = "<group>"; };
 		E964C20E1C32451500A1AFCD /* Prhymer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Prhymer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E964C2111C32451500A1AFCD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E964C2131C32451500A1AFCD /* CompareWordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareWordsViewController.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 		E9EB8B311CFF45B5002DDCC0 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				E96060DC1D1DB6400068AE26 /* R.png */,
 				E94280971D10BD630069724C /* Prhymer Logo Black 1024.png */,
 			);
 			name = Images;
@@ -332,6 +335,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E96060DD1D1DB6400068AE26 /* R.png in Resources */,
 				E92FDE391D0C85B90016A936 /* CompareWordsViewController.xib in Resources */,
 				E925EA201D0E757C0019706B /* PiecesViewController.xib in Resources */,
 				E94280981D10BD630069724C /* Prhymer Logo Black 1024.png in Resources */,
