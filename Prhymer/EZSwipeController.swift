@@ -192,16 +192,18 @@ public class EZSwipeController: UIViewController {
             pageViewControllerH = Constants.ScreenHeight
         } else {
             
-            pageViewControllerY = Constants.StatusBarHeight
+            pageViewControllerY = Constants.StatusBarHeight;
             pageViewControllerH = Constants.ScreenHeightWithoutStatusBar;
             
         }
+        
         pageViewController.view.frame = CGRect(x: 0, y: pageViewControllerY, width: Constants.ScreenWidth, height: pageViewControllerH)
         pageViewController.view.backgroundColor = UIColor.clearColor()
-        addChildViewController(pageViewController)
-        view.addSubview(pageViewController.view)
-        self.setFrameForCurrentOrientation()
-        pageViewController.didMoveToParentViewController(self)
+        addChildViewController(pageViewController);
+        view.addSubview(pageViewController.view);
+        self.setFrameForCurrentOrientation();
+        pageViewController.didMoveToParentViewController(self);
+        
     }
 
     public func setupView() {
