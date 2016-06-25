@@ -13,7 +13,7 @@ class WritingViewController: UIViewController {
     @IBOutlet weak var writingTextView: UITextView!;
     @IBOutlet weak var wordSelector: UIView!;
     var toolbar: UIToolbar!;
-    var toolbarButton: UIBarButtonItem!;
+    var suggestRhymesButton: UIBarButtonItem!;
     
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate;
     var dictionary = [String : String]();
@@ -30,11 +30,11 @@ class WritingViewController: UIViewController {
         
         dismissKeyboard();
         wordSelector?.hidden = false; //need to change this to the UIView that contains the WordSelector.
-        //wordSelector.loading?.hidden = false;
-//        containerController.loading?.startAnimating(); //this need to go in some thread stuff
+        wordSelector.loading?.hidden = false;
+        containerController.loading?.startAnimating(); //this need to go in some thread stuff
         suggestWordsAndFillSuggestor(writingTextView.textInRange(writingTextView.selectedTextRange!));
-//        containerController.loading?.hidden = true;
-//        containerController.loading?.stopAnimating();
+        containerController.loading?.hidden = true;
+        containerController.loading?.stopAnimating();
         
     }
     
@@ -240,7 +240,7 @@ class WritingViewController: UIViewController {
         toolbar = UIToolbar(frame: CGRectMake(0, UIScreen.mainScreen().bounds.size.height - 50 - 70, UIScreen.mainScreen().bounds.size.width, 50));
         //CGRect frame = CGRectMake(0, [[UIScreen mainScreen] bounds].size.height - 44, [[UIScreen mainScreen] bounds].size.width, 44);
         self.toolbar.setItems(items, animated: false);
-        toolbarButton = toolbar.items![1];
+        suggestRhymesButton = toolbar.items![1];
         self.view.addSubview(toolbar);
         
     }
@@ -252,9 +252,11 @@ class WritingViewController: UIViewController {
     
     func keyboardUp(notification: NSNotification){
         
-        toolbarButton.title = "Done";
-        toolbarButton.action = #selector(doneButtonTapped);
-        toolbarButton.style = UIBarButtonItemStyle.Done;
+        let doneButton = UIBarButtonItem(title: "Suggest Rhymes", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(suggestRhymesButtonTapped));
+        doneButton.title = "Done";
+        doneButton.action = #selector(doneButtonTapped);
+        doneButton.style = UIBarButtonItemStyle.Done;
+        appDelegate.parentViewController?.stackNavBars[1].items![0].rightBarButtonItem = doneButton;
         
     }
     
@@ -267,9 +269,9 @@ class WritingViewController: UIViewController {
     @IBAction func doneButtonTapped(){
     
         dismissKeyboard();
-        toolbarButton.title = "Suggest Rhymes";
-        toolbarButton.action = #selector(suggestRhymesButtonTapped);
-        toolbarButton.style = UIBarButtonItemStyle.Plain;
+        let compareWordsNavButton = UIBarButtonItem(image: UIImage(named: "R.png"), style: UIBarButtonItemStyle.Plain, target: appDelegate.parentViewController, action: #selector(ParentViewController.rightButtonAction));
+        appDelegate.parentViewController?.stackNavBars[1].items![0].rightBarButtonItem = compareWordsNavButton;
+        appDelegate.parentViewController?.stackNavBars[1].items![0].rightBarButtonItem?.style = UIBarButtonItemStyle.Plain;
     
     }
     

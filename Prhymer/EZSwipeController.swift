@@ -53,7 +53,7 @@ public class EZSwipeController: UIViewController {
         public static let lightGrayColor = UIColor(red: 248, green: 248, blue: 248, alpha: 1);
     }
 
-    public var stackNavBars = [UINavigationBar]()
+    public var stackNavBars = [UINavigationBar]();
     public var stackVC: [UIViewController]!
     public var stackPageVC: [UIViewController]!
     public var stackStartLocation: Int!
@@ -86,7 +86,8 @@ public class EZSwipeController: UIViewController {
         
         guard !navigationBarShouldNotExist else { return }
 
-        var navBars = [UINavigationBar]()
+        var navBars = [UINavigationBar]();
+        
         for title in pageTitles{
             
             let navigationBarSize = CGSize(width: Constants.ScreenWidth, height: Constants.navigationBarHeight)
@@ -207,28 +208,28 @@ public class EZSwipeController: UIViewController {
 
     }
     
-    func setDefaultVC(index: Int){
-    
-        let newVCIndex = index;
-        datasource?.changedToPageIndex?(newVCIndex);
-        currentStackVC = stackPageVC[newVCIndex];
-        pageViewController.setViewControllers([currentStackVC], direction: .Forward, animated: false, completion: nil);
-    
-    }
+//    func setDefaultVC(index: Int){
+//    
+//        let newVCIndex = index;
+//        datasource?.changedToPageIndex?(newVCIndex);
+//        currentStackVC = stackPageVC[newVCIndex];
+//        pageViewController.setViewControllers([currentStackVC], direction: .Forward, animated: false, completion: nil);
+//    
+//    }
     
     public func setFrameForCurrentOrientation(){
         pageViewController.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
     }
     
     override public func loadView() {
-        super.loadView()
-        stackVC = datasource?.viewControllerData()
+        super.loadView();
+        stackVC = datasource?.viewControllerData();
         stackStartLocation = datasource?.indexOfStartingPage?() ?? 0
         guard stackVC != nil else {
             print("Problem: EZSwipeController needs ViewController Data, please implement EZSwipeControllerDataSource")
-            return
+            return;
         }
-        setupNavigationBar()
+        setupNavigationBar();
         setupViewControllers()
         setupPageViewController()
     }
