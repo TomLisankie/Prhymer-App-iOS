@@ -79,6 +79,9 @@ class WritingViewController: UIViewController {
         doneButton.action = #selector(doneButtonTapped);
         doneButton.style = UIBarButtonItemStyle.Done;
         appDelegate.parentViewController?.stackNavBars[1].items![0].rightBarButtonItem = doneButton;
+        let userInfo:NSDictionary = notification.userInfo!
+        let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue()
+        writingTextView.frame.origin.y -= keyboardSize!.height;
         
     }
     
@@ -112,7 +115,11 @@ class WritingViewController: UIViewController {
     //Calls this function when the tap is recognized.
     func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
-        view.endEditing(true);
+        writingTextView.endEditing(true);
+//        let userInfo:NSDictionary = notification.userInfo!
+//        let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue()
+//        writingTextView.frame.origin.y -= keyboardSize!.height;
+//        view.endEditing(true);
     }
 
     override func didReceiveMemoryWarning() {

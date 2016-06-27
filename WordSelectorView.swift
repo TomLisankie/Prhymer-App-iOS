@@ -62,6 +62,13 @@ class WordSelectorView: UIView {
         wordButton5.tag = 5;
         wordButton6.tag = 6;
         
+        wordButton1.addTarget(self, action: #selector(WordSelectorView.aButtonTapped(_:)), forControlEvents: .TouchUpInside);
+        wordButton2.addTarget(self, action: #selector(WordSelectorView.aButtonTapped(_:)), forControlEvents: .TouchUpInside);
+        wordButton3.addTarget(self, action: #selector(WordSelectorView.aButtonTapped(_:)), forControlEvents: .TouchUpInside);
+        wordButton4.addTarget(self, action: #selector(WordSelectorView.aButtonTapped(_:)), forControlEvents: .TouchUpInside);
+        wordButton5.addTarget(self, action: #selector(WordSelectorView.aButtonTapped(_:)), forControlEvents: .TouchUpInside);
+        wordButton6.addTarget(self, action: #selector(WordSelectorView.aButtonTapped(_:)), forControlEvents: .TouchUpInside);
+        
         wordButton1.backgroundColor = UIColor(red: 0, green: 0.8784, blue: 0.0431, alpha: 1.0);
         wordButton2.backgroundColor = UIColor(red: 0, green: 0.8784, blue: 0.0431, alpha: 1.0);
         wordButton3.backgroundColor = UIColor(red: 0, green: 0.8784, blue: 0.0431, alpha: 1.0);
@@ -71,7 +78,7 @@ class WordSelectorView: UIView {
         
         wordButton1.hidden = true;
         wordButton2.hidden = true;
-        wordButton3.hidden = true;
+        wordButton3.hidden = false;
         wordButton4.hidden = true;
         wordButton5.hidden = true;
         wordButton6.hidden = true;
@@ -297,6 +304,7 @@ class WordSelectorView: UIView {
     func addWord(word: String){
     
         //add word to end of content
+        appDelegate.writingViewController?.writingTextView.text = (appDelegate.writingViewController?.writingTextView.text)! + word;
     
     }
     

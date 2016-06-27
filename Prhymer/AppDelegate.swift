@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let fileInBundle = NSBundle.mainBundle().pathForResource("cmudict-0.7b_modified", ofType: "txt");
     var finder: RhymeFinder?;
     var parentViewController: ParentViewController?;
+    var writingViewController: WritingViewController?;
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         

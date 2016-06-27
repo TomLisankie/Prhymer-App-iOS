@@ -17,6 +17,8 @@ extension ParentViewController: EZSwipeControllerDataSource {
         let storyboard = UIStoryboard(name: "Writing", bundle: nil);
         
         let writing =  storyboard.instantiateViewControllerWithIdentifier("Writing");
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate;
+        appDelegate.writingViewController = writing as! WritingViewController;
         
         let compareWords =  CompareWordsViewController(nibName: "CompareWordsViewController", bundle: nil);
         
