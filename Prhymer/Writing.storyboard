@@ -17,69 +17,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FKo-Rj-uJS">
-                                <rect key="frame" x="0.0" y="253" width="600" height="347"/>
-                                <connections>
-                                    <segue destination="DBC-ba-z0l" kind="embed" id="Gn2-YL-Cg6"/>
-                                </connections>
-                            </containerView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Text goes here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="N7w-h1-Sbc">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" pagingEnabled="YES" indicatorStyle="black" text="Text goes here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="N7w-h1-Sbc">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FeE-TX-KGV" customClass="WordSelectorView" customModule="Prhymer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="297" width="600" height="253"/>
+                                <color key="backgroundColor" red="0.22152894300000001" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="wordSelector" destination="FKo-Rj-uJS" id="FAu-Hd-Bye"/>
+                        <outlet property="wordSelector" destination="FeE-TX-KGV" id="55F-0h-wGq"/>
                         <outlet property="writingTextView" destination="N7w-h1-Sbc" id="raQ-8F-bmZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="81a-Xi-yTa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="304" y="81"/>
-        </scene>
-        <!--Word Selector View Controller-->
-        <scene sceneID="QCE-YS-QIk">
-            <objects>
-                <viewController id="DBC-ba-z0l" customClass="WordSelectorViewController" customModule="Prhymer" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jqs-jI-pzz"/>
-                        <viewControllerLayoutGuide type="bottom" id="DoC-Xy-tPg"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="hGB-oZ-ZeZ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="347"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uH6-Th-UaL">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="347"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6gZ-qd-heB">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="ZlP-If-IuQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GCK-ui-PDk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="304" y="762.5"/>
+            <point key="canvasLocation" x="284" y="87"/>
         </scene>
     </scenes>
 </document>
