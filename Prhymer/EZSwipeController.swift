@@ -89,7 +89,11 @@ public class EZSwipeController: UIViewController {
 
         var navBars = [UINavigationBar]();
         
+        var counter = 0;
+        
         for title in pageTitles{
+            
+            counter = counter + 1;
             
             let navigationBarSize = CGSize(width: Constants.ScreenWidth, height: Constants.navigationBarHeight)
             let navigationBar = UINavigationBar(frame: CGRect(origin: CGPoint.zero, size: navigationBarSize))

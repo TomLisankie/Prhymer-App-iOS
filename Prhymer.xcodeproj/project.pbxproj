@@ -14,6 +14,9 @@
 		E92FDE411D0C9E620016A936 /* EZSwipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92FDE401D0C9E620016A936 /* EZSwipeController.swift */; };
 		E936D36C1D13632400564EF7 /* Writing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E936D36B1D13632400564EF7 /* Writing.storyboard */; };
 		E936D3701D13693600564EF7 /* WritingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E936D36F1D13693600564EF7 /* WritingViewController.swift */; };
+		E93A93AA1D22316000AD7495 /* PieceTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A93A91D22316000AD7495 /* PieceTextView.swift */; };
+		E93A93AD1D23547200AD7495 /* WordSelectorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A93AC1D23547200AD7495 /* WordSelectorButton.swift */; };
+		E93A93AF1D2372E400AD7495 /* Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A93AE1D2372E400AD7495 /* Piece.swift */; };
 		E94280981D10BD630069724C /* Prhymer Logo Black 1024.png in Resources */ = {isa = PBXBuildFile; fileRef = E94280971D10BD630069724C /* Prhymer Logo Black 1024.png */; };
 		E94C6BCB1CF5287700E4288E /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94C6BCA1CF5287700E4288E /* Queue.swift */; };
 		E9507F2D1C45D58C00DD6F2B /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9507F2C1C45D58C00DD6F2B /* Word.swift */; };
@@ -60,6 +63,9 @@
 		E92FDE401D0C9E620016A936 /* EZSwipeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZSwipeController.swift; sourceTree = "<group>"; };
 		E936D36B1D13632400564EF7 /* Writing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Writing.storyboard; sourceTree = "<group>"; };
 		E936D36F1D13693600564EF7 /* WritingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WritingViewController.swift; sourceTree = "<group>"; };
+		E93A93A91D22316000AD7495 /* PieceTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieceTextView.swift; sourceTree = "<group>"; };
+		E93A93AC1D23547200AD7495 /* WordSelectorButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordSelectorButton.swift; sourceTree = "<group>"; };
+		E93A93AE1D2372E400AD7495 /* Piece.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Piece.swift; path = ../Piece.swift; sourceTree = "<group>"; };
 		E94280971D10BD630069724C /* Prhymer Logo Black 1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Prhymer Logo Black 1024.png"; sourceTree = "<group>"; };
 		E94C6BCA1CF5287700E4288E /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		E9507F2C1C45D58C00DD6F2B /* Word.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
@@ -139,10 +145,20 @@
 			children = (
 				E925EA1D1D0E757C0019706B /* PiecesViewController.swift */,
 				E936D36F1D13693600564EF7 /* WritingViewController.swift */,
-				E95A49A81D1F6B940034B1F0 /* Word Selector */,
+				E93A93AB1D22317900AD7495 /* Custom Views */,
 				E964C2131C32451500A1AFCD /* CompareWordsViewController.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		E93A93AB1D22317900AD7495 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				E93A93A91D22316000AD7495 /* PieceTextView.swift */,
+				E95A49A61D1F60B20034B1F0 /* WordSelectorView.swift */,
+				E93A93AC1D23547200AD7495 /* WordSelectorButton.swift */,
+			);
+			name = "Custom Views";
 			sourceTree = "<group>";
 		};
 		E9480C931CEAECE5001981A0 /* Resources */ = {
@@ -151,14 +167,6 @@
 				E964C2411C324DDF00A1AFCD /* cmudict-0.7b_modified.txt */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		E95A49A81D1F6B940034B1F0 /* Word Selector */ = {
-			isa = PBXGroup;
-			children = (
-				E95A49A61D1F60B20034B1F0 /* WordSelectorView.swift */,
-			);
-			name = "Word Selector";
 			sourceTree = "<group>";
 		};
 		E964C2051C32451500A1AFCD = {
@@ -186,6 +194,7 @@
 			children = (
 				E964C2111C32451500A1AFCD /* AppDelegate.swift */,
 				E94C6BCA1CF5287700E4288E /* Queue.swift */,
+				E93A93AE1D2372E400AD7495 /* Piece.swift */,
 				E92FDE3F1D0C8C480016A936 /* View Controllers */,
 				E9FB1C221CE58BD600BFC47E /* Rhyme Essentials */,
 				E92FDE3A1D0C85CA0016A936 /* Interface Stuff */,
@@ -376,10 +385,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E93A93AD1D23547200AD7495 /* WordSelectorButton.swift in Sources */,
 				E9FB882E1C6A3F2100BAE96B /* Node.swift in Sources */,
 				E925EA1F1D0E757C0019706B /* PiecesViewController.swift in Sources */,
 				E9FB88301C6A3F3D00BAE96B /* IndexSet.swift in Sources */,
 				E964C2401C3245AB00A1AFCD /* Phoneme.swift in Sources */,
+				E93A93AA1D22316000AD7495 /* PieceTextView.swift in Sources */,
 				E95A49A71D1F60B20034B1F0 /* WordSelectorView.swift in Sources */,
 				E9507F2F1C45FE7D00DD6F2B /* WordIndexRhymePercentilePair.swift in Sources */,
 				E9507F2D1C45D58C00DD6F2B /* Word.swift in Sources */,
@@ -388,6 +399,7 @@
 				E94C6BCB1CF5287700E4288E /* Queue.swift in Sources */,
 				E936D3701D13693600564EF7 /* WritingViewController.swift in Sources */,
 				E92FDE3E1D0C86FB0016A936 /* ParentViewController.swift in Sources */,
+				E93A93AF1D2372E400AD7495 /* Piece.swift in Sources */,
 				E9FB1C211CE58B9200BFC47E /* RhymeFinder.swift in Sources */,
 				E964C2141C32451500A1AFCD /* CompareWordsViewController.swift in Sources */,
 				E964C2121C32451500A1AFCD /* AppDelegate.swift in Sources */,

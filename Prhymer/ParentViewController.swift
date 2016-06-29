@@ -28,7 +28,7 @@ extension ParentViewController: EZSwipeControllerDataSource {
     
     func titlesForPages() -> [String] {
         
-        return ["Pieces", "Writing", "Compare Words"];
+        return ["Pieces", "Untitled", "Compare Words"];
         
     }
     
@@ -42,7 +42,7 @@ extension ParentViewController: EZSwipeControllerDataSource {
             
         } else if index == 1 {
             
-            title = "Writing";
+            title = "Untitled";
             
         } else if index == 2 {
             

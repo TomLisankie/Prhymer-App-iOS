@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" pagingEnabled="YES" indicatorStyle="black" text="Text goes here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="N7w-h1-Sbc">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" pagingEnabled="YES" indicatorStyle="black" text="Text goes here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="N7w-h1-Sbc" customClass="PieceTextView" customModule="Prhymer" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -31,8 +31,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="pieceTextView" destination="N7w-h1-Sbc" id="HFe-Fk-ug7"/>
                         <outlet property="wordSelector" destination="FeE-TX-KGV" id="55F-0h-wGq"/>
-                        <outlet property="writingTextView" destination="N7w-h1-Sbc" id="raQ-8F-bmZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="81a-Xi-yTa" userLabel="First Responder" sceneMemberID="firstResponder"/>
