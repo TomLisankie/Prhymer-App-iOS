@@ -32,11 +32,15 @@ class WordSelectorView: UIView {
     var firstTouch = true;
     var prevWord = "";
     var wordButtons = [UIButton]();
+    var selectedWord = "";
     
     
     required init?(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder);
+        
+        dictionary = appDelegate.finder!.dictionary;
+        
         instructionLabel.text = "Select a word or phrase to find rhymes for.";
         instructionLabel.backgroundColor = UIColor(red: 1, green: 0, blue: 0.0157, alpha: 1.0);
         addSubview(instructionLabel);
@@ -98,33 +102,32 @@ class WordSelectorView: UIView {
         
     }
     
-    func changeButtonsHiddenState(){
+    func showButtons() {
+        
+        wordButton1.hidden = false;
+        wordButton2.hidden = false;
+        wordButton3.hidden = false;
+        wordButton4.hidden = false;
+        wordButton5.hidden = false;
+        wordButton6.hidden = false;
+        
+    }
     
-        if(wordButton1.hidden == true && wordButton2.hidden == true && wordButton3.hidden == true && wordButton4.hidden == true && wordButton5.hidden == true && wordButton6.hidden == true){
+    func hideButtons() {
         
-            wordButton1.hidden = false;
-            wordButton2.hidden = false;
-            wordButton3.hidden = false;
-            wordButton4.hidden = false;
-            wordButton5.hidden = false;
-            wordButton6.hidden = false;
+        wordButton1.hidden = true;
+        wordButton2.hidden = true;
+        wordButton3.hidden = true;
+        wordButton4.hidden = true;
+        wordButton5.hidden = true;
+        wordButton6.hidden = true;
         
-        }else{
-        
-            wordButton1.hidden = true;
-            wordButton2.hidden = true;
-            wordButton3.hidden = true;
-            wordButton4.hidden = true;
-            wordButton5.hidden = true;
-            wordButton6.hidden = true;
-        
-        }
-    
     }
     
     func suggestWordsAndFillSuggestor(wordString: String!){
         
         print(wordString);
+        selectedWord = wordString;
         
         if(wordString == "" || wordString == nil){
             
@@ -207,7 +210,7 @@ class WordSelectorView: UIView {
                         for num in 1...3 {
                             
                             let pair = greenRhymingWords.removeFirst();
-                            wordButtons[num].setTitle(pair.word + ", " + String(pair.rhymePercentile), forState: UIControlState.Normal);
+                            wordButtons[num - 1].setTitle(pair.word + ", " + String(Int(Double(round(100*pair.rhymePercentile)/100) * 100)) + String("%"), forState: UIControlState.Normal);
                             
                         }
                         
@@ -216,7 +219,7 @@ class WordSelectorView: UIView {
                         for num in 0...greenRhymingWords.count {
                             
                             let pair = greenRhymingWords.removeFirst();
-                            wordButtons[num].setTitle(pair.word + ", " + String(pair.rhymePercentile), forState: UIControlState.Normal);
+                            wordButtons[num].setTitle(pair.word + ", " + String(Int(Double(round(100*pair.rhymePercentile)/100) * 100)) + String("%"), forState: UIControlState.Normal);
                             
                         }
                         
@@ -235,7 +238,7 @@ class WordSelectorView: UIView {
                         for num in 1...3 {
                             
                             let pair = yellowRhymingWords.removeFirst();
-                            wordButtons[num].setTitle(pair.word + ", " + String(pair.rhymePercentile), forState: UIControlState.Normal);
+                            wordButtons[num + 2].setTitle(pair.word + ", " + String(Int(Double(round(100*pair.rhymePercentile)/100) * 100)) + String("%"), forState: UIControlState.Normal);
                             
                         }
                         
@@ -244,7 +247,7 @@ class WordSelectorView: UIView {
                         for num in 0...yellowRhymingWords.count {
                             
                             let pair = yellowRhymingWords.removeFirst();
-                            wordButtons[num].setTitle(pair.word + ", " + String(pair.rhymePercentile), forState: UIControlState.Normal);
+                            wordButtons[num + 2].setTitle(pair.word + ", " + String(Int(Double(round(100*pair.rhymePercentile)/100) * 100)) + String("%"), forState: UIControlState.Normal);
                             
                         }
                         
@@ -263,7 +266,7 @@ class WordSelectorView: UIView {
                         for num in 1...3 {
                             
                             let pair = redRhymingWords.removeFirst();
-                            wordButtons[num].setTitle(pair.word + ", " + String(pair.rhymePercentile), forState: UIControlState.Normal);
+                            wordButtons[num - 1].setTitle(pair.word + ", " + String(Int(Double(round(100*pair.rhymePercentile)/100) * 100)) + String("%"), forState: UIControlState.Normal);
                             
                         }
                         
@@ -272,7 +275,7 @@ class WordSelectorView: UIView {
                         for num in 0...redRhymingWords.count {
                             
                             let pair = redRhymingWords.removeFirst();
-                            wordButtons[num].setTitle(pair.word + ", " + String(pair.rhymePercentile), forState: UIControlState.Normal);
+                            wordButtons[num].setTitle(pair.word + ", " + String(Int(Double(round(100*pair.rhymePercentile)/100) * 100)) + String("%"), forState: UIControlState.Normal);
                             
                         }
                         
@@ -296,31 +299,37 @@ class WordSelectorView: UIView {
         
     }
     
+    @IBAction func refreshButtonTapped(){
+        
+        suggestWordsAndFillSuggestor(selectedWord);
+        
+    }
+    
     @IBAction func aButtonTapped(sender: UIButton){
         
         if(sender.tag == 1){
             
-            addWord(sender.currentTitle!);
+            addWord(sender.currentTitle!.componentsSeparatedByString(", ")[0]);
         
         }else if(sender.tag == 2){
             
-            addWord(sender.currentTitle!);
+            addWord(sender.currentTitle!.componentsSeparatedByString(", ")[0]);
             
         }else if(sender.tag == 3){
             
-            addWord(sender.currentTitle!);
+            addWord(sender.currentTitle!.componentsSeparatedByString(", ")[0]);
             
         }else if(sender.tag == 4){
             
-            addWord(sender.currentTitle!);
+            addWord(sender.currentTitle!.componentsSeparatedByString(", ")[0]);
             
         }else if(sender.tag == 5){
             
-            addWord(sender.currentTitle!);
+            addWord(sender.currentTitle!.componentsSeparatedByString(", ")[0]);
             
         }else if(sender.tag == 6){
             
-            addWord(sender.currentTitle!);
+            addWord(sender.currentTitle!.componentsSeparatedByString(", ")[0]);
             
         }
         
@@ -328,8 +337,20 @@ class WordSelectorView: UIView {
     
     func addWord(word: String){
     
+        instructionLabel.text = "Select a word or phrase to find rhymes for.";
+        
         //add word to end of content
-        appDelegate.writingViewController?.pieceTextView.text = (appDelegate.writingViewController?.pieceTextView.text)! + word;
+        
+        if(appDelegate.writingViewController?.pieceTextView.text.hasSuffix("") == false){
+        
+            //has space(s) as last character
+            appDelegate.writingViewController?.pieceTextView.text = (appDelegate.writingViewController?.pieceTextView.text)! + " " + word;
+        
+        }else{
+        
+            appDelegate.writingViewController?.pieceTextView.text = (appDelegate.writingViewController?.pieceTextView.text)! + word;
+            
+        }
     
     }
     

@@ -11,10 +11,12 @@ import UIKit
 class WritingViewController: UIViewController, UITextViewDelegate {
 
     @IBOutlet weak var pieceTextView: PieceTextView!;
-    @IBOutlet weak var wordSelector: WordSelectorView!
+    @IBOutlet weak var wordSelector: WordSelectorView!;
     var toolbar: UIToolbar!;
+    var refreshWordSelectorButton: UIBarButtonItem!;
     var suggestRhymesButton: UIBarButtonItem!;
     var currentPiece = Piece(title: "Untitled");
+    var writingModeActive = true;
     
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate;
     
@@ -34,15 +36,34 @@ class WritingViewController: UIViewController, UITextViewDelegate {
     }
     
     func textViewDidChangeSelection(textView: UITextView) {
-        let range: NSRange = textView.selectedRange
-        let text = textView.text as NSString
-        let selectedText = text.substringWithRange(NSMakeRange(range.location, range.length));
-        wordSelector.hidden = false;
-        suggestRhymesButton.title = "Writing Mode";
-        wordSelector.instructionLabel.text = "Finding suggestions...";
-        self.wordSelected(selectedText);
-        wordSelector.instructionLabel.hidden = true;
-        wordSelector.changeButtonsHiddenState();
+        
+        if(writingModeActive == false){
+            
+            let range: NSRange = textView.selectedRange
+            let text = textView.text as NSString
+            let selectedText = text.substringWithRange(NSMakeRange(range.location, range.length)).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).stringByTrimmingCharactersInSet(NSCharacterSet.punctuationCharacterSet()).lowercaseString;
+            
+            if(selectedText != ""){
+                
+                wordSelector.hidden = false;
+                suggestRhymesButton.title = "Writing Mode";
+                wordSelector.instructionLabel.text = "Finding suggestions...";
+                self.wordSelected(selectedText);
+                wordSelector.instructionLabel.hidden = true;
+                wordSelector.showButtons();
+                toolbar.items?.insert(UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: wordSelector, action: #selector(WordSelectorView.refreshButtonTapped)), atIndex: 0);
+                
+            }else{
+            
+                wordSelector.instructionLabel.text = "Select a word or phrase to find rhymes for.";
+                wordSelector.instructionLabel.hidden = false;
+                wordSelector.hideButtons();
+                toolbar.items?.removeAtIndex(0);
+            
+            }
+                
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -73,7 +94,9 @@ class WritingViewController: UIViewController, UITextViewDelegate {
         let items = [emptySpace, suggestRhymes];
         toolbar = UIToolbar(frame: CGRectMake(0, UIScreen.mainScreen().bounds.size.height - 50 - 70, UIScreen.mainScreen().bounds.size.width, 50));
         self.toolbar.setItems(items, animated: false);
+        
         suggestRhymesButton = toolbar.items![1];
+        
         self.view.addSubview(toolbar);
         
     }
@@ -120,6 +143,7 @@ class WritingViewController: UIViewController, UITextViewDelegate {
             let contentInsets = UIEdgeInsetsMake(0.0, 0.0, 253 + 50, 0.0);
             pieceTextView.contentInset = contentInsets;
             pieceTextView.scrollIndicatorInsets = contentInsets;
+            writingModeActive = false;
                 
         }else{
         
@@ -130,6 +154,7 @@ class WritingViewController: UIViewController, UITextViewDelegate {
             let contentInsets = UIEdgeInsetsMake(0.0, 0.0, 50, 0.0);
             pieceTextView.contentInset = contentInsets;
             pieceTextView.scrollIndicatorInsets = contentInsets;
+            writingModeActive = true;
         
         }
     
