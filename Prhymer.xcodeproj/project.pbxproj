@@ -12,6 +12,8 @@
 		E92FDE391D0C85B90016A936 /* CompareWordsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E92FDE381D0C85B90016A936 /* CompareWordsViewController.xib */; };
 		E92FDE3E1D0C86FB0016A936 /* ParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92FDE3D1D0C86FB0016A936 /* ParentViewController.swift */; };
 		E92FDE411D0C9E620016A936 /* EZSwipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92FDE401D0C9E620016A936 /* EZSwipeController.swift */; };
+		E935B5A01D503E8B00EF7398 /* PhonemeSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E935B59F1D503E8B00EF7398 /* PhonemeSequence.swift */; };
+		E935B5A21D5040BA00EF7398 /* Syllable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E935B5A11D5040BA00EF7398 /* Syllable.swift */; };
 		E936D36C1D13632400564EF7 /* Writing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E936D36B1D13632400564EF7 /* Writing.storyboard */; };
 		E936D3701D13693600564EF7 /* WritingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E936D36F1D13693600564EF7 /* WritingViewController.swift */; };
 		E93A93AA1D22316000AD7495 /* PieceTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A93A91D22316000AD7495 /* PieceTextView.swift */; };
@@ -61,6 +63,8 @@
 		E92FDE381D0C85B90016A936 /* CompareWordsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompareWordsViewController.xib; sourceTree = "<group>"; };
 		E92FDE3D1D0C86FB0016A936 /* ParentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParentViewController.swift; sourceTree = "<group>"; };
 		E92FDE401D0C9E620016A936 /* EZSwipeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EZSwipeController.swift; sourceTree = "<group>"; };
+		E935B59F1D503E8B00EF7398 /* PhonemeSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhonemeSequence.swift; sourceTree = "<group>"; };
+		E935B5A11D5040BA00EF7398 /* Syllable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Syllable.swift; sourceTree = "<group>"; };
 		E936D36B1D13632400564EF7 /* Writing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Writing.storyboard; sourceTree = "<group>"; };
 		E936D36F1D13693600564EF7 /* WritingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WritingViewController.swift; sourceTree = "<group>"; };
 		E93A93A91D22316000AD7495 /* PieceTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieceTextView.swift; sourceTree = "<group>"; };
@@ -241,6 +245,8 @@
 				E9FB882D1C6A3F2100BAE96B /* Node.swift */,
 				E9FB882F1C6A3F3D00BAE96B /* IndexSet.swift */,
 				E9507F2C1C45D58C00DD6F2B /* Word.swift */,
+				E935B5A11D5040BA00EF7398 /* Syllable.swift */,
+				E935B59F1D503E8B00EF7398 /* PhonemeSequence.swift */,
 				E964C23F1C3245AB00A1AFCD /* Phoneme.swift */,
 				E9507F2E1C45FE7D00DD6F2B /* WordIndexRhymePercentilePair.swift */,
 			);
@@ -385,6 +391,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E935B5A01D503E8B00EF7398 /* PhonemeSequence.swift in Sources */,
 				E93A93AD1D23547200AD7495 /* WordSelectorButton.swift in Sources */,
 				E9FB882E1C6A3F2100BAE96B /* Node.swift in Sources */,
 				E925EA1F1D0E757C0019706B /* PiecesViewController.swift in Sources */,
@@ -401,6 +408,7 @@
 				E92FDE3E1D0C86FB0016A936 /* ParentViewController.swift in Sources */,
 				E93A93AF1D2372E400AD7495 /* Piece.swift in Sources */,
 				E9FB1C211CE58B9200BFC47E /* RhymeFinder.swift in Sources */,
+				E935B5A21D5040BA00EF7398 /* Syllable.swift in Sources */,
 				E964C2141C32451500A1AFCD /* CompareWordsViewController.swift in Sources */,
 				E964C2121C32451500A1AFCD /* AppDelegate.swift in Sources */,
 			);

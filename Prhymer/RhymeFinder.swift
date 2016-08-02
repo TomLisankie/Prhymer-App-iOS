@@ -13,6 +13,10 @@ class RhymeFinder{
     let DEBUGGING = true;
     var anchors = [Word]();
     var dictionary = [String : String]();
+    let SAME_VOWEL = 5.0;
+    let DIFFERENT_VOWEL = 1.0;
+    let SAME_CONSONANT = 1.0;
+    let DIFFERENT_CONSONANT = 0.5;
     
     init(pathToDict: String) {
         
@@ -302,11 +306,11 @@ class RhymeFinder{
             
             if(p1.isEqualTo(p2)){
                 
-                return 5.0 + weight;
+                return SAME_VOWEL + weight;
                 
             }else{
                 
-                return 2.5 + weight;
+                return DIFFERENT_VOWEL + weight;
                 
             }
             
@@ -314,11 +318,11 @@ class RhymeFinder{
             
             if(p1.isEqualTo(p2)){
                 
-                return 1.0 + weight;
+                return SAME_CONSONANT + weight;
                 
             }else{
                 
-                return 0.5 + weight;
+                return DIFFERENT_CONSONANT + weight;
                 
             }
             

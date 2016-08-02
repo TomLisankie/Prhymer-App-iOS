@@ -145,7 +145,7 @@ class WordSelectorView: UIView {
                 
                 let origWord = Word(wordName: wordString!.lowercaseString, phonemeString: dictionary[wordString!.lowercaseString]!);
                 
-                while(greenRhymingWords.count < 10 || yellowRhymingWords.count < 10 || redRhymingWords.count < 10){
+                while(greenRhymingWords.count < 6 || yellowRhymingWords.count < 6 || redRhymingWords.count < 6){
                     
                     let line = dictionary.removeAtIndex(dictionary.startIndex);
                     let satellite = Word(wordName: line.0, phonemeString: line.1);
@@ -157,7 +157,7 @@ class WordSelectorView: UIView {
                         
                         if(rp >= 0.75) {
                             
-                            if(greenRhymingWords.count != 10){
+                            if(greenRhymingWords.count != 6){
                                 
                                 let wordRPPair = WordIndexRhymePercentilePair(word: line.0, rhymePercentile: rp);
                                 greenRhymingWords.append(wordRPPair);
@@ -171,7 +171,7 @@ class WordSelectorView: UIView {
                             
                         }else if(rp >= 0.5){
                             
-                            if(yellowRhymingWords.count != 10){
+                            if(yellowRhymingWords.count != 6){
                                 
                                 let wordRPPair = WordIndexRhymePercentilePair(word: line.0, rhymePercentile: rp);
                                 yellowRhymingWords.append(wordRPPair);
@@ -185,7 +185,7 @@ class WordSelectorView: UIView {
                             
                         }else if(rp >= 0.35){
                             
-                            if(redRhymingWords.count != 10){
+                            if(redRhymingWords.count != 6){
                                 
                                 let wordRPPair = WordIndexRhymePercentilePair(word: line.0, rhymePercentile: rp);
                                 redRhymingWords.append(wordRPPair);

@@ -31,9 +31,23 @@ struct Phoneme {
             
         }
         
-        if(phoneme == "AA" || phoneme == "AE" || phoneme == "AH" || phoneme == "AO" || phoneme == "AW" || phoneme == "AY" || phoneme == "EH" || phoneme == "ER" || phoneme == "EY" || phoneme == "IH" || phoneme == "IY" || phoneme == "NG" || phoneme == "OW" || phoneme == "OY" || phoneme == "UH" || phoneme == "UW"){
+        if(phoneme == "AA" || phoneme == "AE" || phoneme == "AH" || phoneme == "AO" || phoneme == "AW" || phoneme == "AY" || phoneme == "EH" || phoneme == "ER" || phoneme == "EY" || phoneme == "IH" || phoneme == "IY" || phoneme == "NG" || phoneme == "OW" || phoneme == "OY" || phoneme == "UH" || phoneme == "UW" || phoneme == "AR" || phoneme == "EL" || phoneme == "OL" || phoneme == "OR" || phoneme == "ALE" || phoneme == "EAR"){
             
             isAVowelPhoneme = true;
+            
+        }
+        
+    }
+    
+    func isALongVowelPhoneme() -> Bool {
+        
+        if(phoneme == "AO" || phoneme == "AW" || phoneme == "AY" || phoneme == "EY" || phoneme == "IY" || phoneme == "OW" || phoneme == "OY" || phoneme == "UW" || phoneme == "OL" || phoneme == "OR" || phoneme == "ALE" || phoneme == "EAR" ){
+            
+            return true;
+            
+        }else{
+            
+            return false;
             
         }
         
