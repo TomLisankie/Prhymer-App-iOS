@@ -18,6 +18,12 @@ struct Syllable {
     
     }
     
+    init(){
+    
+        listOfPhonemes = [Phoneme]();
+    
+    }
+    
     mutating func addPhoneme(p: Phoneme) {
         
         if(p.phoneme == "N") {

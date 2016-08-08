@@ -11,12 +11,14 @@ import Foundation
 struct Word : PhonemeSequence {
     let wordName: String;
     var listOfPhonemes: [Phoneme];
+    var listOfSyllables: [Syllable];
     var numOfSyllables: Int;
     
     init?(wordName: String, phonemeString: String) {
         
         self.wordName = wordName;
         listOfPhonemes = phonemeString.componentsSeparatedByString(" ").map { Phoneme(phonemeName: $0)! }
+        listOfSyllables = [Syllable]();
         
         numOfSyllables = 0;
         for phoneme in listOfPhonemes{
@@ -81,9 +83,141 @@ struct Word : PhonemeSequence {
         
     }
     
-    func splitIntoSyllables() {
+    mutating func splitIntoSyllables() {
         
+        var currentSyllable = Syllable();
+        var phonemesForCurrentSyllable = [Phoneme]();
         
+        var i = 0;
+        
+        for (index,phonemeBeingExamined) in listOfPhonemes.enumerate() {
+            
+            if index == 0 {
+                i = index;
+            }else{
+            
+                i = i + 1;
+            
+            }
+            
+            if phonemeBeingExamined.isAVowelPhoneme {
+                
+                if i+1 != listOfPhonemes.count {
+                    
+                    if listOfPhonemes[i+1].isAVowelPhoneme == false {
+                        
+                        if i+2 != listOfPhonemes.count - 1 {
+                            
+                            if phonemeBeingExamined.isALongVowelPhoneme() {
+                                
+                                phonemesForCurrentSyllable.append(phonemeBeingExamined);
+                                currentSyllable = Syllable(listOfPhonemes: phonemesForCurrentSyllable);
+                                listOfSyllables.append(currentSyllable);
+                                phonemesForCurrentSyllable = [Phoneme]();
+                                currentSyllable = Syllable();
+                                
+                            }else{
+                            
+                                phonemesForCurrentSyllable.append(phonemeBeingExamined);
+                                phonemesForCurrentSyllable.append(listOfPhonemes[i+1]);
+                                i = i + 1;
+                                currentSyllable = Syllable(listOfPhonemes: phonemesForCurrentSyllable);
+                                listOfSyllables.append(currentSyllable);
+                                phonemesForCurrentSyllable = [Phoneme]();
+                                currentSyllable = Syllable();
+                            
+                            }
+                            
+                        }else{
+                        
+                            if listOfPhonemes[i+2].isAVowelPhoneme == false {
+                                
+                                phonemesForCurrentSyllable.append(phonemeBeingExamined);
+                                phonemesForCurrentSyllable.append(listOfPhonemes[i+1]);
+                                phonemesForCurrentSyllable.append(listOfPhonemes[i+2]);
+                                i = i + 2;
+                                currentSyllable = Syllable(listOfPhonemes: phonemesForCurrentSyllable);
+                                listOfSyllables.append(currentSyllable);
+                                phonemesForCurrentSyllable = [Phoneme]();
+                                currentSyllable = Syllable();
+                                
+                            }else{
+                            
+                                phonemesForCurrentSyllable.append(phonemeBeingExamined);
+                                currentSyllable = Syllable(listOfPhonemes: phonemesForCurrentSyllable);
+                                listOfSyllables.append(currentSyllable);
+                                phonemesForCurrentSyllable = [Phoneme]();
+                                phonemesForCurrentSyllable.append(listOfPhonemes[i+1]);
+                                phonemesForCurrentSyllable.append(listOfPhonemes[i+2]);
+                                i = i + 2;
+                                currentSyllable = Syllable(listOfPhonemes: phonemesForCurrentSyllable);
+                                listOfSyllables.append(currentSyllable);
+                                phonemesForCurrentSyllable = [Phoneme]();
+                                currentSyllable = Syllable();
+                            
+                            }
+                        
+                        }
+                        
+                    }else{
+                    
+                        phonemesForCurrentSyllable.append(phonemeBeingExamined);
+                        currentSyllable = Syllable(listOfPhonemes: phonemesForCurrentSyllable);
+                        listOfSyllables.append(currentSyllable);
+                        phonemesForCurrentSyllable = [Phoneme]();
+                        currentSyllable = Syllable();
+                    
+                    }
+                    
+                }else{
+                
+                    phonemesForCurrentSyllable.append(phonemeBeingExamined);
+                    currentSyllable = Syllable(listOfPhonemes: phonemesForCurrentSyllable);
+                    listOfSyllables.append(currentSyllable);
+                    phonemesForCurrentSyllable = [Phoneme]();
+                    currentSyllable = Syllable();
+                
+                }
+                
+            }else{
+            
+                if i+1 != listOfPhonemes.count {
+                    
+                    if listOfSyllables.count != 0 {
+                        
+                        if listOfPhonemes[i+1].isAVowelPhoneme == false {
+                            
+                            listOfSyllables[listOfSyllables.count - 1].addPhoneme(listOfPhonemes[i]);
+                            
+                        }else{
+                        
+                            phonemesForCurrentSyllable.append(phonemeBeingExamined);
+                        
+                        }
+                        
+                    }else{
+                    
+                        phonemesForCurrentSyllable.append(phonemeBeingExamined);
+                    
+                    }
+                    
+                }else{
+                
+                    phonemesForCurrentSyllable.append(phonemeBeingExamined);
+                
+                }
+            
+            }
+            
+        }
+        
+        for phoneme in phonemesForCurrentSyllable {
+            
+            listOfSyllables[listOfSyllables.count - 1].addPhoneme(phoneme);
+            
+        }
+        
+        listOfPhonemes = [Phoneme]();
         
     }
     
@@ -94,6 +228,7 @@ struct Word : PhonemeSequence {
         
         wordName = components[0].lowercaseString;
         listOfPhonemes = components[1].componentsSeparatedByString(" ").map { Phoneme(phonemeName: $0)! }
+        listOfSyllables = [Syllable]();
         
         numOfSyllables = 0;
         for phoneme in listOfPhonemes{
@@ -111,6 +246,7 @@ struct Word : PhonemeSequence {
     init() {
         wordName = "";
         listOfPhonemes = [Phoneme]();
+        listOfSyllables = [Syllable]();
         numOfSyllables = 0;
     }
     
@@ -118,6 +254,7 @@ struct Word : PhonemeSequence {
         
         self.wordName = wordName;
         self.listOfPhonemes = phonemes;
+        listOfSyllables = [Syllable]();
         
         numOfSyllables = 0;
         for phoneme in listOfPhonemes{
