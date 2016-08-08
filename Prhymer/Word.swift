@@ -92,14 +92,6 @@ struct Word : PhonemeSequence {
         
         for (index,phonemeBeingExamined) in listOfPhonemes.enumerate() {
             
-            if index == 0 {
-                i = index;
-            }else{
-            
-                i = i + 1;
-            
-            }
-            
             if phonemeBeingExamined.isAVowelPhoneme {
                 
                 if i+1 != listOfPhonemes.count {
@@ -207,6 +199,14 @@ struct Word : PhonemeSequence {
                 
                 }
             
+            }
+            
+            if index == 0 {
+                i = index;
+            }else{
+                
+                i = i + 1;
+                
             }
             
         }
