@@ -269,4 +269,13 @@ struct Word : PhonemeSequence {
         
     }
     
+    init?(wordName: String, syllables: [Syllable]){
+        
+        self.wordName = wordName;
+        listOfSyllables = syllables;
+        listOfPhonemes = [Phoneme]();
+        numOfSyllables = listOfSyllables.count;
+        
+    }
+    
 }

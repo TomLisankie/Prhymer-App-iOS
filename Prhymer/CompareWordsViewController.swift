@@ -139,29 +139,29 @@ class CompareWordsViewController: UIViewController {
             
             if(findRP == true){
             
-                var firstListOfPhonemes = [Phoneme](), secondListOfPhonemes = [Phoneme]();
+                var firstListOfSyllables = [Syllable](), secondListOfSyllables = [Syllable]();
                 
                 for word in firstWords{
                     
-                    for phoneme in word.listOfPhonemes{
+                    for syllable in word.listOfSyllables{
                         
-                        firstListOfPhonemes.append(phoneme);
+                        firstListOfSyllables.append(syllable);
                         
                     }
                     
                 }
-                let word1 = Word(wordName: string1!, phonemes: firstListOfPhonemes);
+                let word1 = Word(wordName: string1!, syllables: firstListOfSyllables);
                 
                 for word in secondWords{
                     
-                    for phoneme in word.listOfPhonemes{
+                    for syllable in word.listOfSyllables{
                         
-                        secondListOfPhonemes.append(phoneme);
+                        secondListOfSyllables.append(syllable);
                         
                     }
                     
                 }
-                let word2 = Word(wordName: string2!, phonemes: secondListOfPhonemes);
+                let word2 = Word(wordName: string2!, syllables: secondListOfSyllables);
                 
                 let rhymePercentile = appDelegate.finder!.findRhymeValueAndPercentileForWords(word1!, satellite: word2!);
                 

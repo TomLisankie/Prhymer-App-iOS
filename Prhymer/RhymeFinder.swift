@@ -73,50 +73,23 @@ class RhymeFinder{
     
     func regularRhymeValueBetweenWords(anchor: Word, satellite: Word) -> Double{
         
-        var foundConsonantCluster = false;
-        var anchorOrSatellite = false;
-        
         var rhymeValue = 0.0;
-        
-        var newWord = Word();
         
         let weightTowardsWordEnd = 0.5;
         
-        if(foundConsonantCluster == false){
-            
-            var counter = 0;
-            for anchorSyllable in anchor.listOfSyllables{
-                
-                rhymeValue = rhymeValue + findRVBetweenSyllables(anchorSyllable,
-                                                                s2: satellite.listOfSyllables[counter], addWeight: true, weight: Double(counter)*weightTowardsWordEnd);
-                
-                counter = counter + 1;
-                
-            }
-            
-        }else{
-            
-            //nothing, it'll be taken care of in the next if-else statement.
-            
-        }
         
-        if(foundConsonantCluster == false){
             
-            return findRhymePercentile(rhymeValue, longerWord: anchor);
+        var counter = 0;
+        for anchorSyllable in anchor.listOfSyllables{
             
-        }else{
+            rhymeValue = rhymeValue + findRVBetweenSyllables(anchorSyllable,
+                                                            s2: satellite.listOfSyllables[counter], addWeight: true, weight: Double(counter)*weightTowardsWordEnd);
             
-            if(anchorOrSatellite == true){
-                
-                return idealRhymeValueBetweenWords(newWord, satellite: satellite);
-                
-            }else{
-                
-                return idealRhymeValueBetweenWords(anchor, satellite: newWord);
-                
-            }
+            counter = counter + 1;
             
         }
+    
+        return findRhymePercentile(rhymeValue, longerWord: anchor);
         
     }
     
