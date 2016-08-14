@@ -13,6 +13,7 @@ class RhymeFinder{
     let DEBUGGING = true;
     var anchors = [Word]();
     var dictionary = [String : String]();
+    
     let SAME_VOWEL = 5.0;
     let DIFFERENT_VOWEL = 1.0;
     let SAME_CONSONANT = 1.0;
