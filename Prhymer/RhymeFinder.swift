@@ -12,7 +12,8 @@ class RhymeFinder{
 
     let DEBUGGING = true;
     var anchors = [Word]();
-    var dictionary = [String : String]();
+    var dictionary = [WordName : String]();
+    var trie = PhonemicSearchTrie();
     
     let SAME_VOWEL = 5.0;
     let DIFFERENT_VOWEL = 1.0;
@@ -40,7 +41,13 @@ class RhymeFinder{
                 break;
             }
             
-            dictionary[components[0].lowercaseString] = components[1];
+            var wordName = WordName(wordName: components[0].lowercaseString);
+            
+            dictionary[wordName] = components[1];
+            
+            let word = Word(wordName: wordName, phonemeString: components[1]);
+            
+            trie.addWord(word!);
         
         }
         

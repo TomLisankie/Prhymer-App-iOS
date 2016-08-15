@@ -34,6 +34,9 @@
 		E964C2401C3245AB00A1AFCD /* Phoneme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E964C23F1C3245AB00A1AFCD /* Phoneme.swift */; };
 		E964C2421C324DDF00A1AFCD /* cmudict-0.7b_modified.txt in Resources */ = {isa = PBXBuildFile; fileRef = E964C2411C324DDF00A1AFCD /* cmudict-0.7b_modified.txt */; };
 		E9AD324F1CF3B3A9004FE2A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9AD324E1CF3B3A9004FE2A2 /* Main.storyboard */; };
+		E9CEE67C1D6162EF00FF653B /* WordName.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CEE67B1D6162EF00FF653B /* WordName.swift */; };
+		E9CEE67E1D61677F00FF653B /* PhonemicSearchTrie.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CEE67D1D61677F00FF653B /* PhonemicSearchTrie.swift */; };
+		E9CEE6801D6167C600FF653B /* PhonemicSearchTrieNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CEE67F1D6167C600FF653B /* PhonemicSearchTrieNode.swift */; };
 		E9FB1C211CE58B9200BFC47E /* RhymeFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FB1C201CE58B9200BFC47E /* RhymeFinder.swift */; };
 		E9FB882C1C6A3E8800BAE96B /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FB882B1C6A3E8800BAE96B /* Layer.swift */; };
 		E9FB882E1C6A3F2100BAE96B /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FB882D1C6A3F2100BAE96B /* Node.swift */; };
@@ -91,6 +94,9 @@
 		E964C23F1C3245AB00A1AFCD /* Phoneme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Phoneme.swift; sourceTree = "<group>"; };
 		E964C2411C324DDF00A1AFCD /* cmudict-0.7b_modified.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "cmudict-0.7b_modified.txt"; sourceTree = "<group>"; };
 		E9AD324E1CF3B3A9004FE2A2 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		E9CEE67B1D6162EF00FF653B /* WordName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordName.swift; sourceTree = "<group>"; };
+		E9CEE67D1D61677F00FF653B /* PhonemicSearchTrie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhonemicSearchTrie.swift; sourceTree = "<group>"; };
+		E9CEE67F1D6167C600FF653B /* PhonemicSearchTrieNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhonemicSearchTrieNode.swift; sourceTree = "<group>"; };
 		E9FB1C201CE58B9200BFC47E /* RhymeFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RhymeFinder.swift; sourceTree = "<group>"; };
 		E9FB882B1C6A3E8800BAE96B /* Layer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
 		E9FB882D1C6A3F2100BAE96B /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
@@ -248,6 +254,9 @@
 				E935B5A11D5040BA00EF7398 /* Syllable.swift */,
 				E935B59F1D503E8B00EF7398 /* PhonemeSequence.swift */,
 				E964C23F1C3245AB00A1AFCD /* Phoneme.swift */,
+				E9CEE67B1D6162EF00FF653B /* WordName.swift */,
+				E9CEE67D1D61677F00FF653B /* PhonemicSearchTrie.swift */,
+				E9CEE67F1D6167C600FF653B /* PhonemicSearchTrieNode.swift */,
 				E9507F2E1C45FE7D00DD6F2B /* WordIndexRhymePercentilePair.swift */,
 			);
 			name = "Rhyme Essentials";
@@ -393,6 +402,7 @@
 			files = (
 				E935B5A01D503E8B00EF7398 /* PhonemeSequence.swift in Sources */,
 				E93A93AD1D23547200AD7495 /* WordSelectorButton.swift in Sources */,
+				E9CEE6801D6167C600FF653B /* PhonemicSearchTrieNode.swift in Sources */,
 				E9FB882E1C6A3F2100BAE96B /* Node.swift in Sources */,
 				E925EA1F1D0E757C0019706B /* PiecesViewController.swift in Sources */,
 				E9FB88301C6A3F3D00BAE96B /* IndexSet.swift in Sources */,
@@ -401,9 +411,11 @@
 				E95A49A71D1F60B20034B1F0 /* WordSelectorView.swift in Sources */,
 				E9507F2F1C45FE7D00DD6F2B /* WordIndexRhymePercentilePair.swift in Sources */,
 				E9507F2D1C45D58C00DD6F2B /* Word.swift in Sources */,
+				E9CEE67C1D6162EF00FF653B /* WordName.swift in Sources */,
 				E9FB882C1C6A3E8800BAE96B /* Layer.swift in Sources */,
 				E92FDE411D0C9E620016A936 /* EZSwipeController.swift in Sources */,
 				E94C6BCB1CF5287700E4288E /* Queue.swift in Sources */,
+				E9CEE67E1D61677F00FF653B /* PhonemicSearchTrie.swift in Sources */,
 				E936D3701D13693600564EF7 /* WritingViewController.swift in Sources */,
 				E92FDE3E1D0C86FB0016A936 /* ParentViewController.swift in Sources */,
 				E93A93AF1D2372E400AD7495 /* Piece.swift in Sources */,

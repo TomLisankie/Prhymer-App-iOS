@@ -41,7 +41,7 @@ struct Phoneme {
     
     func isALongVowelPhoneme() -> Bool {
         
-        if(phoneme == "AO" || phoneme == "AW" || phoneme == "AY" || phoneme == "EY" || phoneme == "IY" || phoneme == "OW" || phoneme == "OY" || phoneme == "UW" || phoneme == "OL" || phoneme == "OR" || phoneme == "ALE" || phoneme == "EAR" ){
+        if(phoneme == "AO" || phoneme == "AW" || phoneme == "AY" || phoneme == "EY" || phoneme == "IY" || phoneme == "OW" || phoneme == "OY" || phoneme == "UW" || phoneme == "OL" || phoneme == "OR" || phoneme == "ALE" || phoneme == "EAR" || phoneme == "AR"){
             
             return true;
             

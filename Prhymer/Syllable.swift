@@ -11,10 +11,23 @@ import Foundation
 struct Syllable {
     
     var listOfPhonemes: [Phoneme];
+    let vowelPhoneme : Phoneme;
+    
     
     init(listOfPhonemes: [Phoneme]){
     
         self.listOfPhonemes = listOfPhonemes;
+        
+        for phoneme in self.listOfPhonemes {
+            
+            if phoneme.isAVowelPhoneme {
+                
+                self.vowelPhoneme = phoneme;
+                break;
+                
+            }
+            
+        }
     
     }
     
