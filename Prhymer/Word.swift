@@ -12,30 +12,26 @@ struct Word : PhonemeSequence {
     let wordName: String;
     let wordNameObj: WordName;
     var listOfPhonemes: [Phoneme];
-    var listOfSyllables: [Syllable];
-    var numOfSyllables: Int;
+    var vowelPhonemes: [Phoneme];
     
     init?(wordName: String, phonemeString: String) {
         
         self.wordName = wordName;
-        wordNameObj = WordName(wordName);
+        wordNameObj = WordName(wordName: wordName);
         listOfPhonemes = phonemeString.componentsSeparatedByString(" ").map { Phoneme(phonemeName: $0)! }
-        listOfSyllables = [Syllable]();
+        vowelPhonemes = [Phoneme]();
         
-        numOfSyllables = 0;
         for phoneme in listOfPhonemes{
             
             if(phoneme.isAVowelPhoneme == true){
                 
-                numOfSyllables = numOfSyllables + 1;
+                vowelPhonemes.append(phoneme);
                 
             }
             
             //check for environmentally dependent phoneme changes:
             
         }
-        
-        print("Number of Syllables in " + wordName + ": ", numOfSyllables);
         
         for (index, phoneme) in listOfPhonemes.enumerate() {
             
@@ -80,8 +76,6 @@ struct Word : PhonemeSequence {
             }
             
         }
-        
-        splitIntoSyllables();
         
     }
     
@@ -90,22 +84,19 @@ struct Word : PhonemeSequence {
         self.wordName = wordName.wordName;
         wordNameObj = wordName;
         listOfPhonemes = phonemeString.componentsSeparatedByString(" ").map { Phoneme(phonemeName: $0)! }
-        listOfSyllables = [Syllable]();
+        vowelPhonemes = [Phoneme]();
         
-        numOfSyllables = 0;
         for phoneme in listOfPhonemes{
             
             if(phoneme.isAVowelPhoneme == true){
                 
-                numOfSyllables = numOfSyllables + 1;
+                vowelPhonemes.append(phoneme);
                 
             }
             
             //check for environmentally dependent phoneme changes:
             
         }
-        
-        print("Number of Syllables in " + wordName + ": ", numOfSyllables);
         
         for (index, phoneme) in listOfPhonemes.enumerate() {
             
@@ -150,146 +141,6 @@ struct Word : PhonemeSequence {
             }
             
         }
-        
-        splitIntoSyllables();
-        
-    }
-    
-    mutating func splitIntoSyllables() {
-        
-        var currentSyllable = Syllable();
-        var phonemesForCurrentSyllable = [Phoneme]();
-        
-        var i = 0;
-        
-        for (index,phonemeBeingExamined) in listOfPhonemes.enumerate() {
-            
-            if phonemeBeingExamined.isAVowelPhoneme {
-                
-                if i+1 != listOfPhonemes.count {
-                    
-                    if listOfPhonemes[i+1].isAVowelPhoneme == false {
-                        
-                        if i+2 != listOfPhonemes.count - 1 {
-                            
-                            if phonemeBeingExamined.isALongVowelPhoneme() {
-                                
-                                phonemesForCurrentSyllable.append(phonemeBeingExamined);
-                                currentSyllable = Syllable(listOfPhonemes: phonemesForCurrentSyllable);
-                                listOfSyllables.append(currentSyllable);
-                                phonemesForCurrentSyllable = [Phoneme]();
-                                currentSyllable = Syllable();
-                                
-                            }else{
-                            
-                                phonemesForCurrentSyllable.append(phonemeBeingExamined);
-                                phonemesForCurrentSyllable.append(listOfPhonemes[i+1]);
-                                i = i + 1;
-                                currentSyllable = Syllable(listOfPhonemes: phonemesForCurrentSyllable);
-                                listOfSyllables.append(currentSyllable);
-                                phonemesForCurrentSyllable = [Phoneme]();
-                                currentSyllable = Syllable();
-                            
-                            }
-                            
-                        }else{
-                        
-                            if listOfPhonemes[i+2].isAVowelPhoneme == false {
-                                
-                                phonemesForCurrentSyllable.append(phonemeBeingExamined);
-                                phonemesForCurrentSyllable.append(listOfPhonemes[i+1]);
-                                phonemesForCurrentSyllable.append(listOfPhonemes[i+2]);
-                                i = i + 2;
-                                currentSyllable = Syllable(listOfPhonemes: phonemesForCurrentSyllable);
-                                listOfSyllables.append(currentSyllable);
-                                phonemesForCurrentSyllable = [Phoneme]();
-                                currentSyllable = Syllable();
-                                
-                            }else{
-                            
-                                phonemesForCurrentSyllable.append(phonemeBeingExamined);
-                                currentSyllable = Syllable(listOfPhonemes: phonemesForCurrentSyllable);
-                                listOfSyllables.append(currentSyllable);
-                                phonemesForCurrentSyllable = [Phoneme]();
-                                phonemesForCurrentSyllable.append(listOfPhonemes[i+1]);
-                                phonemesForCurrentSyllable.append(listOfPhonemes[i+2]);
-                                i = i + 2;
-                                currentSyllable = Syllable(listOfPhonemes: phonemesForCurrentSyllable);
-                                listOfSyllables.append(currentSyllable);
-                                phonemesForCurrentSyllable = [Phoneme]();
-                                currentSyllable = Syllable();
-                            
-                            }
-                        
-                        }
-                        
-                    }else{
-                    
-                        phonemesForCurrentSyllable.append(phonemeBeingExamined);
-                        currentSyllable = Syllable(listOfPhonemes: phonemesForCurrentSyllable);
-                        listOfSyllables.append(currentSyllable);
-                        phonemesForCurrentSyllable = [Phoneme]();
-                        currentSyllable = Syllable();
-                    
-                    }
-                    
-                }else{
-                
-                    phonemesForCurrentSyllable.append(phonemeBeingExamined);
-                    currentSyllable = Syllable(listOfPhonemes: phonemesForCurrentSyllable);
-                    listOfSyllables.append(currentSyllable);
-                    phonemesForCurrentSyllable = [Phoneme]();
-                    currentSyllable = Syllable();
-                
-                }
-                
-            }else{
-            
-                if i+1 != listOfPhonemes.count {
-                    
-                    if listOfSyllables.count != 0 {
-                        
-                        if listOfPhonemes[i+1].isAVowelPhoneme == false {
-                            
-                            listOfSyllables[listOfSyllables.count - 1].addPhoneme(listOfPhonemes[i]);
-                            
-                        }else{
-                        
-                            phonemesForCurrentSyllable.append(phonemeBeingExamined);
-                        
-                        }
-                        
-                    }else{
-                    
-                        phonemesForCurrentSyllable.append(phonemeBeingExamined);
-                    
-                    }
-                    
-                }else{
-                
-                    phonemesForCurrentSyllable.append(phonemeBeingExamined);
-                
-                }
-            
-            }
-            
-            if index == 0 {
-                i = index;
-            }else{
-                
-                i = i + 1;
-                
-            }
-            
-        }
-        
-        for phoneme in phonemesForCurrentSyllable {
-            
-            listOfSyllables[listOfSyllables.count - 1].addPhoneme(phoneme);
-            
-        }
-        
-        listOfPhonemes = [Phoneme]();
         
     }
     
@@ -299,15 +150,15 @@ struct Word : PhonemeSequence {
         guard components.count == 2 else { return nil }
         
         wordName = components[0].lowercaseString;
+        wordNameObj = WordName(wordName: wordName);
         listOfPhonemes = components[1].componentsSeparatedByString(" ").map { Phoneme(phonemeName: $0)! }
-        listOfSyllables = [Syllable]();
+        vowelPhonemes = [Phoneme]();
         
-        numOfSyllables = 0;
         for phoneme in listOfPhonemes{
         
             if(phoneme.isAVowelPhoneme == true){
             
-                numOfSyllables = numOfSyllables + 1;
+                vowelPhonemes.append(phoneme);
             
             }
         
@@ -317,36 +168,27 @@ struct Word : PhonemeSequence {
     
     init() {
         wordName = "";
+        wordNameObj = WordName(wordName: wordName);
         listOfPhonemes = [Phoneme]();
-        listOfSyllables = [Syllable]();
-        numOfSyllables = 0;
+        vowelPhonemes = [Phoneme]();
     }
     
     init?(wordName: String, phonemes: [Phoneme]) {
         
         self.wordName = wordName;
+        wordNameObj = WordName(wordName: wordName);
         self.listOfPhonemes = phonemes;
-        listOfSyllables = [Syllable]();
+        vowelPhonemes = [Phoneme]();
         
-        numOfSyllables = 0;
         for phoneme in listOfPhonemes{
             
             if(phoneme.isAVowelPhoneme == true){
                 
-                numOfSyllables = numOfSyllables + 1;
+                vowelPhonemes.append(phoneme);
                 
             }
             
         }
-        
-    }
-    
-    init?(wordName: String, syllables: [Syllable]){
-        
-        self.wordName = wordName;
-        listOfSyllables = syllables;
-        listOfPhonemes = [Phoneme]();
-        numOfSyllables = listOfSyllables.count;
         
     }
     

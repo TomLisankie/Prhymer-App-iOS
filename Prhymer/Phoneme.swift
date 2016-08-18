@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Phoneme {
+class Phoneme {
     var phoneme = "";
     var isAVowelPhoneme = false;
     var stress = -1;

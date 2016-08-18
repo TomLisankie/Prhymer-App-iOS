@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 class PhonemicSearchTrie {
     
     var trieRoot: PhonemicSearchTrieNode;
@@ -21,46 +20,45 @@ class PhonemicSearchTrie {
     
     func addWord(word: Word) -> Bool{
         
-        if(word.wordNameObj.wordName == ""){
+        if(word.wordName == ""){
             
             return false;
             
         }
         
+        let wordCharArr = word.wordName.characters;
         var tempRoot = trieRoot;
         
-        for syllable in word.listOfSyllables.reverse(){
+        for charValue in wordCharArr{
             
-            tempRoot.addChild(syllable.vowelPhoneme.phoneme);
-            tempRoot = tempRoot.getChild(syllable.vowelPhoneme.phoneme);
+            tempRoot.addChild(charValue);
+            tempRoot = tempRoot.getChild(charValue);
             
         }
         
-        tempRoot.wordNames.append(word.wordNameObj);
-        tempRoot.isFinalPhoneme = true;
+        tempRoot.word = word;
+        tempRoot.isFinalChar = true;
         
         return true;
         
-    }//left off here
+    }
     
     func getWord(wordName: String) -> Word{
         
         var word = Word(wordName: "", phonemes: [Phoneme]());
         var currentNode = trieRoot;
         
-        for(var i = 0; i < wordName.characters.count; i++){
+        for character in wordName.characters{
             
-            let current = wordName[wordName.startIndex.advancedBy(i)];
             let children = currentNode.getChildrenNodes();
             var foundChar = false;
             
-            for(var j = 0; j < children.count; j++){
+            for child in children{
                 
                 foundChar = false;
-                let child = children[j];
                 let childChar = child.charValue;
                 
-                if(String(childChar) == String(current)){
+                if(String(childChar) == String(character)){
                     
                     currentNode = child;
                     foundChar = true;
@@ -80,7 +78,7 @@ class PhonemicSearchTrie {
         
         word = currentNode.word!;
         
-        return word;
+        return word!;
         
     } //okay finished this class, need to fill out RhymeDictionaryTrieNode now.
     

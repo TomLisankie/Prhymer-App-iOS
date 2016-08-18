@@ -14,7 +14,7 @@ class PhonemicSearchTrieNode {
     var isFinalChar: Bool;
     var charValue: Character;
     var depth: Int;
-    var childrenArray: [RhymeDictionaryTrieNode];
+    var childrenArray: [PhonemicSearchTrieNode];
     
     init(){
         
@@ -22,7 +22,7 @@ class PhonemicSearchTrieNode {
         isFinalChar = true;
         charValue = ".";
         depth = 0;
-        childrenArray = [RhymeDictionaryTrieNode]();
+        childrenArray = [PhonemicSearchTrieNode]();
         
     }
     
@@ -30,9 +30,9 @@ class PhonemicSearchTrieNode {
         
         isFinalChar = false;
         
-        for(var i = 0; i < childrenArray.count; i++){
+        for child in childrenArray{
             
-            if(childrenArray[i].charValue == charValue){
+            if(child.charValue == charValue){
                 
                 return false;
                 
@@ -40,7 +40,7 @@ class PhonemicSearchTrieNode {
             
         }
         
-        let newNode = RhymeDictionaryTrieNode();
+        let newNode = PhonemicSearchTrieNode();
         newNode.charValue = charValue;
         newNode.depth = self.depth + 1;
         
@@ -58,19 +58,19 @@ class PhonemicSearchTrieNode {
         
     }
     
-    func getChild(charValue: Character) -> RhymeDictionaryTrieNode{
+    func getChild(charValue: Character) -> PhonemicSearchTrieNode{
         
-        for(var i = 0; i < childrenArray.count; i++){
+        for child in childrenArray{
             
-            if(childrenArray[i].charValue == charValue){
+            if(child.charValue == charValue){
                 
-                return childrenArray[i];
+                return child;
                 
             }
             
         }
         
-        return RhymeDictionaryTrieNode();
+        return PhonemicSearchTrieNode();
         
     }
     
@@ -78,9 +78,9 @@ class PhonemicSearchTrieNode {
         
         var childrenValues = [Character]();
         
-        for(var i = 0; i < childrenArray.count; i++){
+        for child in childrenArray{
             
-            childrenValues.append(childrenArray[i].charValue);
+            childrenValues.append(child.charValue);
             
         }
         
@@ -88,7 +88,7 @@ class PhonemicSearchTrieNode {
         
     }
     
-    func getChildrenNodes() -> [RhymeDictionaryTrieNode]{
+    func getChildrenNodes() -> [PhonemicSearchTrieNode]{
         
         return childrenArray;
         

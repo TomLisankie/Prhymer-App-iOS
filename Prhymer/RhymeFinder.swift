@@ -9,12 +9,10 @@
 import Foundation
 
 class RhymeFinder{
-
+    
     let DEBUGGING = true;
     var anchors = [Word]();
-    var dictionary = [WordName : String]();
-    var trie = PhonemicSearchTrie();
-    
+    var dictionary = [String : String]();
     let SAME_VOWEL = 5.0;
     let DIFFERENT_VOWEL = 1.0;
     let SAME_CONSONANT = 1.0;
@@ -34,21 +32,15 @@ class RhymeFinder{
         let lines = stringData.componentsSeparatedByString("\n").filter { !$0.hasPrefix(";;;") && !$0.isEmpty }
         
         for line in lines{
-        
+            
             let components = line.componentsSeparatedByString("  ")
             guard components.count == 2 else {
                 print("The lines aren't separated by two spaces.");
                 break;
             }
             
-            var wordName = WordName(wordName: components[0].lowercaseString);
+            dictionary[components[0].lowercaseString] = components[1];
             
-            dictionary[wordName] = components[1];
-            
-            let word = Word(wordName: wordName, phonemeString: components[1]);
-            
-            trie.addWord(word!);
-        
         }
         
         let dictionaryCreationStart = NSDate();
@@ -63,15 +55,15 @@ class RhymeFinder{
         
         var rhymePercentile = 0.0;
         
-        if(anchor.listOfSyllables.count == satellite.listOfSyllables.count){
+        if(anchor.listOfPhonemes.count == satellite.listOfPhonemes.count){
             
             debugPrint("Regular Rhyme Value");
-            rhymePercentile = regularRhymeValueBetweenWords(anchor, satellite: satellite);
+            rhymePercentile = regularRhymeValue(anchor, satellite: satellite);
             
         }else{
             
             debugPrint("Ideal Rhyme Value");
-            rhymePercentile = idealRhymeValueBetweenWords(anchor, satellite: satellite);
+            rhymePercentile = idealRhymeValue(anchor, satellite: satellite);
             
         }
         
@@ -79,34 +71,83 @@ class RhymeFinder{
         
     }
     
-    func regularRhymeValueBetweenWords(anchor: Word, satellite: Word) -> Double{
+    func regularRhymeValue(anchor: Word, satellite: Word) -> Double{
+        
+        var foundConsonantCluster = false;
+        var anchorOrSatellite = false;
         
         var rhymeValue = 0.0;
         
-        let weightTowardsWordEnd = 0.5;
+        var newWord = Word();
         
+        let weightTowardsWordEnd = 0.1;
         
+        if(anchor.listOfPhonemes[0].isAVowelPhoneme == false && anchor.listOfPhonemes[1].isAVowelPhoneme == false && anchor.listOfPhonemes[0].isEqualTo(satellite.listOfPhonemes[0]) == false && anchor.listOfPhonemes[1].isEqualTo(satellite.listOfPhonemes[1]) == false){
             
-        var counter = 0;
-        for anchorSyllable in anchor.listOfSyllables{
+            foundConsonantCluster = true;
+            print(anchor.listOfPhonemes[0].phoneme);
+            let shortenedListOfPhonemes = Array(anchor.listOfPhonemes[1...anchor.listOfPhonemes.count-1]);
             
-            rhymeValue = rhymeValue + findRVBetweenSyllables(anchorSyllable,
-                                                            s2: satellite.listOfSyllables[counter], addWeight: true, weight: Double(counter)*weightTowardsWordEnd);
+            newWord = Word(wordName: anchor.wordName, phonemes: shortenedListOfPhonemes)!;
             
-            counter = counter + 1;
+            anchorOrSatellite = true;
+            
+        }else if(satellite.listOfPhonemes[0].isAVowelPhoneme == false && satellite.listOfPhonemes[1].isAVowelPhoneme == false && anchor.listOfPhonemes[0].isEqualTo(satellite.listOfPhonemes[0]) == false && anchor.listOfPhonemes[1].isEqualTo(satellite.listOfPhonemes[1]) == false){
+            
+            foundConsonantCluster = true;
+            
+            let shortenedListOfPhonemes = Array(satellite.listOfPhonemes[1...anchor.listOfPhonemes.count-1]);
+            
+            newWord = Word(wordName: anchor.wordName, phonemes: shortenedListOfPhonemes)!; //may want to switch this to satellite rather than anchor
+            
+            anchorOrSatellite = false;
             
         }
-    
-        return findRhymePercentile(rhymeValue, longerWord: anchor);
+        
+        if(foundConsonantCluster == false){
+            
+            var counter = 0;
+            for anchorPhoneme in anchor.listOfPhonemes{
+                
+                rhymeValue = rhymeValue + findRVBetweenPhonemes(anchorPhoneme,
+                                                                p2: satellite.listOfPhonemes[counter], addWeight: true, weight: Double(counter)*weightTowardsWordEnd);
+                
+                counter = counter + 1;
+                
+            }
+            
+        }else{
+            
+            //nothing, it'll be taken care of in the next if-else statement.
+            
+        }
+        
+        if(foundConsonantCluster == false){
+            
+            return findRhymePercentile(rhymeValue, longerWord: anchor);
+            
+        }else{
+            
+            if(anchorOrSatellite == true){
+                
+                return idealRhymeValue(newWord, satellite: satellite);
+                
+            }else{
+                
+                return idealRhymeValue(anchor, satellite: newWord);
+                
+            }
+            
+        }
         
     }
     
-    func idealRhymeValueBetweenWords(anchor: Word, satellite: Word) -> Double{
+    func idealRhymeValue(anchor: Word, satellite: Word) -> Double{
         
         var shorterWord = Word();
         var longerWord = Word();
         
-        if(anchor.listOfSyllables.count < satellite.listOfSyllables.count){
+        if(anchor.listOfPhonemes.count < satellite.listOfPhonemes.count){
             
             shorterWord = anchor;
             longerWord = satellite;
@@ -128,218 +169,7 @@ class RhymeFinder{
         var pastLayerNumber = 0;
         
         var s = 0;
-        for shorterWordSyllable in shorterWord.listOfSyllables{
-            
-            let weightTowardsWordEnd = 0.5;
-            
-            if(firstSearch == true){
-                
-                let startNode = Node();
-                
-                var l = 0;
-                
-                for longerWordSyllable in longerWord.listOfSyllables{
-                    
-                    let RVBetweenSyllables = findRVBetweenSyllables(shorterWordSyllable, s2: longerWordSyllable, addWeight: true, weight: Double(l)*weightTowardsWordEnd);
-                    
-                    if(RVBetweenSyllables > 0){
-                        
-                        foundStartingIndex = true;
-                        
-                        let indexSet = IndexSet(index: l, RVBetweenPhonemes: RVBetweenSyllables);
-                        
-                        startNode.addIndexSet(indexSet);
-                        
-                    }
-                    
-                    l = l + 1;
-                    
-                }
-                
-                if(foundStartingIndex == true){
-                    
-                    nodesForThisLayer.append(startNode);
-                    layers.append(Layer(nodes: nodesForThisLayer));
-                    firstSearch = false;
-                    
-                }
-                
-                nodesForThisLayer = [Node]();
-                
-            }else{
-                
-                for nodeBeingExamined in layers[pastLayerNumber].nodes{
-                    
-                    for setBeingExamined in nodeBeingExamined.indexSets{
-                        
-                        let childNode = Node();
-                        let indexToStartAt = setBeingExamined.indexes[0];
-                        
-                        if(indexToStartAt + 1 == longerWord.listOfSyllables.count){
-                            
-                            //do nothing
-                            
-                        }else{
-                            
-                            
-                            for(var l = indexToStartAt+1; l < longerWord.listOfPhonemes.count; l = l + 1){
-                                
-                                let RVBetweenSyllables = findRVBetweenSyllables(shorterWordSyllable, s2: longerWord.listOfSyllables[l], addWeight: true, weight: Double(l)*weightTowardsWordEnd);
-                                
-                                if(RVBetweenSyllables > 0){
-                                    
-                                    let indexSet = IndexSet(index: l, RVBetweenPhonemes: RVBetweenSyllables);
-                                    childNode.addIndexSet(indexSet);
-                                    
-                                }
-                                
-                                
-                            }
-                            
-                            setBeingExamined.attachChildNode(childNode);
-                            nodesForThisLayer.append(childNode);
-                            
-                        }
-                        
-                    }
-                    
-                }
-                
-                layers.append(Layer(nodes: nodesForThisLayer));
-                nodesForThisLayer = [Node]();
-                
-                pastLayerNumber = pastLayerNumber + 1;
-                
-            }
-            
-            s = s + 1;
-            
-        }
-        
-        //find best path
-        
-        var bestSet = IndexSet(index: 0, RVBetweenPhonemes: 0.0);
-        var theNode = Node();
-        
-        var l = layers.count - 1;
-        for layer in layers.reverse(){
-            
-            for nodeBeingExamined in layer.nodes{
-                
-                theNode = nodeBeingExamined;
-                if(nodeBeingExamined.indexSets.count > 0){
-                    
-                    nodeBeingExamined.findBestIndexSetAndSendItUp();
-                    
-                }
-                
-            }
-            
-            if(l == 0 && layer.nodes.count == 1){
-                
-                bestSet = theNode.bestSet!;
-                
-            }
-            
-            l = l - 1;
-            
-        }
-        
-        idealRhymeValue = bestSet.rhymeValueForSet;
-        print("Ideal Rhyme Value: ", idealRhymeValue);
-        
-        var rhymeValue = idealRhymeValue;
-        print("Deduction: ", findDeductionForWordIndexSet(bestSet, longerWord: longerWord));
-        
-        rhymeValue = rhymeValue - findDeductionForWordIndexSet(bestSet, longerWord: longerWord);
-        print("Rhyme Value: ", rhymeValue);
-        
-        return findRhymePercentile(rhymeValue, longerWord: longerWord);
-        
-    }
-    
-    func findRhymePercentile(rhymeValue: Double, longerWord: Word) -> Double{
-        
-        var homophonicRhymeValue = 0.0;
-        var rhymePercentile = 0.0;
-        
-        let weightTowardsWordEnd = 0.5;
-        
-        var i = 0;
-        for longerWordSyllable in longerWord.listOfSyllables{
-            
-            homophonicRhymeValue = homophonicRhymeValue + findRVBetweenSyllables(longerWordSyllable, s2: longerWordSyllable, addWeight: true, weight: Double(i)*weightTowardsWordEnd);
-            
-            i = i + 1;
-            
-        }
-        
-        rhymePercentile = rhymeValue / homophonicRhymeValue;
-        
-        return rhymePercentile;
-        
-    }
-    
-    func findRVBetweenSyllables(s1: Syllable, s2: Syllable, addWeight: Bool, weight: Double) -> Double{
-        
-        var rhymeValue = 0.0;
-        
-        if s1.listOfPhonemes.count == s2.listOfPhonemes.count {
-            
-            rhymeValue = regularRhymeValueBetweenSyllables(s1, s2: s2);
-            
-        }else{
-        
-            rhymeValue = idealRhymeValueBetweenSyllables(s1, satelliteSyllable: s2);
-        
-        }
-        
-        return rhymeValue + weight;
-        
-    }
-    
-    func regularRhymeValueBetweenSyllables(s1: Syllable, s2: Syllable) -> Double {
-        
-        var rhymeValue = 0.0;
-        
-        for (p, phoneme) in s1.listOfPhonemes.enumerate() {
-            
-            rhymeValue = rhymeValue + findRVBetweenPhonemes(s1.listOfPhonemes[p], p2: s2.listOfPhonemes[p]);
-            
-        }
-        
-        return rhymeValue;
-        
-    }
-    
-    func idealRhymeValueBetweenSyllables(anchorSyllable: Syllable, satelliteSyllable: Syllable) -> Double {
-        
-        var shorterSyllable = Syllable();
-        var longerSyllable = Syllable();
-        
-        if(anchorSyllable.listOfPhonemes.count < satelliteSyllable.listOfPhonemes.count){
-            
-            shorterSyllable = anchorSyllable;
-            longerSyllable = satelliteSyllable;
-            
-        }else{
-            
-            shorterSyllable = satelliteSyllable;
-            longerSyllable = anchorSyllable;
-            
-        }
-        
-        var idealRhymeValue = 0.0;
-        
-        var firstSearch = true;
-        var foundStartingIndex = false;
-        var layers = [Layer]();
-        var nodesForThisLayer = [Node]();
-        
-        var pastLayerNumber = 0;
-        
-        var s = 0;
-        for shorterWordPhoneme in shorterSyllable.listOfPhonemes{
+        for shorterWordPhoneme in shorterWord.listOfPhonemes{
             
             let weightTowardsWordEnd = 0.1;
             
@@ -349,9 +179,9 @@ class RhymeFinder{
                 
                 var l = 0;
                 
-                for longerWordPhoneme in longerSyllable.listOfPhonemes{
+                for longerWordPhoneme in longerWord.listOfPhonemes{
                     
-                    let RVBetweenPhonemes = findRVBetweenPhonemes(shorterWordPhoneme, p2: longerWordPhoneme);
+                    let RVBetweenPhonemes = findRVBetweenPhonemes(shorterWordPhoneme, p2: longerWordPhoneme, addWeight: true, weight: Double(l)*weightTowardsWordEnd);
                     
                     if(RVBetweenPhonemes > 0){
                         
@@ -386,17 +216,17 @@ class RhymeFinder{
                         let childNode = Node();
                         let indexToStartAt = setBeingExamined.indexes[0];
                         
-                        if(indexToStartAt + 1 == longerSyllable.listOfPhonemes.count){
+                        if(indexToStartAt + 1 == longerWord.listOfPhonemes.count){
                             
                             //do nothing
                             
                         }else{
                             
                             
-                            for(var l = indexToStartAt+1; l < longerSyllable.listOfPhonemes.count; l = l + 1){
+                            for(var l = indexToStartAt+1; l < longerWord.listOfPhonemes.count; l = l + 1){
                                 //for l in indextTOStartAt+1 < longerWord.listOfPhonemes.count
-                                let longerWordPhoneme = longerSyllable.listOfPhonemes[l];
-                                let RVBetweenPhonemes = findRVBetweenPhonemes(shorterWordPhoneme, p2: longerWordPhoneme);
+                                let longerWordPhoneme = longerWord.listOfPhonemes[l];
+                                let RVBetweenPhonemes = findRVBetweenPhonemes(shorterWordPhoneme, p2: longerWordPhoneme, addWeight: true, weight: Double(l)*weightTowardsWordEnd);
                                 
                                 if(RVBetweenPhonemes > 0){
                                     
@@ -461,28 +291,26 @@ class RhymeFinder{
         print("Ideal Rhyme Value: ", idealRhymeValue);
         
         var rhymeValue = idealRhymeValue;
-        print("Deduction: ", findDeductionForSyllableIndexSet(bestSet, longerSyllable: longerSyllable));
+        print("Deduction: ", findDeductionForIndexSet(bestSet, longerWord: longerWord));
         
-        rhymeValue = rhymeValue - findDeductionForSyllableIndexSet(bestSet, longerSyllable: longerSyllable);
+        rhymeValue = rhymeValue - findDeductionForIndexSet(bestSet, longerWord: longerWord);
         print("Rhyme Value: ", rhymeValue);
         
-        return rhymeValue;
+        return findRhymePercentile(rhymeValue, longerWord: longerWord);
         
     }
     
-    func findRVBetweenPhonemes(p1: Phoneme, p2: Phoneme) -> Double {
+    func findRVBetweenPhonemes(p1: Phoneme, p2: Phoneme, addWeight: Bool, weight: Double) -> Double{
         
         if(p1.isAVowelPhoneme == true && p2.isAVowelPhoneme == true){
             
-            let stressDifference = Double(abs(p1.stress - p2.stress));
-            
             if(p1.isEqualTo(p2)){
                 
-                return SAME_VOWEL - 1.5*stressDifference;
+                return SAME_VOWEL + weight;
                 
             }else{
                 
-                return DIFFERENT_VOWEL - 1.5*stressDifference;
+                return DIFFERENT_VOWEL + weight;
                 
             }
             
@@ -490,11 +318,11 @@ class RhymeFinder{
             
             if(p1.isEqualTo(p2)){
                 
-                return SAME_CONSONANT;
+                return SAME_CONSONANT + weight;
                 
             }else{
                 
-                return DIFFERENT_CONSONANT;
+                return DIFFERENT_CONSONANT + weight;
                 
             }
             
@@ -506,55 +334,29 @@ class RhymeFinder{
         
     }
     
-    func findDeductionForWordIndexSet(bestSet: IndexSet, longerWord: Word) -> Double{
+    func findRhymePercentile(rhymeValue: Double, longerWord: Word) -> Double{
         
-        var deduction = 0.0;
+        var homophonicRhymeValue = 0.0;
+        var rhymePercentile = 0.0;
         
-        if(bestSet.indexes[0] > 0){
-            
-            if(bestSet.indexes[0] > 1){
-                
-                print("log10 being applied on: ", Double(bestSet.indexes[0]));
-                deduction = deduction + log10(Double(bestSet.indexes[0]));
-                
-            }else{
-                
-                deduction = deduction + 0.25;
-                
-            }
-            
-        }
-        
-        if((longerWord.listOfSyllables.count - 1) - bestSet.indexes[bestSet.indexes.count-1] > 0){
-            
-            print("Another log10 being applied on: ", Double((longerWord.listOfSyllables.count - 1) - bestSet.indexes[bestSet.indexes.count-1]));
-            deduction = deduction + log10(Double((longerWord.listOfSyllables.count - 1) - bestSet.indexes[bestSet.indexes.count-1]));
-            
-        }
+        let weightTowardsWordEnd = 0.1;
         
         var i = 0;
-        for set in bestSet.indexes{
+        for longerWordPhoneme in longerWord.listOfPhonemes{
             
-            if(i == bestSet.indexes.count - 1){
-            
-                break;
-            
-            }
-            
-            let index1 = set;
-            let index2 = bestSet.indexes[i+1];
-            
-            deduction = deduction + (0.25 * Double(index2 - index1 - 1));
+            homophonicRhymeValue = homophonicRhymeValue + findRVBetweenPhonemes(longerWordPhoneme, p2: longerWordPhoneme, addWeight: true, weight: Double(i)*weightTowardsWordEnd);
             
             i = i + 1;
             
         }
         
-        return deduction;
+        rhymePercentile = rhymeValue / homophonicRhymeValue;
+        
+        return rhymePercentile;
         
     }
     
-    func findDeductionForSyllableIndexSet(bestSet: IndexSet, longerSyllable: Syllable) -> Double{
+    func findDeductionForIndexSet(bestSet: IndexSet, longerWord: Word) -> Double{
         
         var deduction = 0.0;
         
@@ -573,10 +375,10 @@ class RhymeFinder{
             
         }
         
-        if((longerSyllable.listOfPhonemes.count - 1) - bestSet.indexes[bestSet.indexes.count-1] > 0){
+        if((longerWord.listOfPhonemes.count - 1) - bestSet.indexes[bestSet.indexes.count-1] > 0){
             
-            print("Another log10 being applied on: ", Double((longerSyllable.listOfPhonemes.count - 1) - bestSet.indexes[bestSet.indexes.count-1]));
-            deduction = deduction + log10(Double((longerSyllable.listOfPhonemes.count - 1) - bestSet.indexes[bestSet.indexes.count-1]));
+            print("Another log10 being applied on: ", Double((longerWord.listOfPhonemes.count - 1) - bestSet.indexes[bestSet.indexes.count-1]));
+            deduction = deduction + log10(Double((longerWord.listOfPhonemes.count - 1) - bestSet.indexes[bestSet.indexes.count-1]));
             
         }
         
@@ -592,7 +394,7 @@ class RhymeFinder{
             let index1 = set;
             let index2 = bestSet.indexes[i+1];
             
-            deduction = deduction + (0.25 * Double(index2 - index1 - 1));
+            deduction = deduction + (0.25 * Double(index2 - index1-1));
             
             i = i + 1;
             
@@ -619,5 +421,5 @@ class RhymeFinder{
         }
         
     }
-
+    
 }
