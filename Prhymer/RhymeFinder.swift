@@ -12,7 +12,8 @@ class RhymeFinder{
     
     let DEBUGGING = true;
     var anchors = [Word]();
-    var dictionary = [String : String]();
+    var dictionary = [WordName : String]();
+    var trie = PhonemicSearchTrie();
     let SAME_VOWEL = 5.0;
     let DIFFERENT_VOWEL = 1.0;
     let SAME_CONSONANT = 1.0;
@@ -39,13 +40,16 @@ class RhymeFinder{
                 break;
             }
             
-            dictionary[components[0].lowercaseString] = components[1];
+            let wordName = WordName(wordName: components[0].lowercaseString);
+            
+            dictionary[wordName] = components[1];
+            
+            //let word = Word(wordName: wordName, phonemeString: components[1]);
+            
+            //trie.addWord(word!);
+            
             
         }
-        
-        let dictionaryCreationStart = NSDate();
-        
-        print("Dictionary created in \(NSDate().timeIntervalSince1970 - dictionaryCreationStart.timeIntervalSince1970) seconds.");
         
         print("buildWords done in \(NSDate().timeIntervalSince1970 - start.timeIntervalSince1970) seconds.");
         

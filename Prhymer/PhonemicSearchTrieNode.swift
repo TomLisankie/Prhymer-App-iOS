@@ -10,29 +10,29 @@ import Foundation
 
 class PhonemicSearchTrieNode {
     
-    var word: Word?;
-    var isFinalChar: Bool;
-    var charValue: Character;
+    var phonemeName: String;
+    var isFinalPhoneme: Bool;
+    var wordNames: [WordName];
     var depth: Int;
     var childrenArray: [PhonemicSearchTrieNode];
     
     init(){
         
-        word = nil;
-        isFinalChar = true;
-        charValue = ".";
+        phonemeName = "";
+        isFinalPhoneme = true;
+        wordNames = [WordName]();
         depth = 0;
         childrenArray = [PhonemicSearchTrieNode]();
         
     }
     
-    func addChild(charValue: Character) -> Bool{
+    func addChild(phoneme: String) -> Bool{
         
-        isFinalChar = false;
+        isFinalPhoneme = false;
         
         for child in childrenArray{
             
-            if(child.charValue == charValue){
+            if(child.phonemeName == phoneme){
                 
                 return false;
                 
@@ -41,7 +41,7 @@ class PhonemicSearchTrieNode {
         }
         
         let newNode = PhonemicSearchTrieNode();
-        newNode.charValue = charValue;
+        newNode.phonemeName = phoneme;
         newNode.depth = self.depth + 1;
         
         childrenArray.append(newNode);
@@ -58,11 +58,11 @@ class PhonemicSearchTrieNode {
         
     }
     
-    func getChild(charValue: Character) -> PhonemicSearchTrieNode{
+    func getChild(phoneme: String) -> PhonemicSearchTrieNode{
         
         for child in childrenArray{
             
-            if(child.charValue == charValue){
+            if(child.phonemeName == phoneme){
                 
                 return child;
                 
@@ -74,13 +74,13 @@ class PhonemicSearchTrieNode {
         
     }
     
-    func getChildrenValues() -> [Character]{
+    func getChildrenValues() -> [String]{
         
-        var childrenValues = [Character]();
+        var childrenValues = [String]();
         
         for child in childrenArray{
             
-            childrenValues.append(child.charValue);
+            childrenValues.append(child.phonemeName);
             
         }
         

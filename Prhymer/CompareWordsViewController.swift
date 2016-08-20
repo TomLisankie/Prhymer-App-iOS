@@ -101,7 +101,7 @@ class CompareWordsViewController: UIViewController {
             
             for entry in firstStrings{
                 
-                if(appDelegate.finder!.dictionary[entry.lowercaseString] == nil){
+                if(appDelegate.finder!.dictionary[WordName(wordName: entry.lowercaseString)] == nil){
                 
                     firstTextField?.backgroundColor = UIColor.redColor();
                     firstTextField?.textColor = UIColor.whiteColor();
@@ -111,7 +111,7 @@ class CompareWordsViewController: UIViewController {
                 
                 }else{
                 
-                    let word = Word(wordName: entry.lowercaseString, phonemeString: appDelegate.finder!.dictionary[entry.lowercaseString]!);
+                    let word = Word(wordName: entry.lowercaseString, phonemeString: appDelegate.finder!.dictionary[WordName(wordName: entry.lowercaseString)]!);
                     firstWords.append(word!);
                     
                 }
@@ -120,7 +120,7 @@ class CompareWordsViewController: UIViewController {
             
             for entry in secondStrings{
                 
-                if(appDelegate.finder!.dictionary[entry.lowercaseString] == nil){
+                if(appDelegate.finder!.dictionary[WordName(wordName: entry.lowercaseString)] == nil){
                     
                     secondTextField?.backgroundColor = UIColor.redColor();
                     secondTextField?.textColor = UIColor.whiteColor();
@@ -130,7 +130,7 @@ class CompareWordsViewController: UIViewController {
                     
                 }else{
                 
-                    let word = Word(wordName: entry.lowercaseString, phonemeString: appDelegate.finder!.dictionary[entry.lowercaseString]!);
+                    let word = Word(wordName: entry.lowercaseString, phonemeString: appDelegate.finder!.dictionary[WordName(wordName: entry.lowercaseString)]!);
                     secondWords.append(word!);
                     
                 }
@@ -138,30 +138,30 @@ class CompareWordsViewController: UIViewController {
             }
             
             if(findRP == true){
-            
-                var firstListOfSyllables = [Syllable](), secondListOfSyllables = [Syllable]();
+                
+                var firstListOfPhonemes = [Phoneme](), secondListOfPhonemes = [Phoneme]();
                 
                 for word in firstWords{
                     
-                    for syllable in word.listOfSyllables{
+                    for phoneme in word.listOfPhonemes{
                         
-                        firstListOfSyllables.append(syllable);
+                        firstListOfPhonemes.append(phoneme);
                         
                     }
                     
                 }
-                let word1 = Word(wordName: string1!, syllables: firstListOfSyllables);
+                let word1 = Word(wordName: string1!, phonemes: firstListOfPhonemes);
                 
                 for word in secondWords{
                     
-                    for syllable in word.listOfSyllables{
+                    for phoneme in word.listOfPhonemes{
                         
-                        secondListOfSyllables.append(syllable);
+                        secondListOfPhonemes.append(phoneme);
                         
                     }
                     
                 }
-                let word2 = Word(wordName: string2!, syllables: secondListOfSyllables);
+                let word2 = Word(wordName: string2!, phonemes: secondListOfPhonemes);
                 
                 let rhymePercentile = appDelegate.finder!.findRhymeValueAndPercentileForWords(word1!, satellite: word2!);
                 

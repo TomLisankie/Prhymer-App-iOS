@@ -29,46 +29,46 @@ class PhonemicSearchTrie {
         let wordCharArr = word.wordName.characters;
         var tempRoot = trieRoot;
         
-        for charValue in wordCharArr{
+        for phoneme in word.vowelPhonemes.reverse(){
             
-            tempRoot.addChild(charValue);
-            tempRoot = tempRoot.getChild(charValue);
+            tempRoot.addChild(phoneme.phoneme);
+            tempRoot = tempRoot.getChild(phoneme.phoneme);
             
         }
         
-        tempRoot.word = word;
-        tempRoot.isFinalChar = true;
+        tempRoot.wordNames.append(word.wordNameObj);
+        tempRoot.isFinalPhoneme = true;
         
         return true;
         
     }
     
-    func getWord(wordName: String) -> Word{
+    func getWordsWithSimilarVowelStructure(wordName: WordName) -> [WordName]{ //used to fetch words with same vowel structure
         
         var word = Word(wordName: "", phonemes: [Phoneme]());
         var currentNode = trieRoot;
         
-        for character in wordName.characters{
+        for phoneme in (word?.vowelPhonemes.reverse())!{
             
             let children = currentNode.getChildrenNodes();
-            var foundChar = false;
+            var foundPhoneme = false;
             
             for child in children{
                 
-                foundChar = false;
-                let childChar = child.charValue;
+                foundPhoneme = false;
+                let childPhoneme = child.phonemeName;
                 
-                if(String(childChar) == String(character)){
+                if(childPhoneme == phoneme.phoneme){
                     
                     currentNode = child;
-                    foundChar = true;
+                    foundPhoneme = true;
                     break;
                     
                 }
                 
             }
             
-            if(foundChar == false){
+            if(foundPhoneme == false){
                 
                 break;
                 
@@ -76,10 +76,8 @@ class PhonemicSearchTrie {
             
         }
         
-        word = currentNode.word!;
+        return currentNode.wordNames;
         
-        return word!;
-        
-    } //okay finished this class, need to fill out RhymeDictionaryTrieNode now.
+    }
     
 }
