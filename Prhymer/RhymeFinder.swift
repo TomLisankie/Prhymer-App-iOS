@@ -48,7 +48,6 @@ class RhymeFinder{
             
             //trie.addWord(word!);
             
-            
         }
         
         print("buildWords done in \(NSDate().timeIntervalSince1970 - start.timeIntervalSince1970) seconds.");
