@@ -101,7 +101,7 @@ class CompareWordsViewController: UIViewController {
             
             for entry in firstStrings{
                 
-                if(appDelegate.finder!.dictionary[WordName(wordName: entry.lowercaseString)] == nil){
+                if(appDelegate.finder!.dictionary[entry.lowercaseString] == nil){
                 
                     firstTextField?.backgroundColor = UIColor.redColor();
                     firstTextField?.textColor = UIColor.whiteColor();
@@ -111,7 +111,7 @@ class CompareWordsViewController: UIViewController {
                 
                 }else{
                 
-                    let word = Word(wordName: entry.lowercaseString, phonemeString: appDelegate.finder!.dictionary[WordName(wordName: entry.lowercaseString)]!);
+                    let word = Word(wordName: entry.lowercaseString, phonemeString: appDelegate.finder!.dictionary[entry.lowercaseString]!);
                     firstWords.append(word!);
                     
                 }
@@ -120,7 +120,7 @@ class CompareWordsViewController: UIViewController {
             
             for entry in secondStrings{
                 
-                if(appDelegate.finder!.dictionary[WordName(wordName: entry.lowercaseString)] == nil){
+                if(appDelegate.finder!.dictionary[entry.lowercaseString] == nil){
                     
                     secondTextField?.backgroundColor = UIColor.redColor();
                     secondTextField?.textColor = UIColor.whiteColor();
@@ -130,7 +130,7 @@ class CompareWordsViewController: UIViewController {
                     
                 }else{
                 
-                    let word = Word(wordName: entry.lowercaseString, phonemeString: appDelegate.finder!.dictionary[WordName(wordName: entry.lowercaseString)]!);
+                    let word = Word(wordName: entry.lowercaseString, phonemeString: appDelegate.finder!.dictionary[entry.lowercaseString]!);
                     secondWords.append(word!);
                     
                 }

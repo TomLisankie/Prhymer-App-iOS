@@ -11,9 +11,11 @@ import Foundation
 class RhymeFinder{
     
     let DEBUGGING = true;
-    var anchors = [Word]();
-    var dictionary = [WordName : String]();
-    var trie = PhonemicSearchTrie();
+    
+    var dictionary = [String : String]();
+    var structureReference = [String : Int]();
+    var wordList = [String]();
+    
     let SAME_VOWEL = 5.0;
     let DIFFERENT_VOWEL = 1.0;
     let SAME_CONSONANT = 1.0;
@@ -32,6 +34,8 @@ class RhymeFinder{
         let stringData = try! String(contentsOfFile: pathToDict, encoding: NSASCIIStringEncoding)
         let lines = stringData.componentsSeparatedByString("\n").filter { !$0.hasPrefix(";;;") && !$0.isEmpty }
         
+        var l = 0;
+        
         for line in lines{
             
             let components = line.componentsSeparatedByString("  ")
@@ -40,13 +44,21 @@ class RhymeFinder{
                 break;
             }
             
-            let wordName = WordName(wordName: components[0].lowercaseString);
+            if(components[0] == "#"){
             
-            dictionary[wordName] = components[1];
+                structureReference[components[1]] = l - structureReference.count;
             
-            //let word = Word(wordName: wordName, phonemeString: components[1]);
+            }else{
             
-            //trie.addWord(word!);
+                let lowerCaseWord = components[0].lowercaseString;
+                
+                wordList.append(lowerCaseWord);
+                
+                dictionary[lowerCaseWord] = components[1];
+            
+            }
+            
+            l = l + 1;
             
         }
         
