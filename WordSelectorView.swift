@@ -12,7 +12,7 @@ class WordSelectorView: UIView {
     
     let instructionLabel = UILabel(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, 40));
     
-    let loading = UIActivityIndicatorView(frame: CGRectMake((UIScreen.mainScreen().bounds.size.width/2)-60, 126-60, 120, 120));
+    //let loading = UIActivityIndicatorView(frame: CGRectMake((UIScreen.mainScreen().bounds.size.width/2)-60, 126-60, 120, 120));
     
     var wordButton1 = WordSelectorButton();
     var wordButton2 = WordSelectorButton();
@@ -77,9 +77,9 @@ class WordSelectorView: UIView {
         wordButton1.backgroundColor = UIColor(red: 0, green: 0.8784, blue: 0.0431, alpha: 1.0);
         wordButton2.backgroundColor = UIColor(red: 0, green: 0.8784, blue: 0.0431, alpha: 1.0);
         wordButton3.backgroundColor = UIColor(red: 0, green: 0.8784, blue: 0.0431, alpha: 1.0);
-        wordButton4.backgroundColor = UIColor(red: 0.9373, green: 0.9373, blue: 0, alpha: 1.0);
-        wordButton5.backgroundColor = UIColor(red: 0.9373, green: 0.9373, blue: 0, alpha: 1.0);
-        wordButton6.backgroundColor = UIColor(red: 0.9373, green: 0.9373, blue: 0, alpha: 1.0);
+        wordButton4.backgroundColor = UIColor(red: 0, green: 0.8784, blue: 0.0431, alpha: 1.0);
+        wordButton5.backgroundColor = UIColor(red: 0, green: 0.8784, blue: 0.0431, alpha: 1.0);
+        wordButton6.backgroundColor = UIColor(red: 0, green: 0.8784, blue: 0.0431, alpha: 1.0);
         
         wordButton1.hidden = true;
         wordButton2.hidden = true;
@@ -97,8 +97,8 @@ class WordSelectorView: UIView {
         addSubview(wordButton5);
         addSubview(wordButton6);
         
-        loading.startAnimating();
-        addSubview(loading);
+//        loading.startAnimating();
+//        addSubview(loading);
         
     }
     
@@ -126,173 +126,92 @@ class WordSelectorView: UIView {
     
     func suggestWordsAndFillSuggestor(wordString: String!){
         
-        print(wordString);
-        selectedWord = wordString;
+        if(selectedWord == wordString){
         
-        if(wordString == "" || wordString == nil){
+            if greenRhymingWords.count < 6 {
+                
+                //find words one level up in the trie
+                
+                
+            }
             
-            instructionLabel.text = "You have to enter a word.";
-            print("You have to enter a word.");
-            
+            for num in 1...6 {
+                
+                let pair = greenRhymingWords.removeFirst();
+                wordButtons[num - 1].setTitle(pair.word + ", " + String(Int(Double(round(100*pair.rhymePercentile)/100) * 100)) + String("%"), forState: UIControlState.Normal);
+                
+            }
+        
         }else{
+        
+            selectedWord = wordString;
             
-            if(dictionary[wordString!.lowercaseString] == nil){
+            greenRhymingWords = [WordIndexRhymePercentilePair]();
+            
+            if(wordString == "" || wordString == nil){
+            
+                instructionLabel.text = "You have to enter a word.";
+            
+            }else{
+            
+                if(dictionary[wordString.lowercaseString] == nil){
                 
-                instructionLabel.text = "Sorry, this word couldn't be found.";
-                print("Sorry, this word couldn't be found.");
+                    instructionLabel.text = "Sorry, this word couldn't be found.";
                 
-            }else{ //write action code here
+                }else{
                 
-                let origWord = Word(wordName: wordString!.lowercaseString, phonemeString: dictionary[wordString!.lowercaseString]!);
-                
-                while(greenRhymingWords.count < 6 || yellowRhymingWords.count < 6 || redRhymingWords.count < 6){
+                    let firstWord = Word(wordName: selectedWord, phonemeString: dictionary[selectedWord.lowercaseString]!);
                     
-                    let line = dictionary.removeAtIndex(dictionary.startIndex);
-                    let satellite = Word(wordName: line.0, phonemeString: line.1);
-                    let rp = appDelegate.finder!.findRhymeValueAndPercentileForWords(origWord!, satellite: satellite!);
+                    let vowelString = firstWord?.getVowelPhonemesAsString();
                     
-                    //this is just gonna hang up once it gets to the end of all the lines in the array - need to fix
-                    if(dictionary.isEmpty == false){
-                        print(greenRhymingWords.count, yellowRhymingWords.count, redRhymingWords.count);
+                    let beginningIndex = appDelegate.finder?.structureReference[vowelString!];
+                    
+                    let nextStructFound = false;
+                    
+                    var currentIndex = beginningIndex;
+                    
+                    while nextStructFound == false {
                         
-                        if(rp >= 0.75) {
+                        currentIndex = currentIndex! + 1;
+                        
+                        let currentWord = appDelegate.finder?.wordList[currentIndex!];
+                        let newWord = Word(wordName: currentWord!, phonemeString: dictionary[currentWord!]!);
+                        
+                        if newWord!.getVowelPhonemesAsString() != vowelString {
                             
-                            if(greenRhymingWords.count != 6){
+                            break;
+                            
+                        }else{
+                        
+                           //this is where we handle new stuff
+                            let rp = appDelegate.finder?.findRhymeValueAndPercentileForWords(firstWord!, satellite: newWord!);
+                            if(rp >= 0.75){
+                            
+                                let wordRPPair = WordIndexRhymePercentilePair(word: (newWord?.wordName)!, rhymePercentile: rp!);
                                 
-                                let wordRPPair = WordIndexRhymePercentilePair(word: line.0, rhymePercentile: rp);
                                 greenRhymingWords.append(wordRPPair);
+                                
                                 greenRhymingWords.sortInPlace{
                                     
                                     $0.rhymePercentile > $1.rhymePercentile;
                                     
                                 }
-                                
-                            }
                             
-                        }else if(rp >= 0.5){
-                            
-                            if(yellowRhymingWords.count != 6){
-                                
-                                let wordRPPair = WordIndexRhymePercentilePair(word: line.0, rhymePercentile: rp);
-                                yellowRhymingWords.append(wordRPPair);
-                                yellowRhymingWords.sortInPlace{
-                                    
-                                    $0.rhymePercentile > $1.rhymePercentile;
-                                    
-                                }
-                                
-                            }
-                            
-                        }else if(rp >= 0.35){
-                            
-                            if(redRhymingWords.count != 6){
-                                
-                                let wordRPPair = WordIndexRhymePercentilePair(word: line.0, rhymePercentile: rp);
-                                redRhymingWords.append(wordRPPair);
-                                redRhymingWords.sortInPlace{
-                                    
-                                    $0.rhymePercentile > $1.rhymePercentile;
-                                    
-                                }
-                                
                             }
                             
                         }
                         
                     }
-                    
+                
                 }
                 
-                if(greenWordsAvailable){
+                for num in 1...6 {
                     
-                    if(greenRhymingWords.count > 2){
-                        
-                        for num in 1...3 {
-                            
-                            let pair = greenRhymingWords.removeFirst();
-                            wordButtons[num - 1].setTitle(pair.word + ", " + String(Int(Double(round(100*pair.rhymePercentile)/100) * 100)) + String("%"), forState: UIControlState.Normal);
-                            
-                        }
-                        
-                    }else{
-                        
-                        for num in 0...greenRhymingWords.count {
-                            
-                            let pair = greenRhymingWords.removeFirst();
-                            wordButtons[num].setTitle(pair.word + ", " + String(Int(Double(round(100*pair.rhymePercentile)/100) * 100)) + String("%"), forState: UIControlState.Normal);
-                            
-                        }
-                        
-                    }
-                    
-                }else{
-                    
-                    greenWordsAvailable = false;
+                    let pair = greenRhymingWords.removeFirst();
+                    wordButtons[num - 1].setTitle(pair.word + ", " + String(Int(Double(round(100*pair.rhymePercentile)/100) * 100)) + String("%"), forState: UIControlState.Normal);
                     
                 }
-                
-                if(yellowWordsAvailable){
-                    
-                    if(yellowRhymingWords.count > 2){
-                        
-                        for num in 1...3 {
-                            
-                            let pair = yellowRhymingWords.removeFirst();
-                            wordButtons[num + 2].setTitle(pair.word + ", " + String(Int(Double(round(100*pair.rhymePercentile)/100) * 100)) + String("%"), forState: UIControlState.Normal);
-                            
-                        }
-                        
-                    }else{
-                        
-                        for num in 0...yellowRhymingWords.count {
-                            
-                            let pair = yellowRhymingWords.removeFirst();
-                            wordButtons[num + 2].setTitle(pair.word + ", " + String(Int(Double(round(100*pair.rhymePercentile)/100) * 100)) + String("%"), forState: UIControlState.Normal);
-                            
-                        }
-                        
-                    }
-                    
-                }else{
-                    
-                    yellowWordsAvailable = false;
-                    
-                }
-                
-                if(redWordsAvailable && (greenWordsAvailable == false || yellowWordsAvailable == false)){
-                    
-                    if(redRhymingWords.count > 2){
-                        
-                        for num in 1...3 {
-                            
-                            let pair = redRhymingWords.removeFirst();
-                            wordButtons[num - 1].setTitle(pair.word + ", " + String(Int(Double(round(100*pair.rhymePercentile)/100) * 100)) + String("%"), forState: UIControlState.Normal);
-                            
-                        }
-                        
-                    }else{
-                        
-                        for num in 0...redRhymingWords.count {
-                            
-                            let pair = redRhymingWords.removeFirst();
-                            wordButtons[num].setTitle(pair.word + ", " + String(Int(Double(round(100*pair.rhymePercentile)/100) * 100)) + String("%"), forState: UIControlState.Normal);
-                            
-                        }
-                        
-                    }
-                    
-                }else{
-                    
-                    redWordsAvailable = false;
-                    
-                }
-                
-                if(greenWordsAvailable == false && yellowWordsAvailable == false && yellowWordsAvailable == false){
-                    
-                    //TODO have a popup come up saying that there are no more suggestions.
-                    
-                }
-                
+            
             }
             
         }

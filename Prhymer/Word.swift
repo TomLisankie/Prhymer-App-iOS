@@ -11,25 +11,11 @@ import Foundation
 struct Word : PhonemeSequence {
     let wordName: String;
     var listOfPhonemes: [Phoneme];
-    var vowelPhonemes: [Phoneme];
     
     init?(wordName: String, phonemeString: String) {
         
         self.wordName = wordName;
         listOfPhonemes = phonemeString.componentsSeparatedByString(" ").map { Phoneme(phonemeName: $0)! }
-        vowelPhonemes = [Phoneme]();
-        
-        for phoneme in listOfPhonemes{
-            
-            if(phoneme.isAVowelPhoneme == true){
-                
-                vowelPhonemes.append(phoneme);
-                
-            }
-            
-            //check for environmentally dependent phoneme changes:
-            
-        }
         
         for (index, phoneme) in listOfPhonemes.enumerate() {
             
@@ -77,6 +63,38 @@ struct Word : PhonemeSequence {
         
     }
     
+    func getVowelPhonemes() -> [Phoneme] {
+        
+        var vowelPhonemes = [Phoneme]();
+        
+        for phoneme in listOfPhonemes {
+            
+            if phoneme.isAVowelPhoneme {
+                
+                vowelPhonemes.append(phoneme);
+                
+            }
+            
+        }
+        
+        return vowelPhonemes;
+        
+    }
+    
+    func getVowelPhonemesAsString() -> String {
+        
+        var vowelPhonemeString = "";
+        
+        for phoneme in getVowelPhonemes() {
+            
+            vowelPhonemeString = vowelPhonemeString + phoneme.phoneme + " ";
+            
+        }
+        
+        return vowelPhonemeString;
+        
+    }
+    
     init?(line: String) {
         
         let components = line.componentsSeparatedByString("  ")
@@ -84,41 +102,18 @@ struct Word : PhonemeSequence {
         
         wordName = components[0].lowercaseString;
         listOfPhonemes = components[1].componentsSeparatedByString(" ").map { Phoneme(phonemeName: $0)! }
-        vowelPhonemes = [Phoneme]();
-        
-        for phoneme in listOfPhonemes{
-        
-            if(phoneme.isAVowelPhoneme == true){
-            
-                vowelPhonemes.append(phoneme);
-            
-            }
-        
-        }
         
     }
     
     init() {
         wordName = "";
         listOfPhonemes = [Phoneme]();
-        vowelPhonemes = [Phoneme]();
     }
     
     init?(wordName: String, phonemes: [Phoneme]) {
         
         self.wordName = wordName;
         self.listOfPhonemes = phonemes;
-        vowelPhonemes = [Phoneme]();
-        
-        for phoneme in listOfPhonemes{
-            
-            if(phoneme.isAVowelPhoneme == true){
-                
-                vowelPhonemes.append(phoneme);
-                
-            }
-            
-        }
         
     }
     
