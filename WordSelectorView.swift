@@ -131,7 +131,8 @@ class WordSelectorView: UIView {
             if greenRhymingWords.count < 6 {
                 
                 //find words one level up in the trie
-                
+                //make a separate method that's like "return extra words"
+                print("too few words");
                 
             }
             
@@ -172,8 +173,6 @@ class WordSelectorView: UIView {
                     
                     while nextStructFound == false {
                         
-                        currentIndex = currentIndex! + 1;
-                        
                         let currentWord = appDelegate.finder?.wordList[currentIndex!];
                         let newWord = Word(wordName: currentWord!, phonemeString: dictionary[currentWord!]!);
                         
@@ -200,6 +199,8 @@ class WordSelectorView: UIView {
                             }
                             
                         }
+                        
+                        currentIndex = currentIndex! + 1;
                         
                     }
                 

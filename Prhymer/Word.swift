@@ -13,46 +13,56 @@ struct Word : PhonemeSequence {
     var listOfPhonemes: [Phoneme];
     
     init?(wordName: String, phonemeString: String) {
-        
+        print(phonemeString);
         self.wordName = wordName;
         listOfPhonemes = phonemeString.componentsSeparatedByString(" ").map { Phoneme(phonemeName: $0)! }
         
-        for (index, phoneme) in listOfPhonemes.enumerate() {
-            
-            if (index+1 != listOfPhonemes.count) {
+        for (mutableIndex, phoneme) in listOfPhonemes.enumerate() {
+            print(wordName + " index: ", mutableIndex);
+            if (mutableIndex+1 != listOfPhonemes.count) {
                 
                 if(phoneme.isAVowelPhoneme == true) {
                     
-                    if (phoneme.phoneme == "AA" && listOfPhonemes[index+1].phoneme == "R") {
+                    if (phoneme.phoneme == "AA" && listOfPhonemes[mutableIndex+1].phoneme == "R") {
                         
-                        listOfPhonemes[index] = Phoneme(phonemeName: "AR")!;
-                        listOfPhonemes.removeAtIndex(index+1);
+                        listOfPhonemes[mutableIndex] = Phoneme(phonemeName: "AR")!;
+                        listOfPhonemes.removeAtIndex(mutableIndex+1);
+                        print(phoneme.phoneme + " ran");
                         
-                    }else if (phoneme.phoneme == "EH" && listOfPhonemes[index+1].phoneme == "L") {
+                    }else if (phoneme.phoneme == "EH" && listOfPhonemes[mutableIndex+1].phoneme == "L") {
                         
-                        listOfPhonemes[index] = Phoneme(phonemeName: "EL")!;
-                        listOfPhonemes.removeAtIndex(index+1);
+                        listOfPhonemes[mutableIndex] = Phoneme(phonemeName: "EL")!;
+                        listOfPhonemes.removeAtIndex(mutableIndex+1);
+                        print(phoneme.phoneme + " ran");
                         
-                    }else if (phoneme.phoneme == "OW" && listOfPhonemes[index+1].phoneme == "L") {
+                    }else if (phoneme.phoneme == "OW" && listOfPhonemes[mutableIndex+1].phoneme == "L") {
                         
-                        listOfPhonemes[index] = Phoneme(phonemeName: "OL")!;
-                        listOfPhonemes.removeAtIndex(index+1);
+                        listOfPhonemes[mutableIndex] = Phoneme(phonemeName: "OL")!;
+                        listOfPhonemes.removeAtIndex(mutableIndex+1);
+                        print(phoneme.phoneme + " ran");
                         
-                    }else if ((phoneme.phoneme == "AO" && listOfPhonemes[index+1].phoneme == "R") || (phoneme.phoneme == "UW" && listOfPhonemes[index+1].phoneme == "R")) {
+                    }else if ((phoneme.phoneme == "AO" && listOfPhonemes[mutableIndex+1].phoneme == "R") || (phoneme.phoneme == "UW" && listOfPhonemes[mutableIndex+1].phoneme == "R")) {
                         
-                        listOfPhonemes[index] = Phoneme(phonemeName: "OR")!;
-                        listOfPhonemes.removeAtIndex(index+1);
+                        listOfPhonemes[mutableIndex] = Phoneme(phonemeName: "OR")!;
+                        listOfPhonemes.removeAtIndex(mutableIndex+1);
+                        print(phoneme.phoneme + " ran");
                         
-                    }else if (phoneme.phoneme == "EY" && listOfPhonemes[index+1].phoneme == "L") {
+                    }else if (phoneme.phoneme == "EY" && listOfPhonemes[mutableIndex+1].phoneme == "L") {
                         
-                        listOfPhonemes[index] = Phoneme(phonemeName: "ALE")!;
-                        listOfPhonemes.removeAtIndex(index+1);
+                        listOfPhonemes[mutableIndex] = Phoneme(phonemeName: "ALE")!;
+                        listOfPhonemes.removeAtIndex(mutableIndex+1);
+                        print(phoneme.phoneme + " ran");
                         
-                    }else if (phoneme.phoneme == "IY" && listOfPhonemes[index+1].phoneme == "R") {
+                    }else if (phoneme.phoneme == "IY" && listOfPhonemes[mutableIndex+1].phoneme == "R") {
                         
-                        listOfPhonemes[index] = Phoneme(phonemeName: "EAR")!;
-                        listOfPhonemes.removeAtIndex(index+1);
+                        listOfPhonemes[mutableIndex] = Phoneme(phonemeName: "EAR")!;
+                        listOfPhonemes.removeAtIndex(mutableIndex+1);
+                        print(phoneme.phoneme + " ran");
                         
+                    }else{
+                    
+                        //mutableIndex = mutableIndex + 1;
+                    
                     }
                     
                 }
