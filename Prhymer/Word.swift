@@ -9,7 +9,7 @@
 import Foundation
 
 struct Word : PhonemeSequence {
-    let wordName: String;
+    var wordName: String;
     var listOfPhonemes: [Phoneme];
     
     init?(wordName: String, phonemeString: String) {
@@ -17,8 +17,14 @@ struct Word : PhonemeSequence {
         self.wordName = wordName;
         listOfPhonemes = phonemeString.componentsSeparatedByString(" ").map { Phoneme(phonemeName: $0)! }
         
-        for (mutableIndex, phoneme) in listOfPhonemes.enumerate() {
+        var mutableIndex = 0;
+        var addToIndex = true;
+        
+        for phoneme in listOfPhonemes {
             print(wordName + " index: ", mutableIndex);
+            
+            addToIndex = true;
+            
             if (mutableIndex+1 != listOfPhonemes.count) {
                 
                 if(phoneme.isAVowelPhoneme == true) {
@@ -28,42 +34,50 @@ struct Word : PhonemeSequence {
                         listOfPhonemes[mutableIndex] = Phoneme(phonemeName: "AR")!;
                         listOfPhonemes.removeAtIndex(mutableIndex+1);
                         print(phoneme.phoneme + " ran");
+                        addToIndex = false;
                         
                     }else if (phoneme.phoneme == "EH" && listOfPhonemes[mutableIndex+1].phoneme == "L") {
                         
                         listOfPhonemes[mutableIndex] = Phoneme(phonemeName: "EL")!;
                         listOfPhonemes.removeAtIndex(mutableIndex+1);
                         print(phoneme.phoneme + " ran");
+                        addToIndex = false;
                         
                     }else if (phoneme.phoneme == "OW" && listOfPhonemes[mutableIndex+1].phoneme == "L") {
                         
                         listOfPhonemes[mutableIndex] = Phoneme(phonemeName: "OL")!;
                         listOfPhonemes.removeAtIndex(mutableIndex+1);
                         print(phoneme.phoneme + " ran");
+                        addToIndex = false;
                         
                     }else if ((phoneme.phoneme == "AO" && listOfPhonemes[mutableIndex+1].phoneme == "R") || (phoneme.phoneme == "UW" && listOfPhonemes[mutableIndex+1].phoneme == "R")) {
                         
                         listOfPhonemes[mutableIndex] = Phoneme(phonemeName: "OR")!;
                         listOfPhonemes.removeAtIndex(mutableIndex+1);
                         print(phoneme.phoneme + " ran");
+                        addToIndex = false;
                         
                     }else if (phoneme.phoneme == "EY" && listOfPhonemes[mutableIndex+1].phoneme == "L") {
                         
                         listOfPhonemes[mutableIndex] = Phoneme(phonemeName: "ALE")!;
                         listOfPhonemes.removeAtIndex(mutableIndex+1);
                         print(phoneme.phoneme + " ran");
+                        addToIndex = false;
                         
                     }else if (phoneme.phoneme == "IY" && listOfPhonemes[mutableIndex+1].phoneme == "R") {
                         
                         listOfPhonemes[mutableIndex] = Phoneme(phonemeName: "EAR")!;
                         listOfPhonemes.removeAtIndex(mutableIndex+1);
                         print(phoneme.phoneme + " ran");
+                        addToIndex = false;
                         
-                    }else{
-                    
-                        //mutableIndex = mutableIndex + 1;
-                    
                     }
+                    
+                }
+                
+                if addToIndex == true {
+                    
+                    mutableIndex = mutableIndex + 1;
                     
                 }
                 

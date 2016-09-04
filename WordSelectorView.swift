@@ -174,18 +174,24 @@ class WordSelectorView: UIView {
                     while nextStructFound == false {
                         
                         let currentWord = appDelegate.finder?.wordList[currentIndex!];
-                        let newWord = Word(wordName: currentWord!, phonemeString: dictionary[currentWord!]!);
+                        var newWord = Word(wordName: currentWord!, phonemeString: dictionary[currentWord!]!);
                         
                         if newWord!.getVowelPhonemesAsString() != vowelString {
-                            
+                            print("--LOOP BREAKS--");
                             break;
                             
                         }else{
                         
                            //this is where we handle new stuff
                             let rp = appDelegate.finder?.findRhymeValueAndPercentileForWords(firstWord!, satellite: newWord!);
-                            if(rp >= 0.75){
-                            
+                            if(rp >= 0.75 && firstWord?.wordName != newWord?.wordName){
+                                
+                                if newWord!.wordName.hasSuffix(")") {
+                                    
+                                    newWord?.wordName.removeRange((newWord?.wordName.endIndex.advancedBy(-3))!..<(newWord?.wordName.endIndex)!);
+                                    
+                                }
+                                
                                 let wordRPPair = WordIndexRhymePercentilePair(word: (newWord?.wordName)!, rhymePercentile: rp!);
                                 
                                 greenRhymingWords.append(wordRPPair);
