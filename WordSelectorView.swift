@@ -11,6 +11,7 @@ import UIKit
 class WordSelectorView: UIView {
     
     let instructionLabel = UILabel(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, 40));
+    let vowelPhonemes = ["AA", "AE", "AH", "AO", "AW", "AY", "EH", "ER", "EY", "IH", "IY", "OW", "OY", "UH", "UW", "AR", "EL", "OL", "OR", "ALE", "EAR"];
     
     //let loading = UIActivityIndicatorView(frame: CGRectMake((UIScreen.mainScreen().bounds.size.width/2)-60, 126-60, 120, 120));
     
@@ -132,7 +133,82 @@ class WordSelectorView: UIView {
                 
                 //find words one level up in the trie
                 //make a separate method that's like "return extra words"
-                print("too few words");
+                
+                print("too few words, adding more");
+                
+                let firstWord = Word(wordName: selectedWord, phonemeString: dictionary[selectedWord.lowercaseString]!);
+                
+                let vowelString = firstWord?.getVowelPhonemesAsString();
+                print("vowelString: " + vowelString!);
+                
+                var components = vowelString!.componentsSeparatedByString(" ");
+                components.removeLast();
+                
+                var vowelPhonemeArrayIndex = 0;
+                var newVowelString = "";
+                
+                if components.count == 1 {
+                    
+                    components.insert(vowelPhonemes[vowelPhonemeArrayIndex], atIndex: 0);
+                    
+                    var notEnoughWords = true;
+                    
+                    while notEnoughWords == true {
+                        
+                        for component in components {
+                            
+                            newVowelString = newVowelString + component + " ";
+                            
+                        }
+                        
+                        let beginningIndex = appDelegate.finder?.structureReference[vowelString!];
+                        
+                        //if there's no vowel structures like this
+                        if beginningIndex == 0 {
+                            
+                            vowelPhonemeArrayIndex = vowelPhonemeArrayIndex + 1;
+                            
+                        }else{
+                        
+                            let nextStructFound = false;
+                            
+                            var currentIndex = beginningIndex;
+                            var counter = 0;
+                            
+                            while nextStructFound == false {
+                                
+                                let currentWord = appDelegate.finder?.wordList[currentIndex!];
+                                let newWord = Word(wordName: currentWord!, phonemeString: dictionary[currentWord!]!);
+                                
+                                if newWord!.getVowelPhonemesAsString() != vowelString {
+                                    print("--LOOP BREAKS--");
+                                    break;
+                                    
+                                }
+                                
+                                currentIndex = currentIndex! + 1;
+                                counter = counter + 1;
+                                
+                            }
+                            
+                            
+                        
+                        }
+                        
+                    }
+                    
+                }else{
+                
+                    components.removeFirst();
+                    
+                    for component in components {
+                        
+                        newVowelString = newVowelString + component + " ";
+                        
+                    }
+                    
+                
+                }
                 
             }
             
@@ -161,54 +237,7 @@ class WordSelectorView: UIView {
                 
                 }else{
                 
-                    let firstWord = Word(wordName: selectedWord, phonemeString: dictionary[selectedWord.lowercaseString]!);
-                    
-                    let vowelString = firstWord?.getVowelPhonemesAsString();
-                    
-                    let beginningIndex = appDelegate.finder?.structureReference[vowelString!];
-                    
-                    let nextStructFound = false;
-                    
-                    var currentIndex = beginningIndex;
-                    
-                    while nextStructFound == false {
-                        
-                        let currentWord = appDelegate.finder?.wordList[currentIndex!];
-                        var newWord = Word(wordName: currentWord!, phonemeString: dictionary[currentWord!]!);
-                        
-                        if newWord!.getVowelPhonemesAsString() != vowelString {
-                            print("--LOOP BREAKS--");
-                            break;
-                            
-                        }else{
-                        
-                           //this is where we handle new stuff
-                            let rp = appDelegate.finder?.findRhymeValueAndPercentileForWords(firstWord!, satellite: newWord!);
-                            if(rp >= 0.75 && firstWord?.wordName != newWord?.wordName){
-                                
-                                if newWord!.wordName.hasSuffix(")") {
-                                    
-                                    newWord?.wordName.removeRange((newWord?.wordName.endIndex.advancedBy(-3))!..<(newWord?.wordName.endIndex)!);
-                                    
-                                }
-                                
-                                let wordRPPair = WordIndexRhymePercentilePair(word: (newWord?.wordName)!, rhymePercentile: rp!);
-                                
-                                greenRhymingWords.append(wordRPPair);
-                                
-                                greenRhymingWords.sortInPlace{
-                                    
-                                    $0.rhymePercentile > $1.rhymePercentile;
-                                    
-                                }
-                            
-                            }
-                            
-                        }
-                        
-                        currentIndex = currentIndex! + 1;
-                        
-                    }
+                    greenRhymingWords = findRhymes(wordString);
                 
                 }
                 
@@ -222,6 +251,62 @@ class WordSelectorView: UIView {
             }
             
         }
+        
+    }
+    
+    func findRhymes(wordString: String) -> [WordIndexRhymePercentilePair] {
+        
+        var rhymes = [WordIndexRhymePercentilePair]();
+        
+        let firstWord = Word(wordName: selectedWord, phonemeString: dictionary[selectedWord.lowercaseString]!);
+        
+        let vowelString = firstWord?.getVowelPhonemesAsString();
+        
+        let beginningIndex = appDelegate.finder?.structureReference[vowelString!];
+        
+        let nextStructFound = false;
+        
+        var currentIndex = beginningIndex;
+        
+        while nextStructFound == false {
+            
+            let currentWord = appDelegate.finder?.wordList[currentIndex!];
+            var newWord = Word(wordName: currentWord!, phonemeString: dictionary[currentWord!]!);
+            
+            if newWord!.getVowelPhonemesAsString() != vowelString {
+                print("--LOOP BREAKS--");
+                break;
+                
+            }else{
+                
+                let rp = appDelegate.finder?.findRhymeValueAndPercentileForWords(firstWord!, satellite: newWord!);
+                if(rp >= 0.75 && firstWord?.wordName != newWord?.wordName){
+                    
+                    if newWord!.wordName.hasSuffix(")") {
+                        
+                        newWord?.wordName.removeRange((newWord?.wordName.endIndex.advancedBy(-3))!..<(newWord?.wordName.endIndex)!);
+                        
+                    }
+                    
+                    let wordRPPair = WordIndexRhymePercentilePair(word: (newWord?.wordName)!, rhymePercentile: rp!);
+                    
+                    rhymes.append(wordRPPair);
+                    
+                    rhymes.sortInPlace{
+                        
+                        $0.rhymePercentile > $1.rhymePercentile;
+                        
+                    }
+                    
+                }
+                
+            }
+            
+            currentIndex = currentIndex! + 1;
+            
+        }
+        
+        return rhymes;
         
     }
     
