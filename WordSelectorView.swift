@@ -12,6 +12,8 @@ class WordSelectorView: UIView {
     
     let instructionLabel = UILabel(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, 40));
     let vowelPhonemes = ["AA", "AE", "AH", "AO", "AW", "AY", "EH", "ER", "EY", "IH", "IY", "OW", "OY", "UH", "UW", "AR", "EL", "OL", "OR", "ALE", "EAR"];
+    var vowelStringReplacement = "";
+    
     
     //let loading = UIActivityIndicatorView(frame: CGRectMake((UIScreen.mainScreen().bounds.size.width/2)-60, 126-60, 120, 120));
     
@@ -191,7 +193,11 @@ class WordSelectorView: UIView {
                                 
                             }
                             
-                            
+                            if counter > 5 {
+                                
+                                notEnoughWords = false;
+                                
+                            }
                         
                         }
                         
@@ -210,7 +216,11 @@ class WordSelectorView: UIView {
                 
                 }
                 
+                vowelStringReplacement = newVowelString;
+                
             }
+            
+            greenRhymingWords = findRhymes(selectedWord);
             
             for num in 1...6 {
                 
@@ -260,7 +270,13 @@ class WordSelectorView: UIView {
         
         let firstWord = Word(wordName: selectedWord, phonemeString: dictionary[selectedWord.lowercaseString]!);
         
-        let vowelString = firstWord?.getVowelPhonemesAsString();
+        var vowelString = firstWord?.getVowelPhonemesAsString();
+        
+        if vowelStringReplacement != "" {
+            
+            vowelString = vowelStringReplacement;
+            
+        }
         
         let beginningIndex = appDelegate.finder?.structureReference[vowelString!];
         
