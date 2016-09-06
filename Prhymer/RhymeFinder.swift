@@ -10,7 +10,7 @@ import Foundation
 
 class RhymeFinder{
     
-    let DEBUGGING = true;
+    let DEBUGGING = false;
     
     var dictionary = [String : String]();
     var structureReference = [String : Int]();
@@ -303,13 +303,10 @@ class RhymeFinder{
         }
         
         idealRhymeValue = bestSet.rhymeValueForSet;
-        print("Ideal Rhyme Value: ", idealRhymeValue);
         
         var rhymeValue = idealRhymeValue;
-        print("Deduction: ", findDeductionForIndexSet(bestSet, longerWord: longerWord));
         
         rhymeValue = rhymeValue - findDeductionForIndexSet(bestSet, longerWord: longerWord);
-        print("Rhyme Value: ", rhymeValue);
         
         return findRhymePercentile(rhymeValue, longerWord: longerWord);
         
@@ -379,7 +376,6 @@ class RhymeFinder{
             
             if(bestSet.indexes[0] > 1){
                 
-                print("log10 being applied on: ", Double(bestSet.indexes[0]));
                 deduction = deduction + log10(Double(bestSet.indexes[0]));
                 
             }else{
@@ -392,7 +388,6 @@ class RhymeFinder{
         
         if((longerWord.listOfPhonemes.count - 1) - bestSet.indexes[bestSet.indexes.count-1] > 0){
             
-            print("Another log10 being applied on: ", Double((longerWord.listOfPhonemes.count - 1) - bestSet.indexes[bestSet.indexes.count-1]));
             deduction = deduction + log10(Double((longerWord.listOfPhonemes.count - 1) - bestSet.indexes[bestSet.indexes.count-1]));
             
         }

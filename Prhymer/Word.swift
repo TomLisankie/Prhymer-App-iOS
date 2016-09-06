@@ -21,7 +21,6 @@ struct Word : PhonemeSequence {
         var addToIndex = true;
         
         for phoneme in listOfPhonemes {
-            print(wordName + " index: ", mutableIndex);
             
             addToIndex = true;
             
@@ -33,42 +32,36 @@ struct Word : PhonemeSequence {
                         
                         listOfPhonemes[mutableIndex] = Phoneme(phonemeName: "AR")!;
                         listOfPhonemes.removeAtIndex(mutableIndex+1);
-                        print(phoneme.phoneme + " ran");
                         addToIndex = false;
                         
                     }else if (phoneme.phoneme == "EH" && listOfPhonemes[mutableIndex+1].phoneme == "L") {
                         
                         listOfPhonemes[mutableIndex] = Phoneme(phonemeName: "EL")!;
                         listOfPhonemes.removeAtIndex(mutableIndex+1);
-                        print(phoneme.phoneme + " ran");
                         addToIndex = false;
                         
                     }else if (phoneme.phoneme == "OW" && listOfPhonemes[mutableIndex+1].phoneme == "L") {
                         
                         listOfPhonemes[mutableIndex] = Phoneme(phonemeName: "OL")!;
                         listOfPhonemes.removeAtIndex(mutableIndex+1);
-                        print(phoneme.phoneme + " ran");
                         addToIndex = false;
                         
                     }else if ((phoneme.phoneme == "AO" && listOfPhonemes[mutableIndex+1].phoneme == "R") || (phoneme.phoneme == "UW" && listOfPhonemes[mutableIndex+1].phoneme == "R")) {
                         
                         listOfPhonemes[mutableIndex] = Phoneme(phonemeName: "OR")!;
                         listOfPhonemes.removeAtIndex(mutableIndex+1);
-                        print(phoneme.phoneme + " ran");
                         addToIndex = false;
                         
                     }else if (phoneme.phoneme == "EY" && listOfPhonemes[mutableIndex+1].phoneme == "L") {
                         
                         listOfPhonemes[mutableIndex] = Phoneme(phonemeName: "ALE")!;
                         listOfPhonemes.removeAtIndex(mutableIndex+1);
-                        print(phoneme.phoneme + " ran");
                         addToIndex = false;
                         
                     }else if (phoneme.phoneme == "IY" && listOfPhonemes[mutableIndex+1].phoneme == "R") {
                         
                         listOfPhonemes[mutableIndex] = Phoneme(phonemeName: "EAR")!;
                         listOfPhonemes.removeAtIndex(mutableIndex+1);
-                        print(phoneme.phoneme + " ran");
                         addToIndex = false;
                         
                     }

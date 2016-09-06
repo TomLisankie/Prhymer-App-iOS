@@ -26,9 +26,7 @@ class WordSelectorView: UIView {
     
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate;
     var dictionary = [String : String]();
-    var greenRhymingWords = [WordIndexRhymePercentilePair](); //rhyme very well
-    var yellowRhymingWords = [WordIndexRhymePercentilePair](); //rhyme decently
-    var redRhymingWords = [WordIndexRhymePercentilePair](); //rhyme badly
+    var rhymingWords = [WordIndexRhymePercentilePair]();
     var greenWordsAvailable = true;
     var yellowWordsAvailable = true;
     var redWordsAvailable = true;
@@ -129,9 +127,9 @@ class WordSelectorView: UIView {
     
     func suggestWordsAndFillSuggestor(wordString: String!){
         
-        if(selectedWord == wordString){
+        if(selectedWord == wordString){ //if this isn't a new word we're dealing with
         
-            if greenRhymingWords.count < 6 {
+            if rhymingWords.count < 6 { //if there aren't enough words left
                 
                 //find words one level up in the trie
                 //make a separate method that's like "return extra words"
@@ -149,7 +147,7 @@ class WordSelectorView: UIView {
                 var vowelPhonemeArrayIndex = 0;
                 var newVowelString = "";
                 
-                if components.count == 1 {
+                if components.count == 1 { //if the word is monosyllabic
                     
                     components.insert(vowelPhonemes[vowelPhonemeArrayIndex], atIndex: 0);
                     
@@ -183,7 +181,7 @@ class WordSelectorView: UIView {
                                 let newWord = Word(wordName: currentWord!, phonemeString: dictionary[currentWord!]!);
                                 
                                 if newWord!.getVowelPhonemesAsString() != vowelString {
-                                    print("--LOOP BREAKS--");
+                                    
                                     break;
                                     
                                 }
@@ -193,7 +191,7 @@ class WordSelectorView: UIView {
                                 
                             }
                             
-                            if counter > 5 {
+                            if counter >= 6 {
                                 
                                 notEnoughWords = false;
                                 
@@ -218,13 +216,14 @@ class WordSelectorView: UIView {
                 
                 vowelStringReplacement = newVowelString;
                 
+                rhymingWords = findRhymes(selectedWord);
+                print("yeygyuqergiyuergteiuwyrbgwkhfvjdfb");
+                
             }
             
-            greenRhymingWords = findRhymes(selectedWord);
-            
             for num in 1...6 {
-                
-                let pair = greenRhymingWords.removeFirst();
+                print("---RAN---");
+                let pair = rhymingWords.removeFirst();
                 wordButtons[num - 1].setTitle(pair.word + ", " + String(Int(Double(round(100*pair.rhymePercentile)/100) * 100)) + String("%"), forState: UIControlState.Normal);
                 
             }
@@ -233,7 +232,7 @@ class WordSelectorView: UIView {
         
             selectedWord = wordString;
             
-            greenRhymingWords = [WordIndexRhymePercentilePair]();
+            rhymingWords = [WordIndexRhymePercentilePair]();
             
             if(wordString == "" || wordString == nil){
             
@@ -247,13 +246,13 @@ class WordSelectorView: UIView {
                 
                 }else{
                 
-                    greenRhymingWords = findRhymes(wordString);
+                    rhymingWords = findRhymes(wordString);
                 
                 }
                 
                 for num in 1...6 {
                     
-                    let pair = greenRhymingWords.removeFirst();
+                    let pair = rhymingWords.removeFirst();
                     wordButtons[num - 1].setTitle(pair.word + ", " + String(Int(Double(round(100*pair.rhymePercentile)/100) * 100)) + String("%"), forState: UIControlState.Normal);
                     
                 }
@@ -273,7 +272,7 @@ class WordSelectorView: UIView {
         var vowelString = firstWord?.getVowelPhonemesAsString();
         
         if vowelStringReplacement != "" {
-            
+            print("VOWEL STRING BEING REPLACED");
             vowelString = vowelStringReplacement;
             
         }
@@ -290,13 +289,13 @@ class WordSelectorView: UIView {
             var newWord = Word(wordName: currentWord!, phonemeString: dictionary[currentWord!]!);
             
             if newWord!.getVowelPhonemesAsString() != vowelString {
-                print("--LOOP BREAKS--");
+                
                 break;
                 
             }else{
                 
                 let rp = appDelegate.finder?.findRhymeValueAndPercentileForWords(firstWord!, satellite: newWord!);
-                if(rp >= 0.75 && firstWord?.wordName != newWord?.wordName){
+                if(/*rp >= 0.75 &&*/ firstWord?.wordName != newWord?.wordName){
                     
                     if newWord!.wordName.hasSuffix(")") {
                         
