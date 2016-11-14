@@ -5,15 +5,15 @@ The app uses a Snapchat-like interface to swipe between views.
 
 ## Finding Rhymes
 
-1. Click on "Suggest Rhymes" in the bottom right.
+1) Click on "Suggest Rhymes" in the bottom right.
 
 <img src="http://tomlisankie.com/prhymer-examples/1.png" width="325" height="534" />
 
-2. Long press on word that you want to find rhymes for.
+2) Long press on word that you want to find rhymes for.
 
 <img src="http://tomlisankie.com/prhymer-examples/2.png" width="325" height="534" />
 
-3. Tap word that you want to insert into your writing piece.
+3) Tap word that you want to insert into your writing piece.
 
 <img src="http://tomlisankie.com/prhymer-examples/3.png" width="325" height="534" />
 
