@@ -14,7 +14,7 @@ class Node {
     var parentIndexSet: IndexSet?;
     var bestSet : IndexSet?;
     
-    func addIndexSet(set: IndexSet){
+    func addIndexSet(_ set: IndexSet){
     
         indexSets.append(set);
     

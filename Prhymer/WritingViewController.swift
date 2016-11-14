@@ -18,47 +18,47 @@ class WritingViewController: UIViewController, UITextViewDelegate {
     var currentPiece = Piece(title: "Untitled");
     var writingModeActive = true;
     
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate;
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate;
     
     @IBAction func suggestWordsActionButtonTapped(){
         
         dismissKeyboard();
-        wordSelector?.hidden = false;
+        wordSelector?.isHidden = false;
         suggestRhymesButton.title = "Writing Mode";
-        pieceTextView.editable = false;
+        pieceTextView.isEditable = false;
         
     }
     
-    func wordSelected(word: String) {
+    func wordSelected(_ word: String) {
         
         wordSelector.suggestWordsAndFillSuggestor(word);
         
     }
     
-    func textViewDidChangeSelection(textView: UITextView) {
+    func textViewDidChangeSelection(_ textView: UITextView) {
         
         if(writingModeActive == false){
             
             let range: NSRange = textView.selectedRange
             let text = textView.text as NSString
-            let selectedText = text.substringWithRange(NSMakeRange(range.location, range.length)).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).stringByTrimmingCharactersInSet(NSCharacterSet.punctuationCharacterSet()).lowercaseString;
+            let selectedText = text.substring(with: NSMakeRange(range.location, range.length)).trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).trimmingCharacters(in: CharacterSet.punctuationCharacters).lowercased();
             
             if(selectedText != ""){
                 
-                wordSelector.hidden = false;
+                wordSelector.isHidden = false;
                 suggestRhymesButton.title = "Writing Mode";
                 wordSelector.instructionLabel.text = "Finding suggestions...";
                 self.wordSelected(selectedText);
-                wordSelector.instructionLabel.hidden = true;
+                wordSelector.instructionLabel.isHidden = true;
                 wordSelector.showButtons();
-                toolbar.items?.insert(UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: wordSelector, action: #selector(WordSelectorView.refreshButtonTapped)), atIndex: 0);
+                toolbar.items?.insert(UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.refresh, target: wordSelector, action: #selector(WordSelectorView.refreshButtonTapped)), at: 0);
                 
             }else{
             
                 wordSelector.instructionLabel.text = "Select a word or phrase to find rhymes for.";
-                wordSelector.instructionLabel.hidden = false;
+                wordSelector.instructionLabel.isHidden = false;
                 wordSelector.hideButtons();
-                toolbar.items?.removeAtIndex(0);
+                toolbar.items?.remove(at: 0);
             
             }
                 
@@ -75,8 +75,8 @@ class WritingViewController: UIViewController, UITextViewDelegate {
         
         pieceTextView.delegate = self;
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardUp), name: UIKeyboardWillShowNotification, object: nil);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardDown), name: UIKeyboardWillHideNotification, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardUp), name: NSNotification.Name.UIKeyboardWillShow, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDown), name: NSNotification.Name.UIKeyboardWillHide, object: nil);
         
         setupToolbar();
         
@@ -87,12 +87,12 @@ class WritingViewController: UIViewController, UITextViewDelegate {
     
     func setupToolbar() {
         
-        let emptySpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil);
+        let emptySpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil);
         
-        let suggestRhymes = UIBarButtonItem(title: "Suggest Rhymes", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(suggestRhymesButtonTapped));
+        let suggestRhymes = UIBarButtonItem(title: "Suggest Rhymes", style: UIBarButtonItemStyle.plain, target: self, action: #selector(suggestRhymesButtonTapped));
         
         let items = [emptySpace, suggestRhymes];
-        toolbar = UIToolbar(frame: CGRectMake(0, UIScreen.mainScreen().bounds.size.height - 50 - 70, UIScreen.mainScreen().bounds.size.width, 50));
+        toolbar = UIToolbar(frame: CGRect(x: 0, y: UIScreen.main.bounds.size.height - 50 - 70, width: UIScreen.main.bounds.size.width, height: 50));
         self.toolbar.setItems(items, animated: false);
         
         suggestRhymesButton = toolbar.items![1];
@@ -103,29 +103,29 @@ class WritingViewController: UIViewController, UITextViewDelegate {
     
     func addCustomMenu() {
         let suggestWordActionButton = UIMenuItem(title: "Find Rhymes", action: #selector(suggestWordsActionButtonTapped))
-        UIMenuController.sharedMenuController().menuItems = [suggestWordActionButton]
+        UIMenuController.shared.menuItems = [suggestWordActionButton]
     }
     
-    func keyboardUp(notification: NSNotification){
+    func keyboardUp(_ notification: Notification){
         
-        let doneButton = UIBarButtonItem(title: "Suggest Rhymes", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(suggestRhymesButtonTapped));
+        let doneButton = UIBarButtonItem(title: "Suggest Rhymes", style: UIBarButtonItemStyle.plain, target: self, action: #selector(suggestRhymesButtonTapped));
         doneButton.title = "Done";
         doneButton.action = #selector(doneButtonTapped);
-        doneButton.style = UIBarButtonItemStyle.Done;
+        doneButton.style = UIBarButtonItemStyle.done;
         appDelegate.parentViewController?.stackNavBars[1].items![0].rightBarButtonItem = doneButton;
-        let userInfo:NSDictionary = notification.userInfo!
-        let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue()
+        let userInfo:NSDictionary = (notification as NSNotification).userInfo! as NSDictionary
+        let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
         let contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize!.height, 0.0);
         pieceTextView.contentInset = contentInsets;
         pieceTextView.scrollIndicatorInsets = contentInsets;
         
     }
     
-    func keyboardDown(notification: NSNotification){
+    func keyboardDown(_ notification: Notification){
         
-        let compareWordsNavButton = UIBarButtonItem(image: UIImage(named: "R.png"), style: UIBarButtonItemStyle.Plain, target: appDelegate.parentViewController, action: #selector(ParentViewController.rightButtonAction));
+        let compareWordsNavButton = UIBarButtonItem(image: UIImage(named: "R.png"), style: UIBarButtonItemStyle.plain, target: appDelegate.parentViewController, action: #selector(ParentViewController.rightButtonAction));
         appDelegate.parentViewController?.stackNavBars[1].items![0].rightBarButtonItem = compareWordsNavButton;
-        appDelegate.parentViewController?.stackNavBars[1].items![0].rightBarButtonItem?.style = UIBarButtonItemStyle.Plain;
+        appDelegate.parentViewController?.stackNavBars[1].items![0].rightBarButtonItem?.style = UIBarButtonItemStyle.plain;
         let contentInsets = UIEdgeInsetsMake(0.0, 0.0, 50, 0.0);
         pieceTextView.contentInset = contentInsets;
         pieceTextView.scrollIndicatorInsets = contentInsets;
@@ -134,11 +134,11 @@ class WritingViewController: UIViewController, UITextViewDelegate {
     
     @IBAction func suggestRhymesButtonTapped(){
     
-        if(wordSelector.hidden == true){
+        if(wordSelector.isHidden == true){
             
-            wordSelector.hidden = false;
+            wordSelector.isHidden = false;
             suggestRhymesButton.title = "Writing Mode";
-            pieceTextView.editable = false;
+            pieceTextView.isEditable = false;
             
             let contentInsets = UIEdgeInsetsMake(0.0, 0.0, 253 + 50, 0.0);
             pieceTextView.contentInset = contentInsets;
@@ -147,9 +147,9 @@ class WritingViewController: UIViewController, UITextViewDelegate {
                 
         }else{
         
-            wordSelector.hidden = true;
+            wordSelector.isHidden = true;
             suggestRhymesButton.title = "Suggest Rhymes";
-            pieceTextView.editable = true;
+            pieceTextView.isEditable = true;
             
             let contentInsets = UIEdgeInsetsMake(0.0, 0.0, 50, 0.0);
             pieceTextView.contentInset = contentInsets;
@@ -163,9 +163,9 @@ class WritingViewController: UIViewController, UITextViewDelegate {
     @IBAction func doneButtonTapped(){
     
         dismissKeyboard();
-        let compareWordsNavButton = UIBarButtonItem(image: UIImage(named: "R.png"), style: UIBarButtonItemStyle.Plain, target: appDelegate.parentViewController, action: #selector(ParentViewController.rightButtonAction));
+        let compareWordsNavButton = UIBarButtonItem(image: UIImage(named: "R.png"), style: UIBarButtonItemStyle.plain, target: appDelegate.parentViewController, action: #selector(ParentViewController.rightButtonAction));
         appDelegate.parentViewController?.stackNavBars[1].items![0].rightBarButtonItem = compareWordsNavButton;
-        appDelegate.parentViewController?.stackNavBars[1].items![0].rightBarButtonItem?.style = UIBarButtonItemStyle.Plain;
+        appDelegate.parentViewController?.stackNavBars[1].items![0].rightBarButtonItem?.style = UIBarButtonItemStyle.plain;
     
     }
     

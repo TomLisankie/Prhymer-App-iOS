@@ -10,7 +10,7 @@ import UIKit
 
 class WordSelectorView: UIView {
     
-    let instructionLabel = UILabel(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, 40));
+    let instructionLabel = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 40));
     let vowelPhonemes = ["AA", "AE", "AH", "AO", "AW", "AY", "EH", "ER", "EY", "IH", "IY", "OW", "OY", "UH", "UW", "AR", "EL", "OL", "OR", "ALE", "EAR"];
     var vowelStringReplacement = "";
     
@@ -24,7 +24,7 @@ class WordSelectorView: UIView {
     var wordButton5 = WordSelectorButton();
     var wordButton6 = WordSelectorButton();
     
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate;
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate;
     var dictionary = [String : String]();
     var rhymingWords = [WordIndexRhymePercentilePair]();
     var greenWordsAvailable = true;
@@ -47,19 +47,19 @@ class WordSelectorView: UIView {
         addSubview(instructionLabel);
         
         //CGRectMake(x, y, width, height)
-        wordButton1 = WordSelectorButton(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width/2, 83));
-        wordButton2 = WordSelectorButton(frame: CGRectMake(UIScreen.mainScreen().bounds.size.width/2, 0, UIScreen.mainScreen().bounds.size.width/2, 83));
-        wordButton3 = WordSelectorButton(frame: CGRectMake(0, wordButton1.bounds.size.height, UIScreen.mainScreen().bounds.size.width/2, 84));
-        wordButton4 = WordSelectorButton(frame: CGRectMake(UIScreen.mainScreen().bounds.size.width/2, wordButton2.bounds.size.height, UIScreen.mainScreen().bounds.size.width/2, 84));
-        wordButton5 = WordSelectorButton(frame: CGRectMake(0, wordButton1.bounds.size.height*2, UIScreen.mainScreen().bounds.size.width/2, 84));
-        wordButton6 = WordSelectorButton(frame: CGRectMake(UIScreen.mainScreen().bounds.size.width/2, wordButton2.bounds.size.height*2, UIScreen.mainScreen().bounds.size.width/2, 84));
+        wordButton1 = WordSelectorButton(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width/2, height: 83));
+        wordButton2 = WordSelectorButton(frame: CGRect(x: UIScreen.main.bounds.size.width/2, y: 0, width: UIScreen.main.bounds.size.width/2, height: 83));
+        wordButton3 = WordSelectorButton(frame: CGRect(x: 0, y: wordButton1.bounds.size.height, width: UIScreen.main.bounds.size.width/2, height: 84));
+        wordButton4 = WordSelectorButton(frame: CGRect(x: UIScreen.main.bounds.size.width/2, y: wordButton2.bounds.size.height, width: UIScreen.main.bounds.size.width/2, height: 84));
+        wordButton5 = WordSelectorButton(frame: CGRect(x: 0, y: wordButton1.bounds.size.height*2, width: UIScreen.main.bounds.size.width/2, height: 84));
+        wordButton6 = WordSelectorButton(frame: CGRect(x: UIScreen.main.bounds.size.width/2, y: wordButton2.bounds.size.height*2, width: UIScreen.main.bounds.size.width/2, height: 84));
         
-        wordButton1.setTitle("Word 1, _%", forState: UIControlState.Normal);
-        wordButton2.setTitle("Word 2, _%", forState: UIControlState.Normal);
-        wordButton3.setTitle("Word 3, _%", forState: UIControlState.Normal);
-        wordButton4.setTitle("Word 4, _%", forState: UIControlState.Normal);
-        wordButton5.setTitle("Word 5, _%", forState: UIControlState.Normal);
-        wordButton6.setTitle("Word 6, _%", forState: UIControlState.Normal);
+        wordButton1.setTitle("Word 1, _%", for: UIControlState());
+        wordButton2.setTitle("Word 2, _%", for: UIControlState());
+        wordButton3.setTitle("Word 3, _%", for: UIControlState());
+        wordButton4.setTitle("Word 4, _%", for: UIControlState());
+        wordButton5.setTitle("Word 5, _%", for: UIControlState());
+        wordButton6.setTitle("Word 6, _%", for: UIControlState());
         
         wordButton1.tag = 1;
         wordButton2.tag = 2;
@@ -68,12 +68,12 @@ class WordSelectorView: UIView {
         wordButton5.tag = 5;
         wordButton6.tag = 6;
         
-        wordButton1.addTarget(self, action: #selector(WordSelectorView.aButtonTapped(_:)), forControlEvents: .TouchUpInside);
-        wordButton2.addTarget(self, action: #selector(WordSelectorView.aButtonTapped(_:)), forControlEvents: .TouchUpInside);
-        wordButton3.addTarget(self, action: #selector(WordSelectorView.aButtonTapped(_:)), forControlEvents: .TouchUpInside);
-        wordButton4.addTarget(self, action: #selector(WordSelectorView.aButtonTapped(_:)), forControlEvents: .TouchUpInside);
-        wordButton5.addTarget(self, action: #selector(WordSelectorView.aButtonTapped(_:)), forControlEvents: .TouchUpInside);
-        wordButton6.addTarget(self, action: #selector(WordSelectorView.aButtonTapped(_:)), forControlEvents: .TouchUpInside);
+        wordButton1.addTarget(self, action: #selector(WordSelectorView.aButtonTapped(_:)), for: .touchUpInside);
+        wordButton2.addTarget(self, action: #selector(WordSelectorView.aButtonTapped(_:)), for: .touchUpInside);
+        wordButton3.addTarget(self, action: #selector(WordSelectorView.aButtonTapped(_:)), for: .touchUpInside);
+        wordButton4.addTarget(self, action: #selector(WordSelectorView.aButtonTapped(_:)), for: .touchUpInside);
+        wordButton5.addTarget(self, action: #selector(WordSelectorView.aButtonTapped(_:)), for: .touchUpInside);
+        wordButton6.addTarget(self, action: #selector(WordSelectorView.aButtonTapped(_:)), for: .touchUpInside);
         
         wordButton1.backgroundColor = UIColor(red: 0, green: 0.8784, blue: 0.0431, alpha: 1.0);
         wordButton2.backgroundColor = UIColor(red: 0, green: 0.8784, blue: 0.0431, alpha: 1.0);
@@ -82,12 +82,12 @@ class WordSelectorView: UIView {
         wordButton5.backgroundColor = UIColor(red: 0, green: 0.8784, blue: 0.0431, alpha: 1.0);
         wordButton6.backgroundColor = UIColor(red: 0, green: 0.8784, blue: 0.0431, alpha: 1.0);
         
-        wordButton1.hidden = true;
-        wordButton2.hidden = true;
-        wordButton3.hidden = true;
-        wordButton4.hidden = true;
-        wordButton5.hidden = true;
-        wordButton6.hidden = true;
+        wordButton1.isHidden = true;
+        wordButton2.isHidden = true;
+        wordButton3.isHidden = true;
+        wordButton4.isHidden = true;
+        wordButton5.isHidden = true;
+        wordButton6.isHidden = true;
         
         wordButtons = [wordButton1, wordButton2, wordButton3, wordButton4, wordButton5, wordButton6];
         
@@ -105,27 +105,27 @@ class WordSelectorView: UIView {
     
     func showButtons() {
         
-        wordButton1.hidden = false;
-        wordButton2.hidden = false;
-        wordButton3.hidden = false;
-        wordButton4.hidden = false;
-        wordButton5.hidden = false;
-        wordButton6.hidden = false;
+        wordButton1.isHidden = false;
+        wordButton2.isHidden = false;
+        wordButton3.isHidden = false;
+        wordButton4.isHidden = false;
+        wordButton5.isHidden = false;
+        wordButton6.isHidden = false;
         
     }
     
     func hideButtons() {
         
-        wordButton1.hidden = true;
-        wordButton2.hidden = true;
-        wordButton3.hidden = true;
-        wordButton4.hidden = true;
-        wordButton5.hidden = true;
-        wordButton6.hidden = true;
+        wordButton1.isHidden = true;
+        wordButton2.isHidden = true;
+        wordButton3.isHidden = true;
+        wordButton4.isHidden = true;
+        wordButton5.isHidden = true;
+        wordButton6.isHidden = true;
         
     }
     
-    func suggestWordsAndFillSuggestor(wordString: String!){
+    func suggestWordsAndFillSuggestor(_ wordString: String!){
         
         if(selectedWord == wordString){ //if this isn't a new word we're dealing with
         
@@ -136,12 +136,12 @@ class WordSelectorView: UIView {
                 
                 print("too few words, adding more");
                 
-                let firstWord = Word(wordName: selectedWord, phonemeString: dictionary[selectedWord.lowercaseString]!);
+                let firstWord = Word(wordName: selectedWord, phonemeString: dictionary[selectedWord.lowercased()]!);
                 
                 let vowelString = firstWord?.getVowelPhonemesAsString();
                 print("vowelString: " + vowelString!);
                 
-                var components = vowelString!.componentsSeparatedByString(" ");
+                var components = vowelString!.components(separatedBy: " ");
                 components.removeLast();
                 
                 var vowelPhonemeArrayIndex = 0;
@@ -149,7 +149,7 @@ class WordSelectorView: UIView {
                 
                 if components.count == 1 { //if the word is monosyllabic
                     
-                    components.insert(vowelPhonemes[vowelPhonemeArrayIndex], atIndex: 0);
+                    components.insert(vowelPhonemes[vowelPhonemeArrayIndex], at: 0);
                     
                     var notEnoughWords = true;
                     
@@ -224,7 +224,7 @@ class WordSelectorView: UIView {
             for num in 1...6 {
                 print("---RAN---");
                 let pair = rhymingWords.removeFirst();
-                wordButtons[num - 1].setTitle(pair.word + ", " + String(Int(Double(round(100*pair.rhymePercentile)/100) * 100)) + String("%"), forState: UIControlState.Normal);
+                wordButtons[num - 1].setTitle(pair.word + ", " + String(Int(Double(round(100*pair.rhymePercentile)/100) * 100)) + String("%"), for: UIControlState());
                 
             }
         
@@ -240,7 +240,7 @@ class WordSelectorView: UIView {
             
             }else{
             
-                if(dictionary[wordString.lowercaseString] == nil){
+                if(dictionary[wordString.lowercased()] == nil){
                 
                     instructionLabel.text = "Sorry, this word couldn't be found.";
                 
@@ -253,7 +253,7 @@ class WordSelectorView: UIView {
                 for num in 1...6 {
                     
                     let pair = rhymingWords.removeFirst();
-                    wordButtons[num - 1].setTitle(pair.word + ", " + String(Int(Double(round(100*pair.rhymePercentile)/100) * 100)) + String("%"), forState: UIControlState.Normal);
+                    wordButtons[num - 1].setTitle(pair.word + ", " + String(Int(Double(round(100*pair.rhymePercentile)/100) * 100)) + String("%"), for: UIControlState());
                     
                 }
             
@@ -263,11 +263,11 @@ class WordSelectorView: UIView {
         
     }
     
-    func findRhymes(wordString: String) -> [WordIndexRhymePercentilePair] {
+    func findRhymes(_ wordString: String) -> [WordIndexRhymePercentilePair] {
         
         var rhymes = [WordIndexRhymePercentilePair]();
         
-        let firstWord = Word(wordName: selectedWord, phonemeString: dictionary[selectedWord.lowercaseString]!);
+        let firstWord = Word(wordName: selectedWord, phonemeString: dictionary[selectedWord.lowercased()]!);
         
         var vowelString = firstWord?.getVowelPhonemesAsString();
         
@@ -299,7 +299,7 @@ class WordSelectorView: UIView {
                     
                     if newWord!.wordName.hasSuffix(")") {
                         
-                        newWord?.wordName.removeRange((newWord?.wordName.endIndex.advancedBy(-3))!..<(newWord?.wordName.endIndex)!);
+                        newWord?.wordName.removeSubrange((newWord?.wordName.characters.index((newWord?.wordName.endIndex)!, offsetBy: -3))!..<(newWord?.wordName.endIndex)!);
                         
                     }
                     
@@ -307,7 +307,7 @@ class WordSelectorView: UIView {
                     
                     rhymes.append(wordRPPair);
                     
-                    rhymes.sortInPlace{
+                    rhymes.sort{
                         
                         $0.rhymePercentile > $1.rhymePercentile;
                         
@@ -331,37 +331,37 @@ class WordSelectorView: UIView {
         
     }
     
-    @IBAction func aButtonTapped(sender: UIButton){
+    @IBAction func aButtonTapped(_ sender: UIButton){
         
         if(sender.tag == 1){
             
-            addWord(sender.currentTitle!.componentsSeparatedByString(", ")[0]);
+            addWord(sender.currentTitle!.components(separatedBy: ", ")[0]);
         
         }else if(sender.tag == 2){
             
-            addWord(sender.currentTitle!.componentsSeparatedByString(", ")[0]);
+            addWord(sender.currentTitle!.components(separatedBy: ", ")[0]);
             
         }else if(sender.tag == 3){
             
-            addWord(sender.currentTitle!.componentsSeparatedByString(", ")[0]);
+            addWord(sender.currentTitle!.components(separatedBy: ", ")[0]);
             
         }else if(sender.tag == 4){
             
-            addWord(sender.currentTitle!.componentsSeparatedByString(", ")[0]);
+            addWord(sender.currentTitle!.components(separatedBy: ", ")[0]);
             
         }else if(sender.tag == 5){
             
-            addWord(sender.currentTitle!.componentsSeparatedByString(", ")[0]);
+            addWord(sender.currentTitle!.components(separatedBy: ", ")[0]);
             
         }else if(sender.tag == 6){
             
-            addWord(sender.currentTitle!.componentsSeparatedByString(", ")[0]);
+            addWord(sender.currentTitle!.components(separatedBy: ", ")[0]);
             
         }
         
     }
     
-    func addWord(word: String){
+    func addWord(_ word: String){
     
         instructionLabel.text = "Select a word or phrase to find rhymes for.";
         

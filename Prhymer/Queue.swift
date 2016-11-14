@@ -21,7 +21,7 @@ class _QueueItem<T> {
 ///
 /// A standard queue (FIFO - First In First Out). Supports simultaneous adding and removing, but only one item can be added at a time, and only one item can be removed at a time.
 ///
-public class Queue<T> {
+open class Queue<T> {
     
     var _front: _QueueItem<T>
     var _back: _QueueItem<T>
@@ -36,7 +36,7 @@ public class Queue<T> {
     }
     
     /// Add a new item to the back of the queue.
-    public func enqueue (value: T) {
+    open func enqueue (_ value: T) {
         _back.next = _QueueItem(value)
         _back = _back.next!
         count = count + 1;
@@ -44,7 +44,7 @@ public class Queue<T> {
     
     /// Return and remove the item at the front of the queue.
     //should have it throw a null pointer exception.
-    public func dequeue () -> T? {
+    open func dequeue () -> T? {
         
         count = count - 1;
         
@@ -57,7 +57,7 @@ public class Queue<T> {
         
     }
     
-    public func isEmpty() -> Bool {
+    open func isEmpty() -> Bool {
         return _front === _back
     }
 }

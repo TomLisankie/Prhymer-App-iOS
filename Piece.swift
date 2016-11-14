@@ -24,13 +24,13 @@ class Piece : NSObject, NSCoding {
     
     required init(coder aDecoder: NSCoder) {
         
-        if let title = aDecoder.decodeObjectForKey("title") as? String {
+        if let title = aDecoder.decodeObject(forKey: "title") as? String {
             
             self.title = title;
             
         }
         
-        if let content = aDecoder.decodeObjectForKey("content") as? String {
+        if let content = aDecoder.decodeObject(forKey: "content") as? String {
             
             self.content = content;
             
@@ -38,17 +38,17 @@ class Piece : NSObject, NSCoding {
         
     }
     
-    func encodeWithCoder(aCoder: NSCoder) {
+    func encode(with aCoder: NSCoder) {
         
         if let title = self.title {
             
-            aCoder.encodeObject(title, forKey: "title")
+            aCoder.encode(title, forKey: "title")
             
         }
         
         if let content = self.content {
             
-            aCoder.encodeObject(content, forKey: "content")
+            aCoder.encode(content, forKey: "content")
             
         }
         

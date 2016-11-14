@@ -17,8 +17,8 @@ class CompareWordsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        firstTextField!.clearButtonMode = .Always;
-        secondTextField!.clearButtonMode = .Always;
+        firstTextField!.clearButtonMode = .always;
+        secondTextField!.clearButtonMode = .always;
         
         //Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CompareWordsViewController.dismissKeyboard))
@@ -27,7 +27,7 @@ class CompareWordsViewController: UIViewController {
     
     @IBAction func buttonTapped(){
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate;
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate;
         var findRP = true;
         
         firstTextField?.backgroundColor = UIColor(red:0.44, green:0.76, blue:0.70, alpha:1.0);
@@ -35,7 +35,7 @@ class CompareWordsViewController: UIViewController {
         secondTextField?.backgroundColor = UIColor(red:0.44, green:0.76, blue:0.70, alpha:1.0);
         secondTextField?.textColor = UIColor(red:0.95, green:1.00, blue:0.74, alpha:1.0);
         
-        let string1 = firstTextField?.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).stringByTrimmingCharactersInSet(NSCharacterSet.punctuationCharacterSet());
+        let string1 = firstTextField?.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).trimmingCharacters(in: CharacterSet.punctuationCharacters);
         
         var firstStrings = [String]();
         var wordToAdd1 = "";
@@ -55,7 +55,7 @@ class CompareWordsViewController: UIViewController {
         }
         firstStrings.append(wordToAdd1);
         
-        let string2 = secondTextField?.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).stringByTrimmingCharactersInSet(NSCharacterSet.punctuationCharacterSet());
+        let string2 = secondTextField?.text!.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).trimmingCharacters(in: CharacterSet.punctuationCharacters);
         
         var secondStrings = [String]();
         var wordToAdd2 = "";
@@ -77,22 +77,22 @@ class CompareWordsViewController: UIViewController {
         
         if((string1 == "" || string1 == nil) && (string2 == "" || string2 == nil)){
             
-            firstTextField?.backgroundColor = UIColor.redColor();
-            firstTextField?.textColor = UIColor.whiteColor();
-            secondTextField?.backgroundColor = UIColor.redColor();
-            secondTextField?.textColor = UIColor.whiteColor();
+            firstTextField?.backgroundColor = UIColor.red;
+            firstTextField?.textColor = UIColor.white;
+            secondTextField?.backgroundColor = UIColor.red;
+            secondTextField?.textColor = UIColor.white;
             rhymePercentileLabel?.text = "Must enter values";
             
         }else if(string1 == "" || string1 == nil){
             
-            firstTextField?.backgroundColor = UIColor.redColor();
-            firstTextField?.textColor = UIColor.whiteColor();
+            firstTextField?.backgroundColor = UIColor.red;
+            firstTextField?.textColor = UIColor.white;
             rhymePercentileLabel?.text = "Must enter a value";
             
         }else if(string2 == "" || string2 == nil){
         
-            secondTextField?.backgroundColor = UIColor.redColor();
-            secondTextField?.textColor = UIColor.whiteColor();
+            secondTextField?.backgroundColor = UIColor.red;
+            secondTextField?.textColor = UIColor.white;
             rhymePercentileLabel?.text = "Must enter a value";
         
         }else{
@@ -101,17 +101,17 @@ class CompareWordsViewController: UIViewController {
             
             for entry in firstStrings{
                 
-                if(appDelegate.finder!.dictionary[entry.lowercaseString] == nil){
+                if(appDelegate.finder!.dictionary[entry.lowercased()] == nil){
                 
-                    firstTextField?.backgroundColor = UIColor.redColor();
-                    firstTextField?.textColor = UIColor.whiteColor();
+                    firstTextField?.backgroundColor = UIColor.red;
+                    firstTextField?.textColor = UIColor.white;
                     rhymePercentileLabel?.text = "Word(s) could not be found";
                     findRP = false;
                     break;
                 
                 }else{
                 
-                    let word = Word(wordName: entry.lowercaseString, phonemeString: appDelegate.finder!.dictionary[entry.lowercaseString]!);
+                    let word = Word(wordName: entry.lowercased(), phonemeString: appDelegate.finder!.dictionary[entry.lowercased()]!);
                     firstWords.append(word!);
                     
                 }
@@ -120,17 +120,17 @@ class CompareWordsViewController: UIViewController {
             
             for entry in secondStrings{
                 
-                if(appDelegate.finder!.dictionary[entry.lowercaseString] == nil){
+                if(appDelegate.finder!.dictionary[entry.lowercased()] == nil){
                     
-                    secondTextField?.backgroundColor = UIColor.redColor();
-                    secondTextField?.textColor = UIColor.whiteColor();
+                    secondTextField?.backgroundColor = UIColor.red;
+                    secondTextField?.textColor = UIColor.white;
                     rhymePercentileLabel?.text = "Word(s) could not be found";
                     findRP = false;
                     break;
                     
                 }else{
                 
-                    let word = Word(wordName: entry.lowercaseString, phonemeString: appDelegate.finder!.dictionary[entry.lowercaseString]!);
+                    let word = Word(wordName: entry.lowercased(), phonemeString: appDelegate.finder!.dictionary[entry.lowercased()]!);
                     secondWords.append(word!);
                     
                 }

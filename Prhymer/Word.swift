@@ -15,7 +15,7 @@ struct Word : PhonemeSequence {
     init?(wordName: String, phonemeString: String) {
         print(phonemeString);
         self.wordName = wordName;
-        listOfPhonemes = phonemeString.componentsSeparatedByString(" ").map { Phoneme(phonemeName: $0)! }
+        listOfPhonemes = phonemeString.components(separatedBy: " ").map { Phoneme(phonemeName: $0)! }
         
         var mutableIndex = 0;
         var addToIndex = true;
@@ -31,37 +31,37 @@ struct Word : PhonemeSequence {
                     if (phoneme.phoneme == "AA" && listOfPhonemes[mutableIndex+1].phoneme == "R") {
                         
                         listOfPhonemes[mutableIndex] = Phoneme(phonemeName: "AR")!;
-                        listOfPhonemes.removeAtIndex(mutableIndex+1);
+                        listOfPhonemes.remove(at: mutableIndex+1);
                         addToIndex = false;
                         
                     }else if (phoneme.phoneme == "EH" && listOfPhonemes[mutableIndex+1].phoneme == "L") {
                         
                         listOfPhonemes[mutableIndex] = Phoneme(phonemeName: "EL")!;
-                        listOfPhonemes.removeAtIndex(mutableIndex+1);
+                        listOfPhonemes.remove(at: mutableIndex+1);
                         addToIndex = false;
                         
                     }else if (phoneme.phoneme == "OW" && listOfPhonemes[mutableIndex+1].phoneme == "L") {
                         
                         listOfPhonemes[mutableIndex] = Phoneme(phonemeName: "OL")!;
-                        listOfPhonemes.removeAtIndex(mutableIndex+1);
+                        listOfPhonemes.remove(at: mutableIndex+1);
                         addToIndex = false;
                         
                     }else if ((phoneme.phoneme == "AO" && listOfPhonemes[mutableIndex+1].phoneme == "R") || (phoneme.phoneme == "UW" && listOfPhonemes[mutableIndex+1].phoneme == "R")) {
                         
                         listOfPhonemes[mutableIndex] = Phoneme(phonemeName: "OR")!;
-                        listOfPhonemes.removeAtIndex(mutableIndex+1);
+                        listOfPhonemes.remove(at: mutableIndex+1);
                         addToIndex = false;
                         
                     }else if (phoneme.phoneme == "EY" && listOfPhonemes[mutableIndex+1].phoneme == "L") {
                         
                         listOfPhonemes[mutableIndex] = Phoneme(phonemeName: "ALE")!;
-                        listOfPhonemes.removeAtIndex(mutableIndex+1);
+                        listOfPhonemes.remove(at: mutableIndex+1);
                         addToIndex = false;
                         
                     }else if (phoneme.phoneme == "IY" && listOfPhonemes[mutableIndex+1].phoneme == "R") {
                         
                         listOfPhonemes[mutableIndex] = Phoneme(phonemeName: "EAR")!;
-                        listOfPhonemes.removeAtIndex(mutableIndex+1);
+                        listOfPhonemes.remove(at: mutableIndex+1);
                         addToIndex = false;
                         
                     }
@@ -114,11 +114,11 @@ struct Word : PhonemeSequence {
     
     init?(line: String) {
         
-        let components = line.componentsSeparatedByString("  ")
+        let components = line.components(separatedBy: "  ")
         guard components.count == 2 else { return nil }
         
-        wordName = components[0].lowercaseString;
-        listOfPhonemes = components[1].componentsSeparatedByString(" ").map { Phoneme(phonemeName: $0)! }
+        wordName = components[0].lowercased();
+        listOfPhonemes = components[1].components(separatedBy: " ").map { Phoneme(phonemeName: $0)! }
         
     }
     

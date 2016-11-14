@@ -21,7 +21,7 @@ class IndexSet {
     
     }
     
-    func addIndexes(indexesToAdd: [Int], RVBetweenPhonemes: Double){
+    func addIndexes(_ indexesToAdd: [Int], RVBetweenPhonemes: Double){
     
         for index in indexesToAdd{
         
@@ -33,7 +33,7 @@ class IndexSet {
     
     }
     
-    func attachChildNode(childNode: Node){
+    func attachChildNode(_ childNode: Node){
     
         self.childNode = childNode;
         self.childNode!.parentIndexSet = self;

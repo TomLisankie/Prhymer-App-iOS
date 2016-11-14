@@ -27,18 +27,18 @@ class RhymeFinder{
         
     }
     
-    func buildWords(pathToDict: String){ //builds the list of Word objects that can be compared to one another
-        debugPrint("starting");
-        let start = NSDate();
+    func buildWords(_ pathToDict: String){ //builds the list of Word objects that can be compared to one another
+        debugPrint("starting" as AnyObject);
+        let start = Date();
         
-        let stringData = try! String(contentsOfFile: pathToDict, encoding: NSASCIIStringEncoding)
-        let lines = stringData.componentsSeparatedByString("\n").filter { !$0.hasPrefix(";;;") && !$0.isEmpty }
+        let stringData = try! String(contentsOfFile: pathToDict, encoding: String.Encoding.ascii)
+        let lines = stringData.components(separatedBy: "\n").filter { !$0.hasPrefix(";;;") && !$0.isEmpty }
         
         var l = 0;
         
         for line in lines{
             
-            let components = line.componentsSeparatedByString("  ")
+            let components = line.components(separatedBy: "  ")
             guard components.count == 2 else {
                 print("The lines aren't separated by two spaces.");
                 break;
@@ -50,7 +50,7 @@ class RhymeFinder{
             
             }else{
             
-                let lowerCaseWord = components[0].lowercaseString;
+                let lowerCaseWord = components[0].lowercased();
                 
                 wordList.append(lowerCaseWord);
                 
@@ -62,22 +62,22 @@ class RhymeFinder{
             
         }
         
-        print("buildWords done in \(NSDate().timeIntervalSince1970 - start.timeIntervalSince1970) seconds.");
+        print("buildWords done in \(Date().timeIntervalSince1970 - start.timeIntervalSince1970) seconds.");
         
     }
     
-    func findRhymeValueAndPercentileForWords(anchor: Word, satellite: Word) -> Double{
+    func findRhymeValueAndPercentileForWords(_ anchor: Word, satellite: Word) -> Double{
         
         var rhymePercentile = 0.0;
         
         if(anchor.listOfPhonemes.count == satellite.listOfPhonemes.count){
             
-            debugPrint("Regular Rhyme Value");
+            debugPrint("Regular Rhyme Value" as AnyObject);
             rhymePercentile = regularRhymeValue(anchor, satellite: satellite);
             
         }else{
             
-            debugPrint("Ideal Rhyme Value");
+            debugPrint("Ideal Rhyme Value" as AnyObject);
             rhymePercentile = idealRhymeValue(anchor, satellite: satellite);
             
         }
@@ -86,7 +86,7 @@ class RhymeFinder{
         
     }
     
-    func regularRhymeValue(anchor: Word, satellite: Word) -> Double{
+    func regularRhymeValue(_ anchor: Word, satellite: Word) -> Double{
         
         var foundConsonantCluster = false;
         var anchorOrSatellite = false;
@@ -157,7 +157,7 @@ class RhymeFinder{
         
     }
     
-    func idealRhymeValue(anchor: Word, satellite: Word) -> Double{
+    func idealRhymeValue(_ anchor: Word, satellite: Word) -> Double{
         
         var shorterWord = Word();
         var longerWord = Word();
@@ -238,8 +238,8 @@ class RhymeFinder{
                         }else{
                             
                             
-                            for(var l = indexToStartAt+1; l < longerWord.listOfPhonemes.count; l = l + 1){
-                                //for l in indextTOStartAt+1 < longerWord.listOfPhonemes.count
+                            for l in (indexToStartAt+1)...longerWord.listOfPhonemes.count-1{
+                                //for l in indextToStartAt+1 < longerWord.listOfPhonemes.count
                                 let longerWordPhoneme = longerWord.listOfPhonemes[l];
                                 let RVBetweenPhonemes = findRVBetweenPhonemes(shorterWordPhoneme, p2: longerWordPhoneme, addWeight: true, weight: Double(l)*weightTowardsWordEnd);
                                 
@@ -279,7 +279,7 @@ class RhymeFinder{
         var theNode = Node();
         
         var l = layers.count - 1;
-        for layer in layers.reverse(){
+        for layer in layers.reversed(){
             
             for nodeBeingExamined in layer.nodes{
                 
@@ -312,7 +312,7 @@ class RhymeFinder{
         
     }
     
-    func findRVBetweenPhonemes(p1: Phoneme, p2: Phoneme, addWeight: Bool, weight: Double) -> Double{
+    func findRVBetweenPhonemes(_ p1: Phoneme, p2: Phoneme, addWeight: Bool, weight: Double) -> Double{
         
         if(p1.isAVowelPhoneme == true && p2.isAVowelPhoneme == true){
             
@@ -346,7 +346,7 @@ class RhymeFinder{
         
     }
     
-    func findRhymePercentile(rhymeValue: Double, longerWord: Word) -> Double{
+    func findRhymePercentile(_ rhymeValue: Double, longerWord: Word) -> Double{
         
         var homophonicRhymeValue = 0.0;
         var rhymePercentile = 0.0;
@@ -368,7 +368,7 @@ class RhymeFinder{
         
     }
     
-    func findDeductionForIndexSet(bestSet: IndexSet, longerWord: Word) -> Double{
+    func findDeductionForIndexSet(_ bestSet: IndexSet, longerWord: Word) -> Double{
         
         var deduction = 0.0;
         
@@ -414,15 +414,15 @@ class RhymeFinder{
         
     }
     
-    func charIsMember(char: Character, inSet set: NSCharacterSet) -> Bool {
+    func charIsMember(_ char: Character, inSet set: CharacterSet) -> Bool {
         var found = true
         for ch in String(char).utf16 {
-            if !set.characterIsMember(ch) { found = false }
+            if !set.contains(UnicodeScalar(ch)!) { found = false }
         }
         return found;
     }
     
-    func debugPrint(obj: AnyObject){
+    func debugPrint(_ obj: AnyObject){
         
         if(DEBUGGING){
             

@@ -19,8 +19,8 @@ class Phoneme {
         
         if(phoneme.hasSuffix("0") || phoneme.hasSuffix("1") || phoneme.hasSuffix("2") || phoneme.hasSuffix("3") || phoneme.hasSuffix("4") || phoneme.hasSuffix("5")) {
             
-            let stressText = phoneme.substringFromIndex(phoneme.endIndex.predecessor());
-            let thePhoneme = phoneme.substringToIndex(phoneme.endIndex.predecessor());
+            let stressText = phoneme.substring(from: phoneme.characters.index(before: phoneme.endIndex));
+            let thePhoneme = phoneme.substring(to: phoneme.characters.index(before: phoneme.endIndex));
             self.phoneme = thePhoneme;
             
             if(stressText != ""){
@@ -53,7 +53,7 @@ class Phoneme {
         
     }
     
-    func isEqualTo(p2: Phoneme) -> Bool{
+    func isEqualTo(_ p2: Phoneme) -> Bool{
         
         if(self.phoneme == p2.phoneme){
             

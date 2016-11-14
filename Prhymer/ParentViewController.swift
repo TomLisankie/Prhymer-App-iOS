@@ -16,8 +16,8 @@ extension ParentViewController: EZSwipeControllerDataSource {
         
         let storyboard = UIStoryboard(name: "Writing", bundle: nil);
         
-        let writing =  storyboard.instantiateViewControllerWithIdentifier("Writing");
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate;
+        let writing =  storyboard.instantiateViewController(withIdentifier: "Writing");
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate;
         appDelegate.writingViewController = writing as! WritingViewController;
         
         let compareWords =  CompareWordsViewController(nibName: "CompareWordsViewController", bundle: nil);
@@ -32,7 +32,7 @@ extension ParentViewController: EZSwipeControllerDataSource {
         
     }
     
-    func navigationBarDataForPageIndex(index: Int) -> UINavigationBar {
+    func navigationBarDataForPageIndex(_ index: Int) -> UINavigationBar {
         
         var title = "";
         
@@ -51,44 +51,44 @@ extension ParentViewController: EZSwipeControllerDataSource {
         }
         
         let navigationBar = UINavigationBar();
-        navigationBar.barStyle = UIBarStyle.Default;
+        navigationBar.barStyle = UIBarStyle.default;
         navigationBar.barTintColor = UIColor(red: 112, green: 193, blue: 179, alpha: 1);
         navigationBar.backgroundColor = UIColor(red: 112, green: 193, blue: 179, alpha: 1);
-        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.blackColor()];
+        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black];
         
         let navigationItem = UINavigationItem(title: title)
         navigationItem.hidesBackButton = true
         
         if index == 0 {
             
-            let rightButtonItem = UIBarButtonItem(title: "Write", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(doesNothing));
-            rightButtonItem.tintColor = UIColor.blackColor();
+            let rightButtonItem = UIBarButtonItem(title: "Write", style: UIBarButtonItemStyle.plain, target: self, action: #selector(doesNothing));
+            rightButtonItem.tintColor = UIColor.black;
             
             navigationItem.leftBarButtonItem = nil;
             navigationItem.rightBarButtonItem = rightButtonItem;
             
         } else if index == 1 {
             
-            let rightButtonItem = UIBarButtonItem(image: UIImage(named: "R.png"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(doesNothing));
-            rightButtonItem.tintColor = UIColor.blackColor();
+            let rightButtonItem = UIBarButtonItem(image: UIImage(named: "R.png"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(doesNothing));
+            rightButtonItem.tintColor = UIColor.black;
             
-            let leftButtonItem = UIBarButtonItem(title: "Pieces", style: UIBarButtonItemStyle.Done, target: self, action: #selector(doesNothing));
-            leftButtonItem.tintColor = UIColor.blackColor();
+            let leftButtonItem = UIBarButtonItem(title: "Pieces", style: UIBarButtonItemStyle.done, target: self, action: #selector(doesNothing));
+            leftButtonItem.tintColor = UIColor.black;
             
             navigationItem.leftBarButtonItem = leftButtonItem;
             navigationItem.rightBarButtonItem = rightButtonItem;
             
         } else if index == 2 {
             
-            let leftButtonItem = UIBarButtonItem(title: "Write", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(doesNothing));
-            leftButtonItem.tintColor = UIColor.blackColor();
+            let leftButtonItem = UIBarButtonItem(title: "Write", style: UIBarButtonItemStyle.plain, target: self, action: #selector(doesNothing));
+            leftButtonItem.tintColor = UIColor.black;
             
             navigationItem.leftBarButtonItem = leftButtonItem;
             navigationItem.rightBarButtonItem = nil;
             
         }
         
-        navigationBar.pushNavigationItem(navigationItem, animated: false)
+        navigationBar.pushItem(navigationItem, animated: false)
         return navigationBar;
     }
     
@@ -106,11 +106,11 @@ extension ParentViewController: EZSwipeControllerDataSource {
     
 }
 
-private func scaleTo(image image: UIImage, w: CGFloat, h: CGFloat) -> UIImage {
+private func scaleTo(image: UIImage, w: CGFloat, h: CGFloat) -> UIImage {
     let newSize = CGSize(width: w, height: h)
     UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
-    image.drawInRect(CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
-    let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+    image.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+    let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
     UIGraphicsEndImageContext()
     return newImage;
 }
@@ -119,7 +119,7 @@ class ParentViewController: EZSwipeController {
 
     // Outlet used in storyboard
     @IBOutlet var scrollView: UIScrollView?;
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate;
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate;
     
     override func setupView(){
         print("setupView");
